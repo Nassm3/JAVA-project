@@ -2,11 +2,13 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import javafx.util.StringConverter;
+
 public class InterfaceBatailleNavalle implements ActionListener{
-	
-	public InterfaceBatailleNavalle(int size) {
+	JFrame f = new JFrame();
+	public InterfaceBatailleNavalle(int size, ActionListener listener) {
 		
-		JFrame f = new JFrame();
+		
 		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		f.setLayout(new BorderLayout());
 		
@@ -58,6 +60,7 @@ public class InterfaceBatailleNavalle implements ActionListener{
 		f.setVisible(true);
 
 	}
+<<<<<<< HEAD
 	
     public static JPanel encapsuleComp(JComponent c) {
     	JPanel pan = new JPanel();
@@ -67,9 +70,9 @@ public class InterfaceBatailleNavalle implements ActionListener{
     	pan.add(Box.createVerticalGlue());
     	return pan;
     }
+		
 
 	public String[] choosePanel(){ 
-		
 		String name = new String();
 		int difficulty = -1;
 		int gameSize = -1;
@@ -148,6 +151,7 @@ public class InterfaceBatailleNavalle implements ActionListener{
         String[] tab = {name, String.valueOf(difficulty), String.valueOf(gameSize), String.valueOf(placementOption)}; 
 
 		return tab;
+
 	}
 	
 
