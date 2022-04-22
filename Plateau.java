@@ -9,7 +9,7 @@ public class Plateau {
     public void init(){
         for(int indiceLigne=0; indiceLigne<grille.length; indiceLigne++)
             for(int indiceCol=0; indiceCol<grille[indiceLigne].length; indiceCol++)
-                grille[indiceLigne][indiceCol] = Case.VIDE;
+                grille[indiceLigne][indiceCol] = Case.EMPTY;
     }
     
 }
