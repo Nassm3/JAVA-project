@@ -5,6 +5,10 @@ import javax.swing.*;
 import javafx.util.StringConverter;
 
 public class InterfaceBatailleNavalle implements ActionListener{
+	String name = new String();
+	int difficulty = -1;
+	int gameSize = -1;
+	int placementOption = -1;
 	JFrame f = new JFrame();
 	public InterfaceBatailleNavalle(int size, ActionListener listener) {
 		
@@ -72,20 +76,17 @@ public class InterfaceBatailleNavalle implements ActionListener{
 		
 
 	public String[] choosePanel(){ 
-		String name = new String();
-		int difficulty = -1;
-		int gameSize = -1;
-		int placementOption = -1;
+		
 		
 		JFrame f=new JFrame("Séléction des paramètres");    
         String L[]={"Facile","Moyen"};        
-        JComboBox combobox=new JComboBox(L);
+        JComboBox<String> combobox=new JComboBox<String>(L);
         
         String P[]={"Aléatoire","Joueur"};        
-        JComboBox par=new JComboBox(P);
+        JComboBox<String> par=new JComboBox<String>(P);
         
         String C[]={"16","32","64"};        
-        JComboBox ratio=new JComboBox(C);
+        JComboBox<String> ratio=new JComboBox<String>(C);
         
         
         JLabel txt1=new JLabel("taille",JLabel.CENTER);
@@ -112,27 +113,27 @@ public class InterfaceBatailleNavalle implements ActionListener{
         jouer.setPreferredSize(new Dimension(50,50));
 		jouer.addActionListener(new ActionListener(){
 			public void actionPerformed (ActionEvent e){
-				String name = new String(pseudotext.getText());
+				name = new String(pseudotext.getText());
 				if(combobox.getSelectedItem().equals("Facile")) {
-					int difficulty = 0;}
+					difficulty = 0;}
 					
 				else{
-					int difficulty = 1;}
+					difficulty = 1;}
 										
 				if(ratio.getSelectedItem().equals("16")){
-					int gameSize=0;}
+					gameSize = 0;}
 										
 				else if (ratio.getSelectedItem().equals("32")){
-					int gameSize=1;}
+					gameSize = 1;}
 										
 				else {
-					int gameSize=2;}
+					gameSize = 2;}
 										
 				if(par.getSelectedItem().equals("Aléatoire")){
-					int placementOption=0;}
+					placementOption = 0;}
 										
 				else{
-					int placementOption=1;}
+					placementOption = 1;}
 			}
 		});
 		
@@ -157,7 +158,7 @@ public class InterfaceBatailleNavalle implements ActionListener{
 	
     
 	public static void main(String[] args) {
-		new InterfaceBatailleNavalle(10).choosePanel();
+		new InterfaceBatailleNavalle(10, this).choosePanel();
 	}
 
 	public void actionPerformed(ActionEvent e) {
