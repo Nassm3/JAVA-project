@@ -58,57 +58,103 @@ public class InterfaceBatailleNavalle implements ActionListener{
 		f.setVisible(true);
 
 	}
+	
+    public static JPanel encapsuleComp(JComponent c) {
+    	JPanel pan = new JPanel();
+    	pan.setLayout(new BoxLayout(pan,BoxLayout.Y_AXIS));
+    	pan.add(Box.createVerticalGlue());
+    	pan.add(c);
+    	pan.add(Box.createVerticalGlue());
+    	return pan;
+    }
 
-	public void choosePanel(){ 
-
-
-		JFrame frame = new JFrame("Paramètre de jeu");
-
-		JPanel panelPseudo = new JPanel(new GridLayout(1, 2));
-			JLabel pseudo = new JLabel("Saisir votre pseudo :");
-			JTextField pseudoField = new JTextField(20);
-			panelPseudo.add(pseudo);
-			panelPseudo.add(pseudoField);
-
-		JPanel panelChoixDifficulty = new JPanel(new GridLayout(2, 1));
-			JPanel parameterDifficulty = new JPanel(new FlowLayout(FlowLayout.LEFT));
-			String E[] = { "Facile", "Normale"};
-			JComboBox<String> combobox = new JComboBox<String>(E);
-			JLabel l1 = new JLabel("choisissez la difficulté de l'ordinateur");
-			parameterDifficulty.add(l1);
-			parameterDifficulty.add(combobox);
-			panelChoixDifficulty.add(parameterDifficulty);
-
-		JPanel panelChoixSize = new JPanel(new GridLayout(2, 1));
-			JPanel parameterSize = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-			String E1[] = { "10", "20", "30", "40", "50", "60"};
-			JComboBox<String> comboboxSize = new JComboBox<String>(E1);
-			JLabel l2 = new JLabel("choisissez la taille du plateau");
-			parameterSize.add(l2);
-			parameterSize.add(comboboxSize);
-			panelChoixSize.add(parameterSize);
-
-
-
-		frame.add(panelPseudo, BorderLayout.LINE_START);
-		frame.add(panelChoixDifficulty, BorderLayout.WEST);
-		frame.add(panelChoixSize, BorderLayout.CENTER);
-		frame.pack();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
+	public String[] choosePanel(){ 
 		
+		String name = new String();
+		int difficulty = -1;
+		int gameSize = -1;
+		int placementOption = -1;
 		
+		JFrame f=new JFrame("Séléction des paramètres");    
+        String L[]={"Facile","Moyen"};        
+        JComboBox combobox=new JComboBox(L);
+        
+        String P[]={"Aléatoire","Joueur"};        
+        JComboBox par=new JComboBox(P);
+        
+        String C[]={"16","32","64"};        
+        JComboBox ratio=new JComboBox(C);
+        
+        
+        JLabel txt1=new JLabel("taille",JLabel.CENTER);
+        JLabel txt2=new JLabel("par2",JLabel.CENTER);
+        JLabel txt3=new JLabel("par3",JLabel.CENTER);
+        
+        JPanel centre=new JPanel(new GridLayout(3,2));
+        centre.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        centre.add(encapsuleComp(combobox));
+        centre.add(txt1);
+        centre.add(encapsuleComp(ratio));
+        centre.add(txt2);
+        centre.add(encapsuleComp(par));
+        centre.add(txt3);
+        
+        
+        JPanel pseudo= new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JTextField pseudotext=new JTextField(20);
+        JLabel p=new JLabel("votre pseudo :");
+        pseudo.add(p);
+        pseudo.add(pseudotext);
+        
+        JButton jouer=new JButton("JOUER");
+        jouer.setPreferredSize(new Dimension(50,50));
+		jouer.addActionListener(new ActionListener(){
+			public void actionPerformed (ActionEvent e){
+				name = new String(pseudotext.getText());
+				if(combobox.getSelectedItem().equals("Facile"))
+					difficulty = 0;
+					
+				else
+					difficulty = 1;
+										
+				if(ratio.getSelectedItem().equals("16"))
+					gameSize=0;
+										
+				else if (ratio.getSelectedItem().equals("32"))
+					gameSize=1;
+										
+				else 
+					gameSize=2;
+										
+				if(par.getSelectedItem().equals("Aléatoire"))
+					placementOption=0;
+										
+				else
+					placementOption=1;
+			}
+		});
+		
+        
+        
+		f.setLayout(new BorderLayout());
+		f.add(pseudo,BorderLayout.PAGE_START);
+        f.add(centre,BorderLayout.CENTER);
+        f.add(jouer,BorderLayout.PAGE_END);
+        f.pack();
+        f.setSize(new Dimension(400,500));
+        f.setLocationRelativeTo(null);
+        f.setVisible(true);   
+		
+        String[] tab = {name, String.valueOf(difficulty), String.valueOf(gameSize), String.valueOf(placementOption)}; 
 
-
-
-		JButton jouer = new JButton("Jouer");
-
-
-
+		return tab;
 	}
 	
+
+	
+    
 	public static void main(String[] args) {
-		new InterfaceBatailleNavalle(10).choosePanel();;
+		new InterfaceBatailleNavalle(10).choosePanel();
 	}
 
 	public void actionPerformed(ActionEvent e) {
