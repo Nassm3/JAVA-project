@@ -2,11 +2,13 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import javafx.util.StringConverter;
+
 public class InterfaceBatailleNavalle implements ActionListener{
-	
-	public InterfaceBatailleNavalle(int size) {
+	JFrame f = new JFrame();
+	public InterfaceBatailleNavalle(int size, ActionListener listener) {
 		
-		JFrame f = new JFrame();
+		
 		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		f.setLayout(new BorderLayout());
 		
@@ -59,8 +61,11 @@ public class InterfaceBatailleNavalle implements ActionListener{
 
 	}
 
-	public void choosePanel(){ 
-
+	public String[] choosePanel(){ 
+		String name = new String();
+		int difficulty = -1;
+		int gameSize = -1;
+		int placementOption = -1;
 
 		JFrame frame = new JFrame("Paramètre de jeu");
 
@@ -88,8 +93,22 @@ public class InterfaceBatailleNavalle implements ActionListener{
 			parameterSize.add(comboboxSize);
 			panelChoixSize.add(parameterSize);
 
+		JButton jouer = new JButton("Jouer");
+			jouer.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+						name = new String(pseudoField.getText());
+						if(combobox.getSelectedItem().equals("Facile")){
+							difficulty = 0;
+						}
+						else{
+							difficulty = 1
+						}
 
-
+						
+						
+				}
+			});
+		frame.add(jouer, BorderLayout.PAGE_END);
 		frame.add(panelPseudo, BorderLayout.LINE_START);
 		frame.add(panelChoixDifficulty, BorderLayout.WEST);
 		frame.add(panelChoixSize, BorderLayout.CENTER);
@@ -97,11 +116,13 @@ public class InterfaceBatailleNavalle implements ActionListener{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		
+		String[] tab = {String.valueOf(name), String.valueOf(difficulty), String.valueOf(gameSize), String.valueOf(placementOption)}; 
+
+		return tab;
+
+
+
 		
-
-
-
-		JButton jouer = new JButton("Jouer");
 
 
 
