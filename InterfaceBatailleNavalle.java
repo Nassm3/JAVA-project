@@ -60,7 +60,6 @@ public class InterfaceBatailleNavalle implements ActionListener{
 		f.setVisible(true);
 
 	}
-<<<<<<< HEAD
 	
     public static JPanel encapsuleComp(JComponent c) {
     	JPanel pan = new JPanel();
@@ -113,27 +112,27 @@ public class InterfaceBatailleNavalle implements ActionListener{
         jouer.setPreferredSize(new Dimension(50,50));
 		jouer.addActionListener(new ActionListener(){
 			public void actionPerformed (ActionEvent e){
-				name = new String(pseudotext.getText());
-				if(combobox.getSelectedItem().equals("Facile"))
-					difficulty = 0;
+				String name = new String(pseudotext.getText());
+				if(combobox.getSelectedItem().equals("Facile")) {
+					int difficulty = 0;}
 					
-				else
-					difficulty = 1;
+				else{
+					int difficulty = 1;}
 										
-				if(ratio.getSelectedItem().equals("16"))
-					gameSize=0;
+				if(ratio.getSelectedItem().equals("16")){
+					int gameSize=0;}
 										
-				else if (ratio.getSelectedItem().equals("32"))
-					gameSize=1;
+				else if (ratio.getSelectedItem().equals("32")){
+					int gameSize=1;}
 										
-				else 
-					gameSize=2;
+				else {
+					int gameSize=2;}
 										
-				if(par.getSelectedItem().equals("Aléatoire"))
-					placementOption=0;
+				if(par.getSelectedItem().equals("Aléatoire")){
+					int placementOption=0;}
 										
-				else
-					placementOption=1;
+				else{
+					int placementOption=1;}
 			}
 		});
 		
