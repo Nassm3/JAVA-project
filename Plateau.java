@@ -49,9 +49,9 @@ public class Plateau {
 						}
 					}
 					if (i==a) {
-						for (int x=0;x<Math.abs(a-i);x++) {
-							grille[i+c][j]=Case.BOAT;
-							bateau[i+c][j] = bt;
+						for (int x=0;x<Math.abs(j-b);x++) {
+							grille[i][j+c]=Case.BOAT;
+							bateau[i][j+c] = bt;
 							c+=1;
 						}
 					}
