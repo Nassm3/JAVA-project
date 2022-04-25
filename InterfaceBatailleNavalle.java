@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 
 
@@ -114,7 +115,7 @@ public class InterfaceBatailleNavalle implements ActionListener{
 				
 				JPanel ra=new JPanel(new FlowLayout(FlowLayout.LEFT));
 				JButton bat1 = new JButton();
-				bat1.setIcon(new ImageIcon (new ImageIcon("2c.png").getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
+				bat1.setIcon(new ImageIcon (new ImageIcon("bat4.jpg").getImage().getScaledInstance(150, 100, java.awt.Image.SCALE_SMOOTH)));
 
 				JPanel z1= new JPanel(new GridLayout(2,1));
 				z1.add(new JLabel("compteur :"+"c"));
@@ -127,7 +128,7 @@ public class InterfaceBatailleNavalle implements ActionListener{
 				
 				JPanel re=new JPanel(new FlowLayout(FlowLayout.LEFT));
 				JButton bat2 = new JButton();
-				bat2.setIcon(new ImageIcon (new ImageIcon("3c.png").getImage().getScaledInstance(150, 100, java.awt.Image.SCALE_SMOOTH)));
+				bat2.setIcon(new ImageIcon (new ImageIcon("bat1.jpg").getImage().getScaledInstance(150, 100, java.awt.Image.SCALE_SMOOTH)));
 
 				
 				JPanel z2= new JPanel(new GridLayout(2,1));
@@ -138,7 +139,7 @@ public class InterfaceBatailleNavalle implements ActionListener{
 				
 				JPanel ri=new JPanel(new FlowLayout(FlowLayout.LEFT));
 				JButton bat3 = new JButton();
-				bat3.setIcon(new ImageIcon (new ImageIcon("4c.png").getImage().getScaledInstance(200, 100, java.awt.Image.SCALE_SMOOTH)));
+				bat3.setIcon(new ImageIcon (new ImageIcon("bat3.jpg").getImage().getScaledInstance(200, 100, java.awt.Image.SCALE_SMOOTH)));
 
 				JPanel z3= new JPanel(new GridLayout(2,1));
 				z3.add(new JLabel("compteur :"+"c"));
@@ -148,7 +149,7 @@ public class InterfaceBatailleNavalle implements ActionListener{
 				
 				JPanel ro=new JPanel(new FlowLayout(FlowLayout.LEFT));
 				JButton bat4 = new JButton();
-				bat4.setIcon(null);//new ImageIcon (new ImageIcon("2c.png").getImage().getScaledInstance(80, 80, java.awt.Image.SCALE_SMOOTH)));
+				bat4.setIcon(new ImageIcon (new ImageIcon("bat2.jpg").getImage().getScaledInstance(300, 100, java.awt.Image.SCALE_SMOOTH)));
 				
 				JPanel z4= new JPanel(new GridLayout(2,1));
 				z4.add(new JLabel("compteur :"+"c"));
@@ -182,7 +183,7 @@ public class InterfaceBatailleNavalle implements ActionListener{
 	}
 	
 	public void remplir(int i, int j){
-		if (plat.jouer(0, i, j).split("-")[0].equals("touché-coulé")){
+		/*if (plat.jouer(0, i, j).split("-")[0].equals("touché-coulé")){
 			//TODO getCoordinates from boat
 		}
 		else if (plat.jouer(0, i, j).split("-")[0].equals("touché")){
@@ -191,19 +192,12 @@ public class InterfaceBatailleNavalle implements ActionListener{
 		else{
 			b1[i][j].setEnabled(false);
 			System.out.println("kek");
-		}
+		}*/
+		b1[i][j].setBorder(new LineBorder(Color.ORANGE));
 
 	}
     
 		
-        
-        
-		 
-		
-        
-
-	
-	
 
 	
     
