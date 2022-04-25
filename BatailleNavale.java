@@ -7,6 +7,7 @@ public class BatailleNavale implements ActionListener{
     Joueur joueur;
     int tour;
     String gamemode;
+    InterfaceBatailleNavalle ib;
     public BatailleNavale(){
         
         
@@ -33,7 +34,7 @@ public class BatailleNavale implements ActionListener{
         p = new Plateau(gameSize);
         //System.out.println("Hi " + name + ", you're playing in " + gamemode + " on a " + gameSize + "*" + gameSize + " plateau");
         
-        InterfaceBatailleNavalle ib = new InterfaceBatailleNavalle(gameSize, this, 1, p, joueur);
+        ib = new InterfaceBatailleNavalle(gameSize, this, 1, p, joueur);
         Random r = new Random();
         tour = r.nextInt(2);
 
@@ -43,6 +44,7 @@ public class BatailleNavale implements ActionListener{
         String[] coordinates = e.getActionCommand().split("-");
 		int i = Integer.parseInt(coordinates[0]);
 		int j = Integer.parseInt(coordinates[1]);
+        ib.remplir(i, j);
         //System.out.println("kek");
     }
     public static void main(String[] args) {

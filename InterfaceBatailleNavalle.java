@@ -181,6 +181,19 @@ public class InterfaceBatailleNavalle implements ActionListener{
 
 	}
 	
+	public void remplir(int i, int j){
+		if (plat.jouer(0, i, j).split("-")[0].equals("touché-coulé")){
+			//TODO getCoordinates from boat
+		}
+		else if (plat.jouer(0, i, j).split("-")[0].equals("touché")){
+			b1[i][j].setEnabled(false);
+		}
+		else{
+			b1[i][j].setEnabled(false);
+			System.out.println("kek");
+		}
+
+	}
     
 		
         
@@ -202,16 +215,7 @@ public class InterfaceBatailleNavalle implements ActionListener{
 		String[] coordinates = e.getActionCommand().split("-");
 		int i = Integer.parseInt(coordinates[0]);
 		int j = Integer.parseInt(coordinates[1]);
-		if (plat.jouer(0, i, j).split("-")[0].equals("touché-coulé")){
-			//TODO getCoordinates from boat
-		}
-		else if (plat.jouer(0, i, j).split("-")[0].equals("touché")){
-			b1[i][j].setEnabled(false);
-		}
-		else{
-			b1[i][j].setEnabled(false);
-			System.out.println("kek");
-		}
+		
 
 
 		
