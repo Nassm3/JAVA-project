@@ -29,18 +29,25 @@ public class Bateau{
     
     public boolean isSunk(Plateau p){
     	Case[][] grille = p.getGrille();
-   	 
-    	if (iLS==iLE) {    		
-    		for (int i=iCS;i<=l;i++) {
-    			if (grille[iLS][i]==Case.HIT)
-    				return true;}
+   	 	
+    	if (iLS==iLE) {
+    		int i=iCS;
+    		while(i<=l) {
+      			if (grille[iLS][i]!=Case.HIT || grille[iLS][i]!=Case.SUNK) {
+      				return false;
+      			}
+    		}
     	}
+    		
        	if (iCS==iCE) {
-    		for (int i=iLS; i<= l ;i++) {
-    			if (grille[iCS][i]==Case.HIT)
-    				return true;}
-       	}
-    	return false;
+       		int i=iLS;
+       	    while(i<=l) {
+       	    	if (grille[iLS][i]!=Case.HIT || grille[iLS][i]!=Case.SUNK) {
+       	    		return false;
+       	      	}
+       	    }
        }
+       	return true;
+    }
 
 }
