@@ -41,9 +41,12 @@ public class Plateau {
 				return "touché" +"_"+ bateau[li][col].getName();
 				}
 			}
+		}
+		else{
+			grille[li][col] = Case.MISSED;
+			return "manqué"+"_"+null;
 		} 
-		grille[li][col] = Case.MISSED;
-		return "manqué"+"_"+null;
+		
 
 		
 	}
