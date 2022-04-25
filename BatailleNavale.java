@@ -52,7 +52,7 @@ public class BatailleNavale implements ActionListener{
     }
     
     public void actionPerformed(ActionEvent e) { 
-        String[] coordinates = e.getActionCommand().split("_");
+        String[] coordinates = e.getActionCommand().split("-");
 		int i = Integer.parseInt(coordinates[0]);
 		int j = Integer.parseInt(coordinates[1]);
         ib.remplir(i, j);

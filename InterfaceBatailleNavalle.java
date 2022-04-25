@@ -111,9 +111,9 @@ public class InterfaceBatailleNavalle implements ActionListener{
 			JPanel bateaux;
 			if (mode==1) {
 				
-				bateaux=new JPanel(new GridLayout(1,4));
+				bateaux = new JPanel(new GridLayout(1,4));
 				
-				JPanel ra=new JPanel(new FlowLayout(FlowLayout.LEFT));
+				JPanel ra = new JPanel(new FlowLayout(FlowLayout.LEFT));
 				JButton bat1 = new JButton();
 				bat1.setIcon(new ImageIcon (new ImageIcon("bat4.jpg").getImage().getScaledInstance(150, 100, java.awt.Image.SCALE_SMOOTH)));
 
@@ -183,10 +183,10 @@ public class InterfaceBatailleNavalle implements ActionListener{
 	}
 	
 	public void remplir(int i, int j){
-		if (plat.jouer(0, i, j).split("-")[0].equals("touché-coulé")){
+		if (plat.jouer(0, i, j).split("_")[0].equals("touché-coulé")){
 			//TODO getCoordinates from boat
 		}
-		else if (plat.jouer(0, i, j).split("-")[0].equals("touché")){
+		else if (plat.jouer(0, i, j).split("_")[0].equals("touché")){
 			b1[i][j].setBorder(new LineBorder(Color.WHITE));
 			b1[i][j].setEnabled(false);
 			
@@ -197,7 +197,6 @@ public class InterfaceBatailleNavalle implements ActionListener{
 		}
 		System.out.println(plat.jouer(0, i, j));
 		
-
 	}
     
 		
@@ -209,9 +208,7 @@ public class InterfaceBatailleNavalle implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		String[] coordinates = e.getActionCommand().split("-");
-		int i = Integer.parseInt(coordinates[0]);
-		int j = Integer.parseInt(coordinates[1]);
+
 		
 
 
