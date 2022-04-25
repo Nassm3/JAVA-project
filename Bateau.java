@@ -5,7 +5,7 @@ public class Bateau{
     int iCS;
     int iLE;
     int iCE;
-
+    Plateau p;
     public Bateau(int indiceLigneStart, int indiceColStart,int indiceLigneEnd, int indiceColEnd, int length, int nb) {
         this.l = length;
         if (length == 5){
@@ -27,9 +27,4 @@ public class Bateau{
     }
     public String getName() {return name;}
 
-    public Boolean isSunk(int i, int j){
-        if(iLS == iLE){
-            System.out.println(""); 
-        }
-        return name  + " has been sunked, RIP";}
 }
