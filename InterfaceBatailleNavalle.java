@@ -7,7 +7,7 @@ import javax.swing.*;
 public class InterfaceBatailleNavalle implements ActionListener{
 	
 	JFrame f = new JFrame();
-	public InterfaceBatailleNavalle(int size, ActionListener listener) {
+	public InterfaceBatailleNavalle(int size, ActionListener listener, Plateau plat) {
 		
 		
 		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

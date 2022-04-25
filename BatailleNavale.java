@@ -33,7 +33,7 @@ public class BatailleNavale implements ActionListener{
         p = new Plateau(gameSize);
         //System.out.println("Hi " + name + ", you're playing in " + gamemode + " on a " + gameSize + "*" + gameSize + " plateau");
         
-        InterfaceBatailleNavalle ib = new InterfaceBatailleNavalle(gameSize, this, 1);
+        InterfaceBatailleNavalle ib = new InterfaceBatailleNavalle(gameSize, this, 1, p);
         Random r = new Random();
         tour = r.nextInt(2);
 
