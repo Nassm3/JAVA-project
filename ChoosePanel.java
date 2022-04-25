@@ -31,7 +31,7 @@ public class ChoosePanel implements ActionListener{
 		
 		
 		f=new JDialog((Frame)null,"Séléction des paramètres",true);    
-        String L[]={"Facile","Moyen"};        
+        String L[]={"Facile","Moyen","JoueurVSJoueur"};        
         combobox=new JComboBox<String>(L);
         
         String P[]={"Aléatoire","Joueur"};        
@@ -87,9 +87,12 @@ public class ChoosePanel implements ActionListener{
 
         if(combobox.getSelectedItem().equals("Facile")) {
             difficulty = 0;}
+	    
+	else if(combobox.getSelectedItem().equals("Moyen")) {
+            difficulty = 1;}
             
         else{
-            difficulty = 1;}
+            difficulty = 2;}
                                 
     
         gameSize = Integer.parseInt((String)ratio.getSelectedItem().toString());
