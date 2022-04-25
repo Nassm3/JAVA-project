@@ -1,9 +1,9 @@
  
 public enum Case {
-	SUNK("X"),
-	EMPTY(" "),
-	BOAT("B"),
-	HIT("H");
+	SUNK("coulé"),
+	EMPTY("vide"),
+	BOAT("bateau"),
+	HIT("touché");
 	
 	private String affichage;
 	private Case(String aff) {
