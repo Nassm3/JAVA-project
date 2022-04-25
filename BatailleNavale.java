@@ -56,7 +56,6 @@ public class BatailleNavale implements ActionListener{
 		int i = Integer.parseInt(coordinates[0]);
 		int j = Integer.parseInt(coordinates[1]);
         ib.remplir(i, j);
-        //System.out.println("kek");
     }
     public static void main(String[] args) {
         BatailleNavale bn = new BatailleNavale();

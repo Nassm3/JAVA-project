@@ -28,13 +28,18 @@ public class Plateau {
 	public String jouer(int joueur, int li, int col) {
 
 		if(grille[li][col] != Case.EMPTY){
-			grille[li][col] = Case.HIT;
-			System.out.println(String.valueOf(this));
-			if(bateau[li][col].isSunk(this)){
-			return "touché-coulé" +"-"+bateau[li][col].getName();
-			}
-			else{
+			System.out.println(grille[li][col].affiche());
+			if(grille[li][col] == Case.BOAT){
+
+				grille[li][col] = Case.HIT;
+				System.out.println(bateau[li][col].getName());
+			
+				if(bateau[li][col].isSunk(grille)){
+				return "touché-coulé" +"-"+bateau[li][col].getName();
+				}
+				else{
 				return "touché" +"-"+ bateau[li][col].getName();
+				}
 			}
 		} 
 		grille[li][col] = Case.MISSED;
@@ -52,19 +57,13 @@ public class Plateau {
 			System.out.println("saisir taille cohérente");}
 
 		else {
-			System.out.println(i +" "+ j +" "+a+" "+b);
-
 			if (grille[i][j]==Case.EMPTY && grille[a][b]==Case.EMPTY) {
 
 				grille[i][j]=Case.BOAT;
 				grille[a][b]=Case.BOAT;
 
-				
-				System.out.println(bt.getName());
-
 				bateau[a][b] = bt;
 				bateau[i][j] = bt;
-
 
 				if (taille>2) {
 					int c=1;

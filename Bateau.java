@@ -27,8 +27,7 @@ public class Bateau{
     }
     public String getName() {return name;}
     
-    public boolean isSunk(Plateau p){
-    	Case[][] grille = p.getGrille();
+    public boolean isSunk(Case [][] grille){
    	 	
     	if (iLS==iLE) {
     		int i=iCS;

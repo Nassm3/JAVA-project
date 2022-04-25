@@ -183,17 +183,18 @@ public class InterfaceBatailleNavalle implements ActionListener{
 	}
 	
 	public void remplir(int i, int j){
-		/*if (plat.jouer(0, i, j).split("-")[0].equals("touché-coulé")){
+		if (plat.jouer(0, i, j).split("-")[0].equals("touché-coulé")){
 			//TODO getCoordinates from boat
 		}
 		else if (plat.jouer(0, i, j).split("-")[0].equals("touché")){
 			b1[i][j].setEnabled(false);
+			b1[i][j].setBorder(new LineBorder(Color.ORANGE));
 		}
 		else{
 			b1[i][j].setEnabled(false);
-			System.out.println("kek");
-		}*/
-		b1[i][j].setBorder(new LineBorder(Color.ORANGE));
+			b1[i][j].setBorder(new LineBorder(Color.BLUE));
+		}
+		
 
 	}
     
