@@ -29,7 +29,7 @@ public class Plateau {
 
 		if(grille[li][col] != Case.EMPTY){
 			grille[li][col] = Case.HIT;
-			System.out.println(this);
+			System.out.println(String.valueOf(this));
 			if(bateau[li][col].isSunk(this)){
 			return "touché-coulé" +"-"+bateau[li][col].getName();
 			}
