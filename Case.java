@@ -3,6 +3,7 @@ public enum Case {
 	
 	SUNK("coulé"),
 	EMPTY("vide"),
+	MISSED("manqué"),
 	BOAT("bateau"),
 	HIT("touché");
 	

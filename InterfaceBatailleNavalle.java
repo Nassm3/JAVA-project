@@ -5,9 +5,13 @@ import javax.swing.*;
 
 
 public class InterfaceBatailleNavalle implements ActionListener{
-	
+	Plateau plat;
+	Joueur joueur;
+	JButton [][] b1;
+	JPanel plateau; 
+	JPanel p1;
 	JFrame f = new JFrame();
-	public InterfaceBatailleNavalle(int size, ActionListener listener, Plateau plat) {
+	public InterfaceBatailleNavalle(int size, ActionListener listener) {
 		
 		
 		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -26,8 +30,7 @@ public class InterfaceBatailleNavalle implements ActionListener{
 		for (int i=0;i<b1.length;i++)
 			for (int j=0;j<b1[i].length;j++) {
 				b1[i][j]=new JButton();
-				b1[i][j].addActionListener(listener);
-				b1[i][j].setActionCommand(i+"-"+j);
+				
 				b1[i][j].setBackground(Color.RED);
 				b1[i][j].setPreferredSize(new Dimension(80,80));
 				p1.add(b1[i][j]);
@@ -63,8 +66,9 @@ public class InterfaceBatailleNavalle implements ActionListener{
 		
 		
 		
-		public InterfaceBatailleNavalle(int size, ActionListener listener,int mode) {			
-			
+		public InterfaceBatailleNavalle(int size, ActionListener listener,int mode, Plateau plat, Joueur joueur) {			
+			this.plat = plat;
+			this.joueur = joueur;
 			f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			f.setLayout(new BorderLayout());
 			
@@ -72,15 +76,17 @@ public class InterfaceBatailleNavalle implements ActionListener{
 			tour.setPreferredSize(new Dimension(50,50));
 			tour.setFont(new Font(Font.MONOSPACED,Font.BOLD,20));
 			
-			JPanel plateau =new JPanel(new GridLayout(1,2,50,50)); 
+			plateau =new JPanel(new GridLayout(1,2,50,50)); 
 			
 			
-			JPanel p1=new JPanel(new GridLayout(size,size));
-			JButton [][] b1=new JButton[size][size];
+			p1 = new JPanel(new GridLayout(size,size));
+			b1 = new JButton[size][size];
 			
 			for (int i=0;i<b1.length;i++)
 				for (int j=0;j<b1[i].length;j++) {
 					b1[i][j]=new JButton();
+					b1[i][j].addActionListener(listener);
+					b1[i][j].setActionCommand(i+"-"+j);
 					b1[i][j].setBackground(Color.RED);
 					b1[i][j].setPreferredSize(new Dimension(80,80));
 					p1.add(b1[i][j]);
@@ -196,6 +202,16 @@ public class InterfaceBatailleNavalle implements ActionListener{
 		String[] coordinates = e.getActionCommand().split("-");
 		int i = Integer.parseInt(coordinates[0]);
 		int j = Integer.parseInt(coordinates[1]);
+		if (plat.jouer(0, i, j).split("-")[0].equals("touché-coulé")){
+			//TODO getCoordinates from boat
+		}
+		else if (plat.jouer(0, i, j).split("-")[0].equals("touché")){
+			b1[i][j].setEnabled(false);
+		}
+		else{
+			b1[i][j].setEnabled(false);
+			System.out.println("kek");
+		}
 
 
 		
