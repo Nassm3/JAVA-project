@@ -109,7 +109,7 @@ public class Plateau {
     				return true;}
     	}
        	if (b.iCS==b.iCE) {
-    		for (int i=b.iLS;i<=l;i++) {
+    		for (int i=b.iLS; i<= b.l ;i++) {
     			if (grille[b.iCS][i]==Case.HIT)
     				return true;}
        	}
