@@ -27,4 +27,10 @@ public class Bateau{
     }
     public String getName() {return name;}
 
+    public Boolean isSunk(int i, int j){
+        if(iLS == iLE){
+            System.out.println(""); 
+        }
+        return true;}
+
 }
