@@ -27,7 +27,7 @@ public class Plateau {
 		if(grille[li][col] != Case.EMPTY){
 			grille[li][col] = Case.HIT;
 
-			if(bateau[li][col].isSunk(li, col)){
+			if(bateau[li][col].isSunk(new Plateau(8))) {
 			return "touché-coulé" +"-"+bateau[li][col].getName();
 			}
 			else{
