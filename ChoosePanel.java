@@ -88,7 +88,7 @@ public class ChoosePanel implements ActionListener{
         if(combobox.getSelectedItem().equals("Facile")) {
             difficulty = 0;}
 	    
-	else if(combobox.getSelectedItem().equals("Moyen")) {
+	    else if(combobox.getSelectedItem().equals("Moyen")) {
             difficulty = 1;}
             
         else{
