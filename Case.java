@@ -3,7 +3,7 @@ public enum Case {
 	
 	SUNK("coulé"),
 	EMPTY("vide"),
-	BOAT("bateau", bateau),
+	BOAT("bateau"),
 	HIT("touché");
 	
 	private String affichage;

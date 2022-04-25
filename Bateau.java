@@ -29,7 +29,7 @@ public class Bateau{
 
     public String isSunk(int i, int j){
         if(iLS == iLE){
-            if 
+            System.out.println(""); 
         }
         return name  + " has been sunked, RIP";}
 }
