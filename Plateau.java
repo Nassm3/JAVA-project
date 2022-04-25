@@ -27,7 +27,7 @@ public class Plateau {
 	
 	public String jouer(int joueur, int li, int col) {
 
-		if(grille[li][col] != Case.EMPTY){
+		if (grille[li][col] != Case.EMPTY){
 			//System.out.println(grille[li][col].affiche());
 			if(grille[li][col] == Case.BOAT){
 
@@ -44,11 +44,10 @@ public class Plateau {
 		}
 		else{
 			grille[li][col] = Case.MISSED;
-			return "manqué"+"_"+null;
-		} 
+			return "manqué"+"_"+null;}
+		return " "+"_"+" ";
 		
-
-		
+		 		
 	}
 	
 	public void putBoat(int i,int j,int a, int b ,int taille) { 
