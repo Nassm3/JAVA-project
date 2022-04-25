@@ -187,13 +187,15 @@ public class InterfaceBatailleNavalle implements ActionListener{
 			//TODO getCoordinates from boat
 		}
 		else if (plat.jouer(0, i, j).split("-")[0].equals("touché")){
+			b1[i][j].setBorder(new LineBorder(Color.WHITE));
 			b1[i][j].setEnabled(false);
-			b1[i][j].setBorder(new LineBorder(Color.ORANGE));
+			
 		}
 		else{
 			b1[i][j].setEnabled(false);
 			b1[i][j].setBorder(new LineBorder(Color.BLUE));
 		}
+		System.out.println(plat.jouer(0, i, j));
 		
 
 	}

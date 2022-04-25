@@ -28,22 +28,22 @@ public class Plateau {
 	public String jouer(int joueur, int li, int col) {
 
 		if(grille[li][col] != Case.EMPTY){
-			System.out.println(grille[li][col].affiche());
+			//System.out.println(grille[li][col].affiche());
 			if(grille[li][col] == Case.BOAT){
 
 				grille[li][col] = Case.HIT;
-				System.out.println(bateau[li][col].getName());
+				//System.out.println(bateau[li][col].getName());
 			
 				if(bateau[li][col].isSunk(grille)){
-				return "touché-coulé" +"-"+bateau[li][col].getName();
+				return "touché-coulé" + "_" + bateau[li][col].getName();
 				}
 				else{
-				return "touché" +"-"+ bateau[li][col].getName();
+				return "touché" +"_"+ bateau[li][col].getName();
 				}
 			}
 		} 
 		grille[li][col] = Case.MISSED;
-		return "manqué"+"-"+null;
+		return "manqué"+"_"+null;
 
 		
 	}
