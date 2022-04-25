@@ -1,26 +1,34 @@
 import java.awt.event.*;
+import java.util.Random;
 
 
 public class BatailleNavale implements ActionListener{
     Plateau p;
     Joueur[] joueurs;
     int tour;
-    InterfaceBatailleNavalle ib ;
     public BatailleNavale(){
-        p = new Plateau();
+        //p = new Plateau();
         joueurs = new Joueur[2];
-        ib = new InterfaceBatailleNavalle(this);
+        ChoosePanel cp = new ChoosePanel();
+        cp.choosePanel();
+        String name = cp.getName();
+        int difficulty = cp.getDifficulty();
+        int gameSize = cp.getGameSize();
+        int placementOption = cp.getPlacementOption();
+        System.out.println(gameSize);
+        InterfaceBatailleNavalle ib = new InterfaceBatailleNavalle(gameSize, this);
 
         for (int i = 0; i < joueurs.length; i++){
-            System.out.println("---joueur" + String.valueOf(i+1));
-            joueurs[i] = new Joueur(false, i+1, im);
+            //joueurs[i] = new Joueur(false, i+1, im);
         }
         Random r = new Random();
         tour = r.nextInt(2);
 
     }
     
-    public void actionPerformed(ActionEvent e) {
-        System.out.println(e);
+    public void actionPerformed(ActionEvent e) { 
+    }
+    public static void main(String[] args) {
+        BatailleNavale bn = new BatailleNavale();
     }
 }
