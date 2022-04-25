@@ -43,10 +43,6 @@ public class Bateau{
     	return false;
        }
 
-    public Boolean isSunk(int i, int j){
-        if(iLS == iLE){
-            System.out.println(""); 
-        }
-        return true;}
+
 
 }

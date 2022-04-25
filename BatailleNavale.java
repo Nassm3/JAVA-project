@@ -30,13 +30,24 @@ public class BatailleNavale implements ActionListener{
         }
         int gameSize = cp.getGameSize();
         int placementOption = cp.getPlacementOption();
-
+        
         p = new Plateau(gameSize);
+        if (difficulty != 2){
+            int size = 2;
+            while (size<6) {
+                Random j = new Random();
+                Random i = new Random();
+                int ii = i.nextInt(15);
+                int jj = j.nextInt(15);
+                p.putBoat(ii, jj, ii+size-1, jj, size);
+                size++;
+                
+            }
+        }
         //System.out.println("Hi " + name + ", you're playing in " + gamemode + " on a " + gameSize + "*" + gameSize + " plateau");
         
         ib = new InterfaceBatailleNavalle(gameSize, this, 1, p, joueur);
-        Random r = new Random();
-        tour = r.nextInt(2);
+        
 
     }
     

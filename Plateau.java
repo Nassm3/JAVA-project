@@ -1,9 +1,12 @@
 public class Plateau {
     private Case [][] grille;
 	public Bateau[][] bateau;
+	Bateau bt;
+
     
     public Plateau(int i){
         grille = new Case [i][i];
+		bateau = new Bateau[i][i];
         init();
     } 
 
@@ -26,8 +29,8 @@ public class Plateau {
 
 		if(grille[li][col] != Case.EMPTY){
 			grille[li][col] = Case.HIT;
-
-			if(bateau[li][col].isSunk(li, col)){
+			System.out.println(this);
+			if(bateau[li][col].isSunk(this)){
 			return "touché-coulé" +"-"+bateau[li][col].getName();
 			}
 			else{
@@ -41,22 +44,26 @@ public class Plateau {
 	}
 	
 	public void putBoat(int i,int j,int a, int b ,int taille) { 
+		
+		bt = new Bateau(i, j, a, b, taille, 1);
 
-		if (Math.abs(a-i)+1!=taille ) //|| Math.abs(j-b)+1!=taille)
 
-			System.out.println("saisir taille cohérente");
+		if (Math.abs(a-i)+1!=taille && Math.abs(b-j)+1!=taille) {//|| Math.abs(j-b)+1!=taille)
+			System.out.println("saisir taille cohérente");}
 
 		else {
+			System.out.println(i +" "+ j +" "+a+" "+b);
 
 			if (grille[i][j]==Case.EMPTY && grille[a][b]==Case.EMPTY) {
 
 				grille[i][j]=Case.BOAT;
 				grille[a][b]=Case.BOAT;
 
-				Bateau bt = new Bateau(i, j, a, b, taille, 1);
+				
+				System.out.println(bt.getName());
 
-				bateau[i][j] = bt;
 				bateau[a][b] = bt;
+				bateau[i][j] = bt;
 
 
 				if (taille>2) {
