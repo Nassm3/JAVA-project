@@ -40,9 +40,12 @@ public class InterfaceBatailleNavalle implements ActionListener{
 				b2[i][j]=new JButton();
 				b2[i][j].setPreferredSize(new Dimension(80,80));
 				b2[i][j].setBackground(Color.BLUE);
+				b2[i][j].setEnabled(false);
 				p2.add(b2[i][j]);
+				
 			}
 		plateau.add(p2);
+
 		
 		JLabel res = new JLabel("choisir une position");
 		res.setPreferredSize(new Dimension(25,25));
