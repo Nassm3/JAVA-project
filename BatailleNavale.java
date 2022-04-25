@@ -4,32 +4,36 @@ import java.util.Random;
 
 public class BatailleNavale implements ActionListener{
     Plateau p;
-    Joueur[] joueurs;
+    Joueur joueur;
     int tour;
     String gamemode;
     public BatailleNavale(){
         
-        joueurs = new Joueur[2];
+        
         ChoosePanel cp = new ChoosePanel();
         cp.choosePanel();
+        
         String name = cp.getName();
-
         int difficulty = cp.getDifficulty();
+
         if (difficulty == 0){
-            gamemode = new String("Easy");}
-        else{
+            gamemode = new String("Easy");
+            joueur = new Joueur(name);}
+        else if (difficulty == 1){
             gamemode = new String("Normal");
+            joueur = new Joueur(name);
+        }
+        else{
+            gamemode = new String("JcJ");
+            joueur = new Joueur(name);
         }
         int gameSize = cp.getGameSize();
         int placementOption = cp.getPlacementOption();
+
         p = new Plateau(gameSize);
         //System.out.println("Hi " + name + ", you're playing in " + gamemode + " on a " + gameSize + "*" + gameSize + " plateau");
         
         InterfaceBatailleNavalle ib = new InterfaceBatailleNavalle(gameSize, this);
-
-        for (int i = 0; i < joueurs.length; i++){
-            //joueurs[i] = new Joueur(false, i+1, im);
-        }
         Random r = new Random();
         tour = r.nextInt(2);
 
