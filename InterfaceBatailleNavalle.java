@@ -51,7 +51,16 @@ public class InterfaceBatailleNavalle implements ActionListener{
 		
 		JLabel res = new JLabel("choisir une position");
 		res.setPreferredSize(new Dimension(25,25));
+		f.setLayout(new BorderLayout());
+		f.add(tour, BorderLayout.PAGE_START);
+		f.add(plateau,BorderLayout.CENTER);
+		f.add(res,BorderLayout.PAGE_END);
+		f.pack();
+		f.setLocationRelativeTo(null);
+		f.setVisible(true);
 		}
+
+		
 		
 		
 		public InterfaceBatailleNavalle(int size, ActionListener listener,int mode) {			
@@ -185,9 +194,9 @@ public class InterfaceBatailleNavalle implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		String[] coordinates = e.getActionCommand().split("-");
-		i = Integer.parseInt(coordinates[0]);
-		j = Integer.parseInt(coordinates[1]);
-		
+		int i = Integer.parseInt(coordinates[0]);
+		int j = Integer.parseInt(coordinates[1]);
+
 
 		
 	}
