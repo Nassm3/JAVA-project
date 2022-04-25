@@ -99,24 +99,10 @@ public class Plateau {
 			System.out.print("-");
 		System.out.println();
 	}
-	
-	
-    public boolean isSunk(Bateau b){
-    	 
-    	if (b.iLS==b.iLE) {
-    		for (int i=b.iCS;i<=b.l;i++) {
-    			if (grille[b.iLS][i]==Case.HIT)
-    				return true;}
-    	}
-       	if (b.iCS==b.iCE) {
-    		for (int i=b.iLS; i<= b.l ;i++) {
-    			if (grille[b.iCS][i]==Case.HIT)
-    				return true;}
-       	}
-    	return false;
-       }
 			
-	
+	public Case[] [] getGrille(){
+		return grille;
+	}
 	
 	public static void main(String[] args) {
 		Plateau p=new Plateau(8);

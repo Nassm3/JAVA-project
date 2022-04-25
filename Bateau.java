@@ -26,6 +26,22 @@ public class Bateau{
         this.iCE = indiceColEnd;
     }
     public String getName() {return name;}
+    
+    public boolean isSunk(Plateau p){
+    	Case[][] grille = p.getGrille();
+   	 
+    	if (iLS==iLE) {    		
+    		for (int i=iCS;i<=l;i++) {
+    			if (grille[iLS][i]==Case.HIT)
+    				return true;}
+    	}
+       	if (iCS==iCE) {
+    		for (int i=iLS; i<= l ;i++) {
+    			if (grille[iCS][i]==Case.HIT)
+    				return true;}
+       	}
+    	return false;
+       }
 
     public Boolean isSunk(int i, int j){
         if(iLS == iLE){
