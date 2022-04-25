@@ -41,9 +41,9 @@ public class ChoosePanel implements ActionListener{
         ratio = new JComboBox<String>(C);
         
         
-        JLabel txt1=new JLabel("taille",JLabel.CENTER);
-        JLabel txt2=new JLabel("par2",JLabel.CENTER);
-        JLabel txt3=new JLabel("par3",JLabel.CENTER);
+        JLabel txt1=new JLabel("Difficulté",JLabel.CENTER);
+        JLabel txt2=new JLabel("Taille du plateau",JLabel.CENTER);
+        JLabel txt3=new JLabel("Mise en place des bateaux",JLabel.CENTER);
         
         JPanel centre=new JPanel(new GridLayout(3,2));
         centre.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
