@@ -1,5 +1,6 @@
 public class Plateau {
     private Case [][] grille;
+	public Bateau[][] bateau;
     
     public Plateau(int i){
         grille = new Case [i][i];
@@ -16,7 +17,7 @@ public class Plateau {
 		
         for(int indiceLigne=0; indiceLigne<grille.length; indiceLigne++)
             for(int indiceCol=0; indiceCol<grille[indiceLigne].length; indiceCol++)
-            	if (grille[indiceLigne][indiceCol]==Case.SUNK ||grille[indiceLigne][indiceCol]==Case.EMPTY)
+            	if (grille[indiceLigne][indiceCol]==Case.SUNK || grille[indiceLigne][indiceCol]==Case.EMPTY)
             		return true;
 		return false;
 	}
@@ -35,17 +36,22 @@ public class Plateau {
 			if (grille[i][j]==Case.EMPTY && grille[a][b]==Case.EMPTY) {
 				grille[i][j]=Case.BOAT;
 				grille[a][b]=Case.BOAT;
+				Bateau bt = new Bateau(i, j, a, b, taille, 1);
+				bateau[i][j] = bt;
+				bateau[a][b] = bt;
 				if (taille>3) {
 					int c=1;
 					if (j==b) {
 						for (int x=0;x<Math.abs(a-i);x++) {
 							grille[i+c][j]=Case.BOAT;
+							bateau[i+c][j] = bt;
 							c+=1;
 						}
 					}
 					if (i==a) {
 						for (int x=0;x<Math.abs(a-i);x++) {
 							grille[i+c][j]=Case.BOAT;
+							bateau[i+c][j] = bt;
 							c+=1;
 						}
 					}

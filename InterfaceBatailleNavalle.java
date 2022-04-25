@@ -26,6 +26,8 @@ public class InterfaceBatailleNavalle implements ActionListener{
 		for (int i=0;i<b1.length;i++)
 			for (int j=0;j<b1[i].length;j++) {
 				b1[i][j]=new JButton();
+				b1[i][j].addActionListener(listener);
+				b1[i][j].setActionCommand(i+"-"+j);
 				b1[i][j].setBackground(Color.RED);
 				b1[i][j].setPreferredSize(new Dimension(80,80));
 				p1.add(b1[i][j]);
@@ -78,7 +80,11 @@ public class InterfaceBatailleNavalle implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e);
+		String[] coordinates = e.getActionCommand().split("-");
+		i = Integer.parseInt(coordinates[0]);
+		j = Integer.parseInt(coordinates[1]);
+		
+
 		
 	}
     
