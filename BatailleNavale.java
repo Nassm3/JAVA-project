@@ -42,6 +42,7 @@ public class BatailleNavale implements ActionListener{
                 p.putBoat(ii, jj, ii+size-1, jj, size);
                 size++;
                 
+                
             }
         }
         //System.out.println("Hi " + name + ", you're playing in " + gamemode + " on a " + gameSize + "*" + gameSize + " plateau");
