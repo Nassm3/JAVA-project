@@ -2,7 +2,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import javafx.util.StringConverter;
 
 
 public class InterfaceBatailleNavalle implements ActionListener{
@@ -72,7 +71,7 @@ public class InterfaceBatailleNavalle implements ActionListener{
 	
     
 	public static void main(String[] args) {
-		new InterfaceBatailleNavalle(10, this).choosePanel();
+		//new InterfaceBatailleNavalle(10, this).choosePanel();
 	}
 
 	public void actionPerformed(ActionEvent e) {

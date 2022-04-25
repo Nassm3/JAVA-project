@@ -6,16 +6,25 @@ public class BatailleNavale implements ActionListener{
     Plateau p;
     Joueur[] joueurs;
     int tour;
+    String gamemode;
     public BatailleNavale(){
-        //p = new Plateau();
+        
         joueurs = new Joueur[2];
         ChoosePanel cp = new ChoosePanel();
         cp.choosePanel();
         String name = cp.getName();
+
         int difficulty = cp.getDifficulty();
+        if (difficulty == 0){
+            gamemode = new String("Easy");}
+        else{
+            gamemode = new String("Normal");
+        }
         int gameSize = cp.getGameSize();
         int placementOption = cp.getPlacementOption();
-        System.out.println(gameSize);
+        p = new Plateau(gameSize);
+        //System.out.println("Hi " + name + ", you're playing in " + gamemode + " on a " + gameSize + "*" + gameSize + " plateau");
+        
         InterfaceBatailleNavalle ib = new InterfaceBatailleNavalle(gameSize, this);
 
         for (int i = 0; i < joueurs.length; i++){
