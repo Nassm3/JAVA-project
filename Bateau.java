@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Bateau{
     String name;
     int l;
@@ -5,7 +7,6 @@ public class Bateau{
     int iCS;
     int iLE;
     int iCE;
-    Plateau p;
     public Bateau(int indiceLigneStart, int indiceColStart,int indiceLigneEnd, int indiceColEnd, int length, int nb) {
         this.l = length;
         if (length == 5){
@@ -27,8 +28,14 @@ public class Bateau{
     }
     public String getName() {return name;}
     
-    public boolean isSunk(Case [][] grille){
+    public boolean isSunk(){
+    	getBoatCoordinate();
+    	String indice1=
+    	
    	 	
+    	
+    	
+    	
     	if (iLS==iLE) {
     		int i=iCS;
     		while(i<=l) {
@@ -48,7 +55,26 @@ public class Bateau{
        }
        	return true;
     }
+    
+    public String getBoatCoordinate() {
+		String liste=new String("");
+   		if (l==2){
+			liste=String.valueOf(iLS)+"-"+String.valueOf(iCS)+";"+String.valueOf(iLE)+"-"+String.valueOf(iCE);
+   		}
+   		else {
+   			if (iLS==iLE) {
+   	       		for (int i=iCS;i<=l;i++) {
+   	       			liste=liste.concat(String.valueOf(iLS)+"-"+String.valueOf(i)+";");    	
+   	       	    }
+   			}
+   	       	if (iCS==iCE) {
+   	       		for (int i=iLS;i<=l;i++) {
+   	       			liste=liste.concat(String.valueOf(i)+"-"+String.valueOf(iCS)+";");
+   	       		}
+   	       	}
 
-
-
+   		}
+   		return liste;
+   	}
 }
+

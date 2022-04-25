@@ -190,8 +190,8 @@ public class InterfaceBatailleNavalle implements ActionListener{
 			b1[i][j].setEnabled(false);
 			System.out.println("tc" + result);
 		}
-		else if (result.split("_")[0].equals("touché")){
-			b1[i][j].setBorder(new LineBorder(Color.WHITE));
+		else if (result.equals("touché")){
+			b1[i][j].setBackground(Color.DARK_GRAY);
 			b1[i][j].setEnabled(false);
 			System.out.println("t" + result);
 			
@@ -210,14 +210,9 @@ public class InterfaceBatailleNavalle implements ActionListener{
 	
     
 	public static void main(String[] args) {
-		//new InterfaceBatailleNavalle(10, this).choosePanel();
 	}
 
 	public void actionPerformed(ActionEvent e) {
-
-		
-
-
 		
 	}
     

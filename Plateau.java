@@ -59,13 +59,6 @@ public class Plateau {
 		}
 		return false;
 	}
-
-	public boolean isSink(int i,int j) {
-		if(grille[i][j] == Case.SUNK){
-			return true;
-		}
-		return false;
-	}
 	
 	public void putBoat(int i,int j,int a, int b ,int taille) { 
 		
@@ -128,11 +121,12 @@ public class Plateau {
 	public Case[] [] getGrille(){
 		return grille;
 	}
-	
+		
 	public static void main(String[] args) {
 		Plateau p=new Plateau(8);
 		p.putBoat(1, 2, 4, 2, 4);
-		p.afficher();
+		Bateau bo=new Bateau(1,3,4,3,4,5);
+		System.out.println(bo.getBoatCoordinate(bo));
 	}
 }
 
