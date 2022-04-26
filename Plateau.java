@@ -124,9 +124,19 @@ public class Plateau {
 		
 	public static void main(String[] args) {
 		Plateau p=new Plateau(8);
-		p.putBoat(1, 2, 4, 2, 4);
-		Bateau bo=new Bateau(1,3,4,3,4,5);
-		System.out.println(bo.getBoatCoordinate(bo));
+		p.putBoat(2, 3, 4, 3, 3);
+		Bateau bo=new Bateau(2,3,4,3,3,5);
+		p.jouer(0,0);
+		p.jouer(1,3);
+		p.jouer(2,3);
+		p.jouer(4,3);
+
+
+
+		System.out.println(bo.isSunk(p.grille));
+		p.afficher();
+
+
 	}
 }
 

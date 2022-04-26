@@ -28,32 +28,23 @@ public class Bateau{
     }
     public String getName() {return name;}
     
-    public boolean isSunk(){
-    	getBoatCoordinate();
-    	String indice1=
-    	
-   	 	
-    	
-    	
-    	
-    	if (iLS==iLE) {
-    		int i=iCS;
-    		while(i<=l) {
-      			if (grille[iLS][i]!=Case.HIT || grille[iLS][i]!=Case.SUNK) {
-      				return false;
-      			}
-    		}
-    	}
-    		
-       	if (iCS==iCE) {
-       		int i=iLS;
-       	    while(i<=l) {
-       	    	if (grille[iLS][i]!=Case.HIT || grille[iLS][i]!=Case.SUNK) {
-       	    		return false;
-       	      	}
-       	    }
-       }
-       	return true;
+    public boolean isSunk(Case [][] grille){   	
+   	
+    	String [] coordinate=getBoatCoordinate().split(";");
+		int taille=0;
+		for (int i=0;i<coordinate.length;i++){
+			if (coordinate[i].contains("-")){
+				taille+=1;
+			}
+		}
+		for (int i=0; i<taille;i++){
+			int li=Integer.parseInt(coordinate[i].split("-")[0]);
+			int col=Integer.parseInt(coordinate[i].split("-")[1]);
+			if (grille[li][col]!=Case.HIT){
+				return false;
+			}
+		}
+		return true;
     }
     
     public String getBoatCoordinate() {
