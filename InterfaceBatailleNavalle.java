@@ -201,8 +201,6 @@ public class InterfaceBatailleNavalle implements ActionListener{
 			b1[i][j].setBorder(new LineBorder(Color.BLUE));
 			System.out.println("l" + result);
 		}
-		
-		
 	}
     
 		
