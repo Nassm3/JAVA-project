@@ -32,7 +32,6 @@ public class Bateau{
    	
     	String[] coordinate=getBoatCoordinate().split(";");
 		int taille = 0;
-		System.out.println("coo :" + getBoatCoordinate());
 		for (int i=0;i<coordinate.length;i++){
 			if (coordinate[i].contains("-")){
 				taille+=1;
@@ -71,27 +70,22 @@ public class Bateau{
     
     public String getBoatCoordinate() {
 		String liste = new String("");
-		System.out.println("taille in getBoatCoordinate : " + l);
    		if (l==2){
 			liste=String.valueOf(iLS)+"-"+String.valueOf(iCS)+";"+String.valueOf(iLE)+"-"+String.valueOf(iCE);
    		}
    		else {
-			System.out.println("iLS : " + iLS + " iLE : " + iLE + " iCS : " + iCS + " iCE : " + iCE);
    			if (iLS==iLE) {
    	       		for (int i=iCS;i<=l+iCS-1;i++) {
    	       			liste += String.valueOf(iLS)+"-"+String.valueOf(i)+";";
-					System.out.println("entered iLS==iLE :" + liste);
    	       	    }
    			}
    	       	if (iCS==iCE) {
    	       		for (int i=iLS;i<=l+iLS-1;i++) {
    	       			liste+= String.valueOf(i)+"-"+String.valueOf(iCS)+";";
-					System.out.println("entered iCS==iCE :" + liste);
    	       		}
    	       	}
 
    		}
-		System.out.println("liste : "+ liste);
    		return liste;
    	}
 }
