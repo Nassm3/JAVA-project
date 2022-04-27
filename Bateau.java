@@ -47,6 +47,25 @@ public class Bateau{
 		return true;
     }
     
+    
+	public boolean isHit(Case [][] grille) {
+    	String [] coordinate=getBoatCoordinate().split(";");
+		int taille=0;
+		for (int i=0;i<coordinate.length;i++){
+			if (coordinate[i].contains("-")){
+				taille+=1;
+			}
+		}
+		for (int i=0; i<taille;i++){
+			int li=Integer.parseInt(coordinate[i].split("-")[0]);
+			int col=Integer.parseInt(coordinate[i].split("-")[1]);
+			if (grille[li][col]==Case.HIT){
+				return true;
+			}
+		}
+		return true;
+	}
+    
     public String getBoatCoordinate() {
 		String liste=new String("");
    		if (l==2){
