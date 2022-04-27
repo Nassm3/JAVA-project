@@ -48,13 +48,6 @@ public class Plateau {
 		 		
 	}
 	
-	public boolean isTouched(int i,int j) {
-		if(grille[i][j] == Case.HIT){
-			return true;
-		}
-		return false;
-	}
-	
 	public void putBoat(int i,int j,int a, int b ,int taille) { 
 		
 		bt = new Bateau(i, j, a, b, taille, 1);
