@@ -70,7 +70,6 @@ public class Plateau {
 
 				if (taille>2) {
 					int c=1;
-
 					if (j==b) {
 						for (int x=0;x<Math.abs(a-i);x++) {
 							grille[i+c][j]=Case.BOAT;

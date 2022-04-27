@@ -92,7 +92,7 @@ public class InterfaceBatailleNavalle implements ActionListener{
 					b1[i][j]=new JButton();
 					b1[i][j].addActionListener(listener);
 					b1[i][j].setActionCommand(i+"-"+j);
-					b1[i][j].setBackground(Color.RED);
+					b1[i][j].setIcon(new ImageIcon (new ImageIcon("va.jpg").getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
 					b1[i][j].setPreferredSize(new Dimension(80,80));
 					p1.add(b1[i][j]);
 				}
@@ -193,7 +193,7 @@ public class InterfaceBatailleNavalle implements ActionListener{
 		for(int k=0;k<coordinate.length;k++){
 			int y = Integer.parseInt(coordinate[k].split("-")[0]);
 			int z = Integer.parseInt(coordinate[k].split("-")[1]);
-			b1[y][z].setBorder(new LineBorder(Color.GREEN));}
+			b1[y][z].setIcon(new ImageIcon (new ImageIcon("wreck.jpg").getImage().getScaledInstance(300, 100, java.awt.Image.SCALE_SMOOTH)));}
 	}
 
 	public void remplir(int i, int j){
@@ -202,26 +202,21 @@ public class InterfaceBatailleNavalle implements ActionListener{
 		String boat = res.split("_")[1];
 
 		if (result.equals("touché-coulé")){
-			b1[i][j].setBorder(new LineBorder(Color.GREEN));
 			b1[i][j].setEnabled(false);
 			fillOnSunk(i, j);
 			tour.setText("Touché-coulé !");
 		}
 		else if (result.equals("touché")){
-			b1[i][j].setBackground(Color.DARK_GRAY);
 			b1[i][j].setEnabled(false);
-
+			b1[i][j].setBackground(Color.black);
 			tour.setText("Touché !");
-
-			
 		}
 		else{
 			tour.setText("Manqué :(");
 			b1[i][j].setEnabled(false);
-			b1[i][j].setBorder(new LineBorder(Color.BLUE));
 		}
-	}
-    
+	
+}
 		
 
 	
