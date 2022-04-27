@@ -11,14 +11,16 @@ public class InterfaceBatailleNavalle implements ActionListener{
 	JButton [][] b1;
 	JPanel plateau; 
 	JPanel p1;
-	JFrame f = new JFrame();
+	JFrame f = new JFrame("Bataille Navale !");
+	JLabel tour;
 	public InterfaceBatailleNavalle(int size, ActionListener listener) {
 		
 		
 		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		f.setLayout(new BorderLayout());
 		
-		JLabel tour = new JLabel("INFO",JLabel.CENTER);
+		tour=new JLabel();
+		tour.setText("INFO");
 		tour.setPreferredSize(new Dimension(50,50));
 		tour.setFont(new Font(Font.MONOSPACED,Font.BOLD,20));
 		
@@ -73,9 +75,11 @@ public class InterfaceBatailleNavalle implements ActionListener{
 			f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			f.setLayout(new BorderLayout());
 			
-			JLabel tour = new JLabel("INFO",JLabel.CENTER);
-			tour.setPreferredSize(new Dimension(50,50));
+			tour=new JLabel();
+			tour.setText("INFO");
+			tour.setPreferredSize(new Dimension(100,100));
 			tour.setFont(new Font(Font.MONOSPACED,Font.BOLD,20));
+			tour.setBackground(Color.LIGHT_GRAY);
 			
 			plateau =new JPanel(new GridLayout(1,2,50,50)); 
 			
@@ -201,19 +205,20 @@ public class InterfaceBatailleNavalle implements ActionListener{
 			b1[i][j].setBorder(new LineBorder(Color.GREEN));
 			b1[i][j].setEnabled(false);
 			fillOnSunk(i, j);
-
-			System.out.println(result + " " + boat);
+			tour.setText("Touché-coulé !");
 		}
 		else if (result.equals("touché")){
 			b1[i][j].setBackground(Color.DARK_GRAY);
 			b1[i][j].setEnabled(false);
-			System.out.println(result + " " + boat);
+
+			tour.setText("Touché !");
+
 			
 		}
 		else{
+			tour.setText("Manqué :(");
 			b1[i][j].setEnabled(false);
 			b1[i][j].setBorder(new LineBorder(Color.BLUE));
-			//System.out.println(result);
 		}
 	}
     
