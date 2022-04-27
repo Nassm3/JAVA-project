@@ -2,6 +2,7 @@ import java.awt.event.*;
 import java.util.Random;
 
 
+
 public class BatailleNavale implements ActionListener{
     Plateau p;
     Joueur joueur;
@@ -36,11 +37,10 @@ public class BatailleNavale implements ActionListener{
         if (difficulty != 2){
             int size = 2;
             while (size<6) {
-                Random j = new Random();
-                Random i = new Random();
-                int ii = i.nextInt(15);
-                int jj = j.nextInt(15);
+                int ii = new Random().nextInt(14)+1;
+                int jj = new Random().nextInt(14)+1;
                 p.putBoat(ii, jj, ii+size-1, jj, size);
+                System.out.println(size);
                 size++;
                 
                 

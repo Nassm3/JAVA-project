@@ -189,18 +189,18 @@ public class InterfaceBatailleNavalle implements ActionListener{
 			//TODO getCoordinates from boat
 			b1[i][j].setBorder(new LineBorder(Color.GREEN));
 			b1[i][j].setEnabled(false);
-			System.out.println(result + " " + boat);
+			//System.out.println(result + " " + boat);
 		}
 		else if (result.equals("touché")){
 			b1[i][j].setBackground(Color.DARK_GRAY);
 			b1[i][j].setEnabled(false);
-			System.out.println(result + " " + boat);
+			//System.out.println(result + " " + boat);
 			
 		}
 		else{
 			b1[i][j].setEnabled(false);
 			b1[i][j].setBorder(new LineBorder(Color.BLUE));
-			System.out.println(result);
+			//System.out.println(result);
 		}
 	}
     
