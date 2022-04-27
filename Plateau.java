@@ -32,7 +32,6 @@ public class Plateau {
 
 			if(grille[li][col].affiche().equals("bateau")){	
 				Bateau boat = bateau[li][col];
-				//System.out.println(bateau[li][col].getName());			
 				grille[li][col] = Case.HIT;
 				if(boat.isSunk(grille)){
 					return "touché-coulé" + "_" + boat.getName();
