@@ -27,18 +27,15 @@ public class Plateau {
 	
 	public String jouer(int li, int col) {
 
-		if (grille[li][col] == Case.EMPTY){
+
+		if (grille[li][col] != Case.EMPTY){
+
 			if(grille[li][col].affiche().equals("bateau")){				
 				grille[li][col] = Case.HIT;
-				if(bateau[li][col].isHit(grille)){
-					return "touché" + "_" + bateau[li][col].getName();
+				if(bateau[li][col].isSunk(grille)){
+					return "touché-coulé" + "_" + bateau[li][col].getName();
 				}
-				if (bateau[li][col].isHit(grille)) {
-					return "touché" +"_"+ bateau[li][col].getName();
-				}
-				
 			}
-			
 		}
 		else{
 			grille[li][col] = Case.MISSED;
@@ -118,9 +115,9 @@ public class Plateau {
 		p.putBoat(2, 3, 4, 3, 3);
 		Bateau bo=new Bateau(2,3,4,3,3,5);
 		p.jouer(0,0);
-		p.jouer(1,3);
+		//p.jouer(1,3);
 		p.jouer(2,3);
-		p.jouer(4,3);
+		//p.jouer(4,3);
 
 
 
