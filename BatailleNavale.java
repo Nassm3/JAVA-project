@@ -39,7 +39,7 @@ public class BatailleNavale implements ActionListener{
                 Random i = new Random();
                 int ii = i.nextInt(15);
                 int jj = j.nextInt(15);
-                p.putBoat(ii, jj, ii+size-1, jj, size);
+                p.putBoat(ii, jj, ii+size-2, jj, size);
                 size++;
                 
                 
