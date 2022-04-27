@@ -1,4 +1,3 @@
-import java.util.*;
 
 public class Bateau{
     String name;
@@ -10,13 +9,13 @@ public class Bateau{
     public Bateau(int indiceLigneStart, int indiceColStart,int indiceLigneEnd, int indiceColEnd, int length, int nb) {
         this.l = length;
         if (length == 5){
-            name = "Porte avion" + String.valueOf(nb);
-        }
+            name = "Porte avionb " + String.valueOf(nb);
+		}
         else if (length == 4){ 
-            name = "Croiseur" + String.valueOf(nb);
+            name = "Croiseur " + String.valueOf(nb);
         }
         else if (length == 3){ 
-            name = "Contre-torpilleur" + String.valueOf(nb);
+            name = "Contre-torpilleur " + String.valueOf(nb);
         }
         else{ 
             name = "Torpilleur" + String.valueOf(nb);
