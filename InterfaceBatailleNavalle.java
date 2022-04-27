@@ -182,19 +182,32 @@ public class InterfaceBatailleNavalle implements ActionListener{
 
 	}
 	
+	public void fillOnSunk(int i, int j){
+		Bateau[][] bateau = plat.getBateau();
+		Bateau boat = bateau[i][j];
+		String[] coordinate = boat.getBoatCoordinate().split(";");
+		for(int k=0;k<coordinate.length;k++){
+			int y = Integer.parseInt(coordinate[k].split("-")[0]);
+			int z = Integer.parseInt(coordinate[k].split("-")[1]);
+			b1[y][z].setBorder(new LineBorder(Color.GREEN));}
+	}
+
 	public void remplir(int i, int j){
-		String result = plat.jouer(i, j).split("_")[0];
-		String boat = plat.jouer(i, j).split("_")[1];
+		String res = plat.jouer(i, j);
+		String result = res.split("_")[0];
+		String boat = res.split("_")[1];
+
 		if (result.equals("touché-coulé")){
-			//TODO getCoordinates from boat
 			b1[i][j].setBorder(new LineBorder(Color.GREEN));
 			b1[i][j].setEnabled(false);
-			//System.out.println(result + " " + boat);
+			fillOnSunk(i, j);
+
+			System.out.println(result + " " + boat);
 		}
 		else if (result.equals("touché")){
 			b1[i][j].setBackground(Color.DARK_GRAY);
 			b1[i][j].setEnabled(false);
-			//System.out.println(result + " " + boat);
+			System.out.println(result + " " + boat);
 			
 		}
 		else{

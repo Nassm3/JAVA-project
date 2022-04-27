@@ -52,6 +52,10 @@ public class BatailleNavale implements ActionListener{
         
 
     }
+
+    public void fillButtonOnSunk(int i, int j){
+        ib.fillOnSunk(i, j);
+    }
     
     public void actionPerformed(ActionEvent e) { 
         String[] coordinates = e.getActionCommand().split("-");

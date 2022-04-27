@@ -32,22 +32,21 @@ public class Plateau {
 
 			if(grille[li][col].affiche().equals("bateau")){	
 				Bateau boat = bateau[li][col];
-				//System.out.println(bateau[li][col].getName());			
+				String boatName = bateau[li][col].getName();
 				grille[li][col] = Case.HIT;
 				if(boat.isSunk(grille)){
-					return "touché-coulé" + "_" + boat.getName();
+					return "touché-coulé" + "_" + boatName;
+					
 				}
 				else{
-					return "touché_" + boat.getName();
+					return "touché_" + boatName;
 				}
 			}
+			return "manqué"+"_"+null;
 		}
 		else{
 			grille[li][col] = Case.MISSED;
 			return "manqué"+"_"+null;}
-		return " "+"_"+" ";
-		
-		 		
 	}
 	
 
@@ -92,6 +91,8 @@ public class Plateau {
 		}
 		return bateau;
 	}
+
+	
 	
 	
 	public void afficher() {
@@ -113,6 +114,10 @@ public class Plateau {
 			
 	public Case[] [] getGrille(){
 		return grille;
+	}
+
+	public Bateau[][] getBateau(){
+		return bateau;
 	}
 		
 	public static void main(String[] args) {

@@ -9,24 +9,25 @@ public class Bateau{
     int iCE;
     public Bateau(int indiceLigneStart, int indiceColStart,int indiceLigneEnd, int indiceColEnd, int length, int nb) {
         this.l = length;
+		
         if (length == 5){
-            name = "Porte avion " + String.valueOf(nb);
+            this.name = "Porte avion " + String.valueOf(nb);
 		}
         else if (length == 4){ 
-            name = "Croiseur " + String.valueOf(nb);
+            this.name = "Croiseur " + String.valueOf(nb);
         }
         else if (length == 3){ 
-            name = "Contre-torpilleur " + String.valueOf(nb);
+            this.name = "Contre-torpilleur " + String.valueOf(nb);
         }
         else{ 
-            name = "Torpilleur" + String.valueOf(nb);
+            this.name = "Torpilleur" + String.valueOf(nb);
         }
         this.iLS = indiceLigneStart;
         this.iCS = indiceColStart;
         this.iLE = indiceLigneEnd;
         this.iCE = indiceColEnd;
     }
-    public String getName() {return name;}
+    public String getName() {return this.name;}
     
     public boolean isSunk(Case [][] grille){   	
    	
@@ -37,7 +38,6 @@ public class Bateau{
 				taille+=1;
 			}
 		}
-		System.out.println("taille : " + taille);
 		for (int i=0; i<taille;i++){
 			int li=Integer.parseInt(coordinate[i].split("-")[0]);
 			int col=Integer.parseInt(coordinate[i].split("-")[1]);
@@ -88,5 +88,10 @@ public class Bateau{
    		}
    		return liste;
    	}
+	   public Bateau getBateau(int i, int j) {
+		String [] coordinate = getBoatCoordinate().split(";");
+		
+		return this;
+	   }
 }
 
