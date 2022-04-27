@@ -27,7 +27,8 @@ public class Plateau {
 	
 	public String jouer(int li, int col) {
 
-		if (grille[li][col] != Case.EMPTY){
+		if (grille[li][col] == Case.EMPTY){
+			System.out.println("bateau[li][col].getName() " + grille[li][col].affiche());
 			if(grille[li][col].affiche().equals("bateau")){				
 				grille[li][col] = Case.HIT;
 				if(bateau[li][col].isHit(grille)){
