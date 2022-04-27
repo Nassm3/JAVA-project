@@ -28,7 +28,6 @@ public class Plateau {
 	public String jouer(int li, int col) {
 
 		if (grille[li][col] == Case.EMPTY){
-			System.out.println("bateau[li][col].getName() " + grille[li][col].affiche());
 			if(grille[li][col].affiche().equals("bateau")){				
 				grille[li][col] = Case.HIT;
 				if(bateau[li][col].isHit(grille)){
@@ -51,7 +50,7 @@ public class Plateau {
 	
 
 	
-	public void putBoat(int i,int j,int a, int b ,int taille) { 
+	public Bateau[][] putBoat(int i,int j,int a, int b ,int taille) { 
 		
 		bt = new Bateau(i, j, a, b, taille, 1);
 
@@ -89,6 +88,7 @@ public class Plateau {
 				}
 			}		
 		}
+		return bateau;
 	}
 	
 	
