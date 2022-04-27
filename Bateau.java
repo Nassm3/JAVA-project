@@ -9,7 +9,7 @@ public class Bateau{
     public Bateau(int indiceLigneStart, int indiceColStart,int indiceLigneEnd, int indiceColEnd, int length, int nb) {
         this.l = length;
         if (length == 5){
-            name = "Porte avionb " + String.valueOf(nb);
+            name = "Porte avion " + String.valueOf(nb);
 		}
         else if (length == 4){ 
             name = "Croiseur " + String.valueOf(nb);
@@ -66,7 +66,7 @@ public class Bateau{
 	}
     
     public String getBoatCoordinate() {
-		String liste=new String("");
+		String liste = new String("");
    		if (l==2){
 			liste=String.valueOf(iLS)+"-"+String.valueOf(iCS)+";"+String.valueOf(iLE)+"-"+String.valueOf(iCE);
    		}

@@ -185,7 +185,7 @@ public class InterfaceBatailleNavalle implements ActionListener{
 	public void remplir(int i, int j){
 		String result = plat.jouer(i, j).split("_")[0];
 		String boat = plat.jouer(i, j).split("_")[1];
-		if (result.equals("touché")){
+		if (result.equals("touché-coulé")){
 			//TODO getCoordinates from boat
 			b1[i][j].setBorder(new LineBorder(Color.GREEN));
 			b1[i][j].setEnabled(false);
