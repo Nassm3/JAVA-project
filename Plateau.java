@@ -28,11 +28,7 @@ public class Plateau {
 	public String jouer(int li, int col) {
 
 		if (grille[li][col] != Case.EMPTY){
-			//System.out.println(grille[li][col].affiche());
-			if(grille[li][col].affiche().equals("bateau")){
-				System.out.println("fuck me");
-				
-				//System.out.println(bateau[li][col].getName());
+			if(grille[li][col].affiche().equals("bateau")){				
 				grille[li][col] = Case.HIT;
 				if(bateau[li][col].isSunk(grille)){
 					return "touché-coulé" + "_" + bateau[li][col].getName();
@@ -45,7 +41,6 @@ public class Plateau {
 			
 		}
 		else{
-			System.out.println("fuck me, the sequel");
 			grille[li][col] = Case.MISSED;
 			return "manqué"+"_"+null;}
 		return " "+"_"+" ";
