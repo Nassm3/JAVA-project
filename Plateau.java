@@ -79,7 +79,6 @@ public class Plateau {
 
 				if (taille>2) {
 					int c=1;
-
 					if (j==b) {
 						while(c<Math.abs(a-i)) {
 							grille[i+c][j]=Case.BOAT;
