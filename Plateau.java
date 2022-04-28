@@ -1,10 +1,14 @@
+import java.util.Random;
+
 public class Plateau {
     private Case [][] grille;
 	public Bateau[][] bateau;
 	Bateau bt;
+	int gameSize;
 
     
     public Plateau(int i){
+    	this.gameSize = i;
         grille = new Case [i][i];
 		bateau = new Bateau[i][i];
         init();
@@ -96,7 +100,10 @@ public class Plateau {
 					}
 				}
 			}	
-			else {throw new java.lang.Error("Improperplacement");}	
+			else {
+				int ii = new Random().nextInt(gameSize-taille+1);
+				int jj = new Random().nextInt(gameSize-taille+1);
+				putBoat(ii, jj, ii+taille-1, jj, taille, bn);}	
 		}
 		return bateau;
 	}
@@ -127,6 +134,10 @@ public class Plateau {
 
 	public Bateau[][] getBateau(){
 		return bateau;
+	}
+	
+	public int getSize(){
+		return size;
 	}
 		
 	public static void main(String[] args) {

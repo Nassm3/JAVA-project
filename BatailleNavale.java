@@ -54,9 +54,14 @@ public class BatailleNavale implements ActionListener{
 
     public boolean checkIndexExistence(Bateau[][] bateau, int i, int j, int ii, int jj){
         try {
-            bateau[i][j] = new Bateau();
-            bateau[ii][jj] = new Bateau();
-            return true;
+        	if (bateau[i][j] != null || bateau[ii][jj] != null) {               
+                return true;
+        	}
+        	else {
+        	
+        		return false;
+        	}
+            
         } 
         catch (Exception e) {
             System.err.println(e + ",  " + i+ ",  " + j+ ",  " + ii+ ",  " + jj);
@@ -74,15 +79,14 @@ public class BatailleNavale implements ActionListener{
 
                     //System.out.println("oui" + checkIndexExistence(bateau, ii, jj, ii+size-1, jj));
                     if (new Random().nextInt(2) == 0){
-                        int ii = new Random().nextInt(gameSize-size-1);
-                        int jj = new Random().nextInt(gameSize-size-1);
+                        int ii = new Random().nextInt(gameSize-size+1);
+                        int jj = new Random().nextInt(gameSize-size+1);
                         p.putBoat(ii, jj, ii+size-1, jj, size, this);
                     }
                     
                     else{
-                        int ii = new Random().nextInt(gameSize+size-1);
-                        int jj = new Random().nextInt(gameSize+size-1);
-                        System.out.println("cringe 2, le retour");
+                        int ii = new Random().nextInt(gameSize - size) + size-1;	
+                        int jj = new Random().nextInt(gameSize - size) + size-1;
                         p.putBoat(ii, jj, ii-size+1, jj, size, this);
                     }
                     
@@ -90,13 +94,13 @@ public class BatailleNavale implements ActionListener{
                 else{
                     
                     if (new Random().nextInt(2) == 0){     
-                        int ii = new Random().nextInt(gameSize-size-1);
-                        int jj = new Random().nextInt(gameSize-size-1);               
+                        int ii = new Random().nextInt(gameSize-size+1);
+                        int jj = new Random().nextInt(gameSize-size+1);               
                         p.putBoat(ii, jj, ii, jj+size-1, size, this);
                     }
                     else{
-                        int ii = new Random().nextInt(gameSize+size-1);
-                        int jj = new Random().nextInt(gameSize+size-1);
+                        int ii = new Random().nextInt(gameSize - size) + size-1;
+                        int jj = new Random().nextInt(gameSize - size) + size-1;
                         p.putBoat(ii, jj, ii, jj-size+1, size, this);
                     }
 
