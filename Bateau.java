@@ -78,14 +78,17 @@ public class Bateau{
 			liste=String.valueOf(iLS)+"-"+String.valueOf(iCS)+";"+String.valueOf(iLE)+"-"+String.valueOf(iCE);
    		}
    		else {
+
    			if (iLS==iLE) {
-   	       		for (int i=iCS;i<=l+iCS-1;i++) {
-   	       			liste += String.valueOf(iLS)+"-"+String.valueOf(i)+";";
+				liste += String.valueOf(iLS)+"-"+String.valueOf(iCS);
+   	       		for (int i=iCS+1;i<=l+iCS-1;i++) {
+   	       			liste += ";" + String.valueOf(iLS)+"-"+String.valueOf(i);
    	       	    }
    			}
    	       	if (iCS==iCE) {
-   	       		for (int i=iLS;i<=l+iLS-1;i++) {
-   	       			liste+= String.valueOf(i)+"-"+String.valueOf(iCS)+";";
+				liste += String.valueOf(iLS)+"-"+String.valueOf(iCS);
+   	       		for (int i=iLS+1;i<=l+iLS-1;i++) {
+   	       			liste+= ";" + String.valueOf(i)+"-"+String.valueOf(iCS);
    	       		}
    	       	}
 

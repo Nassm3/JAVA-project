@@ -54,11 +54,15 @@ public class BatailleNavale implements ActionListener{
 
     public boolean checkIndexExistence(Bateau[][] bateau, int i, int j, int ii, int jj){
         try {
-        	if (bateau[i][j] != null || bateau[ii][jj] != null) {               
+        	if (bateau[i][j] == null || bateau[ii][jj] == null) {
+                bateau[i][j] = new Bateau();      
+                bateau[ii][jj] = new Bateau();
+                bateau[i][j] = null;      
+                bateau[ii][jj] = null;
                 return true;
         	}
         	else {
-        	
+                System.out.println(bateau[i][j] + " " + bateau[ii][jj] + "");
         		return false;
         	}
             

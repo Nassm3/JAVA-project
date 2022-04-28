@@ -59,7 +59,7 @@ public class Plateau {
 	
 	public Bateau[][] putBoat(int i,int j,int a, int b ,int taille, BatailleNavale bn){ 
 		
-		bt = new Bateau(i, j, a, b, taille, 1);
+		
 
 
 		if (Math.abs(a-i)+1 != taille && Math.abs(b-j)+1 != taille) {//|| Math.abs(j-b)+1!=taille)
@@ -73,32 +73,23 @@ public class Plateau {
 		}
 
 		else {
+			bt = new Bateau(i, j, a, b, taille, 1);
 			if (grille[i][j]==Case.EMPTY && grille[a][b]==Case.EMPTY) {
-
-				grille[i][j]=Case.BOAT;
-				grille[a][b]=Case.BOAT;
-
-				bateau[a][b] = bt;
-				bateau[i][j] = bt;
-
-				if (taille>2) {
-					int c=1;
-					if (j==b) {
-						while(c<Math.abs(a-i)) {
-							grille[i+c][j]=Case.BOAT;
-							bateau[i+c][j] = bt;
-							c+=1;
-						}
-					}
-
-					else if (i==a) {
-						while(c<Math.abs(b-j)) {
-							grille[i][j+c] = Case.BOAT;
-							bateau[i][j+c] = bt;
-							c+=1;
-						}
-					}
+				
+				String coordinate = bt.getBoatCoordinate();
+				String[] position = coordinate.split(";");
+				//System.out.println(coordinate);
+				int c=0;
+				while(c<position.length){
+					//System.out.println(position[c].split("-")[1]);
+					int indiceL = Integer.parseInt(position[c].split("-")[0]);
+					int indiceCol = Integer.parseInt(position[c].split("-")[1]);
+					grille[indiceL][indiceCol] = Case.BOAT;
+					bateau[indiceL][indiceCol] = bt;
+					c++;
 				}
+
+				
 			}	
 			else {
 				int ii = new Random().nextInt(gameSize-taille+1);
@@ -136,9 +127,7 @@ public class Plateau {
 		return bateau;
 	}
 	
-	public int getSize(){
-		return size;
-	}
+
 		
 	public static void main(String[] args) {
 		/*Plateau p=new Plateau(8);
