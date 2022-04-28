@@ -86,13 +86,13 @@ public class InterfaceBatailleNavalle implements ActionListener{
 			
 			p1 = new JPanel(new GridLayout(size,size));
 			b1 = new JButton[size][size];
-			
+			ImageIcon icon = new ImageIcon (new ImageIcon("va.jpg").getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH));
 			for (int i=0;i<b1.length;i++)
 				for (int j=0;j<b1[i].length;j++) {
 					b1[i][j]=new JButton();
 					b1[i][j].addActionListener(listener);
 					b1[i][j].setActionCommand(i+"-"+j);
-					b1[i][j].setIcon(new ImageIcon (new ImageIcon("va.jpg").getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
+					b1[i][j].setIcon(icon);
 					b1[i][j].setPreferredSize(new Dimension(80,80));
 					p1.add(b1[i][j]);
 				}
@@ -193,6 +193,8 @@ public class InterfaceBatailleNavalle implements ActionListener{
 		for(int k=0;k<coordinate.length;k++){
 			int y = Integer.parseInt(coordinate[k].split("-")[0]);
 			int z = Integer.parseInt(coordinate[k].split("-")[1]);
+			b1[y][z].setBackground(new JButton().getBackground());
+			b1[y][z].setIcon(null);
 			b1[y][z].setIcon(new ImageIcon (new ImageIcon("wreck.jpg").getImage().getScaledInstance(300, 100, java.awt.Image.SCALE_SMOOTH)));}
 	}
 
@@ -208,6 +210,7 @@ public class InterfaceBatailleNavalle implements ActionListener{
 		}
 		else if (result.equals("touché")){
 			b1[i][j].setEnabled(false);
+			b1[i][j].setIcon(null);
 			b1[i][j].setBackground(Color.black);
 			tour.setText("Touché !");
 		}

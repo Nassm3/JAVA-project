@@ -35,7 +35,7 @@ public class Bateau{
     
     public boolean isSunk(Case [][] grille){   	
    	
-    	String[] coordinate=getBoatCoordinate().split(";");
+    	String[] coordinate = getBoatCoordinate().split(";");
 		int taille = 0;
 		for (int i=0;i<coordinate.length;i++){
 			if (coordinate[i].contains("-")){

@@ -68,31 +68,35 @@ public class BatailleNavale implements ActionListener{
         if (difficulty != 2){
             int size = 2;
             while (size<6) {
-                if (new Random().nextInt(2) == 0){
+                if ((new Random().nextInt(2)) == 0){
 
-                    int ii = new Random().nextInt(gameSize-size-1);
-                    int jj = new Random().nextInt(gameSize-size-1);
+                    
 
                     //System.out.println("oui" + checkIndexExistence(bateau, ii, jj, ii+size-1, jj));
-                    if (checkIndexExistence(bateau, ii, jj, ii+size-1, jj)){
-                        System.out.println("cringe");
+                    if (new Random().nextInt(2) == 0){
+                        int ii = new Random().nextInt(gameSize-size-1);
+                        int jj = new Random().nextInt(gameSize-size-1);
                         p.putBoat(ii, jj, ii+size-1, jj, size, this);
                     }
                     
                     else{
+                        int ii = new Random().nextInt(gameSize+size-1);
+                        int jj = new Random().nextInt(gameSize+size-1);
                         System.out.println("cringe 2, le retour");
                         p.putBoat(ii, jj, ii-size+1, jj, size, this);
                     }
                     
-
                 }
                 else{
-                    int ii = new Random().nextInt(gameSize);
-                    int jj = new Random().nextInt(gameSize);
-                    if (checkIndexExistence(bateau, ii, jj, ii, jj+size-1)){                    
+                    
+                    if (new Random().nextInt(2) == 0){     
+                        int ii = new Random().nextInt(gameSize-size-1);
+                        int jj = new Random().nextInt(gameSize-size-1);               
                         p.putBoat(ii, jj, ii, jj+size-1, size, this);
                     }
                     else{
+                        int ii = new Random().nextInt(gameSize+size-1);
+                        int jj = new Random().nextInt(gameSize+size-1);
                         p.putBoat(ii, jj, ii, jj-size+1, size, this);
                     }
 
@@ -113,7 +117,9 @@ public class BatailleNavale implements ActionListener{
 		int j = Integer.parseInt(coordinates[1]);
         ib.remplir(i, j);
     }
+    
     public static void main(String[] args) {
-        BatailleNavale bn = new BatailleNavale();
+        BatailleNavale bn;
+        bn = new BatailleNavale();
     }
 }

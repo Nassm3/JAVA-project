@@ -26,7 +26,7 @@ public class Plateau {
 	}
 	
 	public String jouer(int li, int col) {
-
+		System.out.println("valeur grille :" + grille[li][col].affiche());
 
 		if (grille[li][col] != Case.EMPTY){
 
@@ -89,13 +89,14 @@ public class Plateau {
 
 					else if (i==a) {
 						while(c<Math.abs(b-j)) {
-							grille[i+c][j] = Case.BOAT;
-							bateau[i+c][j] = bt;
+							grille[i][j+c] = Case.BOAT;
+							bateau[i][j+c] = bt;
 							c+=1;
 						}
 					}
 				}
-			}		
+			}	
+			else {throw new java.lang.Error("Improperplacement");}	
 		}
 		return bateau;
 	}
@@ -135,12 +136,12 @@ public class Plateau {
 		p.jouer(0,0);
 		//p.jouer(1,3);
 		p.jouer(2,3);
-		//p.jouer(4,3);*/
+		//p.jouer(4,3);
 
 
 
 		System.out.println(bo.isSunk(p.grille));
-		p.afficher();
+		p.afficher();*/
 
 
 	}
