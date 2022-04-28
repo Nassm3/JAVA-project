@@ -32,7 +32,9 @@ public class Plateau {
 
 			if(grille[li][col].affiche().equals("bateau")){	
 				Bateau boat = bateau[li][col];
+
 				String boatName = bateau[li][col].getName();
+				System.out.println(boat.getBoatCoordinate());
 				grille[li][col] = Case.HIT;
 				if(boat.isSunk(grille)){
 					return "touché-coulé" + "_" + boatName;
@@ -51,13 +53,20 @@ public class Plateau {
 	
 
 	
-	public Bateau[][] putBoat(int i,int j,int a, int b ,int taille) { 
+	public Bateau[][] putBoat(int i,int j,int a, int b ,int taille, BatailleNavale bn){ 
 		
 		bt = new Bateau(i, j, a, b, taille, 1);
 
 
-		if (Math.abs(a-i)+1!=taille && Math.abs(b-j)+1!=taille) {//|| Math.abs(j-b)+1!=taille)
-			System.out.println("saisir taille cohérente");}
+		if (Math.abs(a-i)+1 != taille && Math.abs(b-j)+1 != taille) {//|| Math.abs(j-b)+1!=taille)
+
+			throw new java.lang.Error("ImproperLength");
+			
+		}
+		else if(!bn.checkIndexExistence(bateau, i, j, a, b)){
+			System.err.println("non" +bn.checkIndexExistence(bateau, i, j, a, b));
+			throw new java.lang.Error("Improperplacement " + i +", "+j+", "+a+", "+b);
+		}
 
 		else {
 			if (grille[i][j]==Case.EMPTY && grille[a][b]==Case.EMPTY) {
@@ -72,16 +81,16 @@ public class Plateau {
 					int c=1;
 
 					if (j==b) {
-						for (int x=0;x<Math.abs(a-i);x++) {
+						while(c<Math.abs(a-i)) {
 							grille[i+c][j]=Case.BOAT;
 							bateau[i+c][j] = bt;
 							c+=1;
 						}
 					}
 
-					if (i==a) {
-						for (int x=0;x<Math.abs(a-i);x++) {
-							grille[i+c][j]=Case.BOAT;
+					else if (i==a) {
+						while(c<Math.abs(b-j)) {
+							grille[i+c][j] = Case.BOAT;
 							bateau[i+c][j] = bt;
 							c+=1;
 						}
@@ -121,13 +130,13 @@ public class Plateau {
 	}
 		
 	public static void main(String[] args) {
-		Plateau p=new Plateau(8);
+		/*Plateau p=new Plateau(8);
 		p.putBoat(2, 3, 4, 3, 3);
 		Bateau bo=new Bateau(2,3,4,3,3,5);
 		p.jouer(0,0);
 		//p.jouer(1,3);
 		p.jouer(2,3);
-		//p.jouer(4,3);
+		//p.jouer(4,3);*/
 
 
 

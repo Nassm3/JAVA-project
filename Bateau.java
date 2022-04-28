@@ -7,6 +7,10 @@ public class Bateau{
     int iCS;
     int iLE;
     int iCE;
+	public Bateau(){
+		
+	}
+
     public Bateau(int indiceLigneStart, int indiceColStart,int indiceLigneEnd, int indiceColEnd, int length, int nb) {
         this.l = length;
 		
@@ -90,7 +94,7 @@ public class Bateau{
    	}
 	   public Bateau getBateau(int i, int j) {
 		String [] coordinate = getBoatCoordinate().split(";");
-		
+
 		return this;
 	   }
 }

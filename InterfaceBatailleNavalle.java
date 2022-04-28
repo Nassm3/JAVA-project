@@ -205,7 +205,7 @@ public class InterfaceBatailleNavalle implements ActionListener{
 			b1[i][j].setBorder(new LineBorder(Color.GREEN));
 			b1[i][j].setEnabled(false);
 			fillOnSunk(i, j);
-			tour.setText("Touché-coulé !");
+			tour.setText("Touché-coulé" + boat + "!");
 		}
 		else if (result.equals("touché")){
 			b1[i][j].setBackground(Color.DARK_GRAY);
