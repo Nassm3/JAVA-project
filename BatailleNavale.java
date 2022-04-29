@@ -39,9 +39,13 @@ public class BatailleNavale implements ActionListener{
         pJoueur = new Plateau(gameSize);
         int placementOption = cp.getPlacementOption();
         if (placementOption == 0){
-            putBoatOnGame(p, difficulty, gameSize);
+            putBoatOnGame(pJoueur, difficulty, gameSize);
         }
-        
+        else{
+
+        }
+        putBoatOnGame(p, difficulty, gameSize);
+
                     
                 
             
@@ -126,6 +130,10 @@ public class BatailleNavale implements ActionListener{
         ib.remplir(i, j);
     }
     
+public void m(int l, int c){
+
+}
+
     public static void main(String[] args) {
         BatailleNavale bn;
         bn = new BatailleNavale();

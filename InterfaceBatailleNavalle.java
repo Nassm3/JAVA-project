@@ -119,11 +119,11 @@ public class InterfaceBatailleNavalle implements ActionListener{
 				
 				JPanel ra = new JPanel(new FlowLayout(FlowLayout.LEFT));
 				JButton bat1 = new JButton();
-				bat1.setIcon(new ImageIcon (new ImageIcon("bat4.jpg").getImage().getScaledInstance(150, 100, java.awt.Image.SCALE_SMOOTH)));
+				bat1.setIcon(new ImageIcon (new ImageIcon("bat4.jpg").getImage().getScaledInstance(100, 50, java.awt.Image.SCALE_SMOOTH)));
 
 				JPanel z1= new JPanel(new GridLayout(2,1));
 				z1.add(new JLabel("compteur :"+"c"));
-				z1.add(new JLabel("taille du bateau :"));
+				z1.add(new JLabel("taille du bateau : 2"));
 				ra.add(bat1);
 				ra.add(z1);
 
@@ -132,32 +132,32 @@ public class InterfaceBatailleNavalle implements ActionListener{
 				
 				JPanel re=new JPanel(new FlowLayout(FlowLayout.LEFT));
 				JButton bat2 = new JButton();
-				bat2.setIcon(new ImageIcon (new ImageIcon("bat1.jpg").getImage().getScaledInstance(150, 100, java.awt.Image.SCALE_SMOOTH)));
+				bat2.setIcon(new ImageIcon (new ImageIcon("bat1.jpg").getImage().getScaledInstance(100, 50, java.awt.Image.SCALE_SMOOTH)));
 
 				
 				JPanel z2= new JPanel(new GridLayout(2,1));
 				z2.add(new JLabel("compteur :"+"c"));
-				z2.add(new JLabel("taille du bateau :"));
+				z2.add(new JLabel("taille du bateau :3"));
 				re.add(bat2);
 				re.add(z2);
 				
 				JPanel ri=new JPanel(new FlowLayout(FlowLayout.LEFT));
 				JButton bat3 = new JButton();
-				bat3.setIcon(new ImageIcon (new ImageIcon("bat3.jpg").getImage().getScaledInstance(200, 100, java.awt.Image.SCALE_SMOOTH)));
+				bat3.setIcon(new ImageIcon (new ImageIcon("bat3.jpg").getImage().getScaledInstance(100, 50, java.awt.Image.SCALE_SMOOTH)));
 
 				JPanel z3= new JPanel(new GridLayout(2,1));
 				z3.add(new JLabel("compteur :"+"c"));
-				z3.add(new JLabel("taille du bateau :"));
+				z3.add(new JLabel("taille du bateau : 4"));
 				ri.add(bat3);
 				ri.add(z3);
 				
 				JPanel ro=new JPanel(new FlowLayout(FlowLayout.LEFT));
 				JButton bat4 = new JButton();
-				bat4.setIcon(new ImageIcon (new ImageIcon("bat2.jpg").getImage().getScaledInstance(300, 100, java.awt.Image.SCALE_SMOOTH)));
+				bat4.setIcon(new ImageIcon (new ImageIcon("bat2.jpg").getImage().getScaledInstance(100, 50, java.awt.Image.SCALE_SMOOTH)));
 				
 				JPanel z4= new JPanel(new GridLayout(2,1));
 				z4.add(new JLabel("compteur :"+"c"));
-				z4.add(new JLabel("taille du bateau :"));
+				z4.add(new JLabel("taille du bateau : 5"));
 				ro.add(bat4);
 				ro.add(z4);
 				
