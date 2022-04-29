@@ -12,12 +12,13 @@ public class BatailleNavale implements ActionListener{
     String gamemode;
     InterfaceBatailleNavalle ib;
     Bateau[][] bateau;
+    String name;
     public BatailleNavale(){
         
         ChoosePanel cp = new ChoosePanel();
         cp.choosePanel();
         
-        String name = cp.getName();
+        name = cp.getName();
         int difficulty = cp.getDifficulty();
 
         if (difficulty == 0){
@@ -123,10 +124,8 @@ public class BatailleNavale implements ActionListener{
             int j = Integer.parseInt(coordinates[1]);
             ib.remplir(i, j);
             if(p.gagnant()){
-                System.out.println("no cap");
+            	ib.affichegagnant(name);
             }
-
-
         }
     }
     

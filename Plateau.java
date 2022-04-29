@@ -33,7 +33,7 @@ public class Plateau {
 
 		if (grille[li][col] != Case.EMPTY){
 
-			if(grille[li][col].affiche().equals("bateau")){	
+			if(grille[li][col].affiche().equals("bateau")){
 				Bateau boat = bateau[li][col];
 				String boatName = bateau[li][col].getName();
 				System.out.println(boat.getBoatCoordinate());
