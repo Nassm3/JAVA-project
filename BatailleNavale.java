@@ -46,7 +46,6 @@ public class BatailleNavale implements ActionListener{
             
         }
 
-        putBoatOnGame(p, difficulty, gameSize);
 
                     
                 
@@ -55,6 +54,10 @@ public class BatailleNavale implements ActionListener{
         
         ib = new InterfaceBatailleNavalle(gameSize, this, placementOption, p, joueur);
         ib.revealBoat(pJoueur);
+        if (p.gagnant()) {
+        	ib.affichegagnant(name);
+        }
+        	
 
     }
 
@@ -123,9 +126,6 @@ public class BatailleNavale implements ActionListener{
         }
     }
     
-public void m(int l, int c){
-
-}
 
     public static void main(String[] args) {
         BatailleNavale bn;

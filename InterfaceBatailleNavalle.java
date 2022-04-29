@@ -192,13 +192,17 @@ public class InterfaceBatailleNavalle {
 }
 		
 
-public void revealBoat(Plateau p) {
+	public void revealBoat(Plateau p) {
 	Case [][] grille=p.getGrille();
 	for (int i=0;i<grille.length;i++)
 		for (int j=0;j<grille[i].length;j++) 
 			if (grille[i][j]==Case.BOAT) 
 				b2[i][j].setBackground(Color.GREEN);
-}
+	}
+	
+	public int affichegagnant(String joueur) {
+		return JOptionPane.showConfirmDialog(f,joueur+" a gagné !! Voulez-vous rejouer ??????","CRINGE ALERT",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+	}
     
 	public static void main(String[] args) {
 	}
