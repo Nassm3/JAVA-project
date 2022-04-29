@@ -5,7 +5,6 @@ public class Plateau {
 	public Bateau[][] bateau;
 	Bateau bt;
 	int gameSize;
-
     
     public Plateau(int i){
     	this.gameSize = i;
