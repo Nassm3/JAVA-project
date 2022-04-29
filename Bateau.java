@@ -81,15 +81,34 @@ public class Bateau{
 
    			if (iLS==iLE) {
 				liste += String.valueOf(iLS)+"-"+String.valueOf(iCS);
-   	       		for (int i=iCS+1;i<=l+iCS-1;i++) {
-   	       			liste += ";" + String.valueOf(iLS)+"-"+String.valueOf(i);
-   	       	    }
+				if (iCE > iCS){
+					for (int i=iCS+1;i<=l+iCS-1;i++) {
+						liste += ";" + String.valueOf(iLS)+"-"+String.valueOf(i);
+					}
+				}
+				else{
+					for (int i=iCS-1;i>=iCE;i--) {
+						liste += ";" + String.valueOf(iLS)+"-"+String.valueOf(i);
+					}
+				}
+				
    			}
-   	       	if (iCS==iCE) {
+   	       	else{
+
 				liste += String.valueOf(iLS)+"-"+String.valueOf(iCS);
-   	       		for (int i=iLS+1;i<=l+iLS-1;i++) {
-   	       			liste+= ";" + String.valueOf(i)+"-"+String.valueOf(iCS);
-   	       		}
+				if (iLE > iLS){
+					for (int i=iLS+1;i<=l+iLS-1;i++) {
+
+						liste+= ";" + String.valueOf(i)+"-"+String.valueOf(iCS);
+					}
+				}
+				else{
+					for (int i=iLS-1;i>=iLE;i--) {
+
+						liste += ";" + String.valueOf(i)+"-"+String.valueOf(iCS);
+					}
+				}
+   	       		
    	       	}
 
    		}

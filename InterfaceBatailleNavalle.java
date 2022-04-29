@@ -15,6 +15,10 @@ public class InterfaceBatailleNavalle {
 	JFrame f = new JFrame("Bataille Navale !");
 	JLabel tour;
 	BatailleNavale bn;
+	JButton bat1, bat2, bat3, bat4;
+	int c1, c2, c3, c4;
+	JPanel z1, z2, z3, z4;
+	JLabel compteur1, compteur2, compteur3, compteur4;
 
 		
 		
@@ -42,6 +46,7 @@ public class InterfaceBatailleNavalle {
 					b1[i][j].addActionListener(listener);
 					b1[i][j].setActionCommand(i+"-"+j);
 					b1[i][j].setIcon(icon);
+					b1[i][j].setEnabled(false);
 					b1[i][j].setPreferredSize(new Dimension(80,80));
 					p1.add(b1[i][j]);
 				}
@@ -69,13 +74,16 @@ public class InterfaceBatailleNavalle {
 				bateaux = new JPanel(new GridLayout(1,4));
 				
 				JPanel ra = new JPanel(new FlowLayout(FlowLayout.LEFT));
-				JButton bat1 = new JButton();
+				bat1 = new JButton();
 				bat1.addActionListener(listener);
-				bat1.setActionCommand("2");
+				
+				bat1.setActionCommand("a-b-2");
 				bat1.setIcon(new ImageIcon (new ImageIcon("bat4.jpg").getImage().getScaledInstance(100, 50, java.awt.Image.SCALE_SMOOTH)));
 
-				JPanel z1= new JPanel(new GridLayout(2,1));
-				z1.add(new JLabel("compteur :"+"c"));
+				z1 = new JPanel(new GridLayout(2,1));
+				c1 = 1;
+				compteur1 = new JLabel("compteur : "+ c1 );
+				z1.add(compteur1);
 				z1.add(new JLabel("taille du bateau : 2"));
 				ra.add(bat1);
 				ra.add(z1);
@@ -84,32 +92,48 @@ public class InterfaceBatailleNavalle {
 
 				
 				JPanel re=new JPanel(new FlowLayout(FlowLayout.LEFT));
-				JButton bat2 = new JButton();
-				bat2.setIcon(new ImageIcon (new ImageIcon("bat1.jpg").getImage().getScaledInstance(100, 50, java.awt.Image.SCALE_SMOOTH)));
-
+				bat2 = new JButton();
+				bat2.addActionListener(listener);
 				
+				bat2.setIcon(new ImageIcon (new ImageIcon("bat1.jpg").getImage().getScaledInstance(100, 50, java.awt.Image.SCALE_SMOOTH)));
+				bat2.setActionCommand("a-b-3");
+				c2 = 1;
 				JPanel z2= new JPanel(new GridLayout(2,1));
-				z2.add(new JLabel("compteur :"+"c"));
-				z2.add(new JLabel("taille du bateau :3"));
+				compteur2 = new JLabel("compteur : "+ c2 );
+
+				z2.add(compteur2);
+				z2.add(new JLabel("taille du bateau : 3"));
 				re.add(bat2);
 				re.add(z2);
 				
 				JPanel ri=new JPanel(new FlowLayout(FlowLayout.LEFT));
-				JButton bat3 = new JButton();
+				bat3 = new JButton();
+				bat3.addActionListener(listener);
+				
+				bat3.setActionCommand("a-b-4");
 				bat3.setIcon(new ImageIcon (new ImageIcon("bat3.jpg").getImage().getScaledInstance(100, 50, java.awt.Image.SCALE_SMOOTH)));
 
-				JPanel z3= new JPanel(new GridLayout(2,1));
-				z3.add(new JLabel("compteur :"+"c"));
+				z3= new JPanel(new GridLayout(2,1));
+				c3 = 1;
+				compteur3 = new JLabel("compteur : "+ c3 );
+
+				z3.add(compteur3);
 				z3.add(new JLabel("taille du bateau : 4"));
 				ri.add(bat3);
 				ri.add(z3);
 				
 				JPanel ro=new JPanel(new FlowLayout(FlowLayout.LEFT));
-				JButton bat4 = new JButton();
-				bat4.setIcon(new ImageIcon (new ImageIcon("bat2.jpg").getImage().getScaledInstance(100, 50, java.awt.Image.SCALE_SMOOTH)));
+				bat4 = new JButton();
+				bat4.addActionListener(listener);
 				
-				JPanel z4= new JPanel(new GridLayout(2,1));
-				z4.add(new JLabel("compteur :"+"c"));
+
+				bat4.setIcon(new ImageIcon (new ImageIcon("bat2.jpg").getImage().getScaledInstance(100, 50, java.awt.Image.SCALE_SMOOTH)));
+				bat4.setActionCommand("a-b-5");
+				z4= new JPanel(new GridLayout(2,1));
+				c4 = 1;
+				compteur4 = new JLabel("compteur : "+ c4 );
+
+				z4.add(compteur4);
 				z4.add(new JLabel("taille du bateau : 5"));
 				ro.add(bat4);
 				ro.add(z4);
@@ -139,6 +163,48 @@ public class InterfaceBatailleNavalle {
 
 	}
 
+	public void decreaseButton(int b){
+		switch(b){
+   
+			case 2: 
+				c1--;
+				compteur1.setText("compteur : "+ c1);
+				if (c1 <= 0) bat1.setEnabled(false);
+				break;
+		
+			case 3:
+				c2--;
+				compteur2.setText("compteur : "+ c2);
+				if (c2 <= 0) bat2.setEnabled(false);
+				break;
+
+			case 4:
+				c3--;
+				compteur3.setText("compteur : "+ c3);
+				if (c3 <= 0) bat3.setEnabled(false);
+			break;
+
+			case 5:
+				c4--;
+				compteur4.setText("compteur : "+ c4);
+				if (c4 <= 0) bat4.setEnabled(false);
+				break;
+
+			default:
+				System.out.println("wtf, how did we get here");
+				break;
+		}
+		if (c1 ==0 && c2 ==0 && c3 ==0 && c4 ==0)	{
+			for (int i=0;i<b1.length;i++){
+				for (int j=0;j<b1[i].length;j++) {
+					b1[i][j].setEnabled(true);
+
+				}
+			}
+		}
+	 }
+	
+
 	public void activateButton( Case [][] grille ){
 		for (int i=0;i<b2.length;i++)
 				for (int j=0;j<b2[i].length;j++) {
@@ -148,10 +214,11 @@ public class InterfaceBatailleNavalle {
 					
 				}
 	}
+
 	public void deactivateButton(Case [][] grille){
 		for (int i=0;i<b2.length;i++)
 				for (int j=0;j<b2[i].length;j++) {
-					b2[i][j].setEnabled(true);
+					b2[i][j].setEnabled(false);
 				}
 	}
 	
@@ -194,6 +261,7 @@ public class InterfaceBatailleNavalle {
 		}
 	
 }
+
 		
 
 	public void revealBoat(Plateau p) {

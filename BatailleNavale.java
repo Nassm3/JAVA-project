@@ -13,6 +13,8 @@ public class BatailleNavale implements ActionListener{
     InterfaceBatailleNavalle ib;
     Bateau[][] bateau;
     String name;
+    int cpt;
+    int placeLigneStart, placeLigneEnd, placeColStart, placeColEnd, placeSize;
     public BatailleNavale(){
         
         ChoosePanel cp = new ChoosePanel();
@@ -40,13 +42,13 @@ public class BatailleNavale implements ActionListener{
         pJoueur = new Plateau(gameSize);
         int placementOption = cp.getPlacementOption();
         if (placementOption == 0){
-            putBoatOnGame(p, difficulty, gameSize);
-            putBoatOnGame(pJoueur, difficulty, gameSize);
+            putBoatOnGame(pJoueur, 0, gameSize);
+
         }
         else {
-            
-        }
 
+        }
+        putBoatOnGame(p, difficulty, gameSize);
 
                     
                 
@@ -82,6 +84,8 @@ public class BatailleNavale implements ActionListener{
         }
         }
 
+
+
     public void putBoatOnGame(Plateau p, int difficulty, int gameSize){
         if (difficulty != 2){
             int size = 2;
@@ -112,20 +116,54 @@ public class BatailleNavale implements ActionListener{
     
     public void actionPerformed(ActionEvent e) { 
         String[] coordinates = e.getActionCommand().split("-");
-            if (coordinates[0].equals("a")){
-                int i = Integer.parseInt(coordinates[1]);
-                int j = Integer.parseInt(coordinates[2]);
-                System.out.println(coordinates[0] +"" + i+" "+j);
+            if (coordinates[1].equals("b")){
+                cpt = 0;
+                ib.activateButton(pJoueur.getGrille());
+                placeSize = Integer.parseInt(coordinates[2]);
             }
-        else{
-            
+            else if (coordinates[0].equals("a")){
+                if (cpt == 0){
+                    placeLigneStart = Integer.parseInt(coordinates[1]);
+                    placeColStart = Integer.parseInt(coordinates[2]);
+                    cpt++;
+                }
+                else if (cpt == 1){
+                    placeLigneEnd = Integer.parseInt(coordinates[1]);
+                    placeColEnd = Integer.parseInt(coordinates[2]);
+                    if ((placeColStart<16 || placeLigneEnd<16 || placeColEnd<16 || placeSize<16) 
+                    && (Math.abs((placeLigneStart-placeLigneEnd)+(placeColStart-placeColEnd))+1 == placeSize) 
+                    && (placeLigneStart == placeLigneEnd || placeColStart==placeColEnd)){
+                        pJoueur.manualPutBoat(placeLigneStart, placeColStart, placeLigneEnd, placeColEnd, placeSize, this);
+                        ib.deactivateButton(pJoueur.getGrille());
+                        ib.revealBoat(pJoueur);
+                        cpt++;
+                        ib.decreaseButton(placeSize);
+                    }
+                    else{
+                        ib.tour.setText("Taille pas bonne kek, cringe même, c'est Squid Game nul a chier si je puis me permettre");
+                        ib.deactivateButton(pJoueur.getGrille());
 
+                        cpt = 0;
+
+                    }
+                }
+
+                
+            
+                
+
+            }
+            
+        else{
             int i = Integer.parseInt(coordinates[0]);
             int j = Integer.parseInt(coordinates[1]);
             ib.remplir(i, j);
             if(p.gagnant()){
-            	ib.affichegagnant(name);
+                ib.affichegagnant(name);
+
             }
+
+
         }
     }
     

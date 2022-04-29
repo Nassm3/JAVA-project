@@ -29,7 +29,6 @@ public class Plateau {
 	}
 	
 	public String jouer(int li, int col) {
-		System.out.println("valeur grille :" + grille[li][col].affiche());
 
 		if (grille[li][col] != Case.EMPTY){
 
@@ -59,7 +58,44 @@ public class Plateau {
 	}
 	
 
-	
+	public Boolean manualPutBoat(int i,int j,int a, int b ,int taille, BatailleNavale bn){
+		bt = new Bateau(i, j, a, b, taille, 1);
+			if (grille[i][j]==Case.EMPTY && grille[a][b]==Case.EMPTY) {
+				String coordinate = bt.getBoatCoordinate();
+				String[] position = coordinate.split(";");
+				if (i<a || j<b){
+					int c=0;
+					while(c<position.length){
+						int indiceL = Integer.parseInt(position[c].split("-")[0]);
+						int indiceCol = Integer.parseInt(position[c].split("-")[1]);
+						grille[indiceL][indiceCol] = Case.BOAT;
+						bateau[indiceL][indiceCol] = bt;
+						c++;
+				}
+			}
+				else{
+					int c=taille-1;
+					while(c>=0){
+
+						int indiceL = Integer.parseInt(position[c].split("-")[0]);
+						int indiceCol = Integer.parseInt(position[c].split("-")[1]);
+						System.out.println(c + " " + indiceL + " " + indiceCol);
+						grille[indiceL][indiceCol] = Case.BOAT;
+						bateau[indiceL][indiceCol] = bt;
+						c--;}
+				}
+
+				
+			}
+			else{
+				return false;
+			}
+
+		return true;
+
+	}
+
+
 	public Bateau[][] putBoat(int i,int j,int a, int b ,int taille, BatailleNavale bn){ 
 		
 		
