@@ -1,11 +1,13 @@
 import java.awt.event.*;
 import java.util.Random;
 
+import javax.swing.JLabel;
+
 
 
 public class BatailleNavale implements ActionListener{
-    Plateau p;
-    Plateau pJoueur;
+    Plateau pg;
+    Plateau pd;
     int gameSize;
     Joueur joueur;
     int tour;
@@ -14,7 +16,6 @@ public class BatailleNavale implements ActionListener{
     Bateau[][] bateau;
     String name;
     public BatailleNavale(){
-        
         ChoosePanel cp = new ChoosePanel();
         cp.choosePanel();
         
@@ -34,33 +35,20 @@ public class BatailleNavale implements ActionListener{
         }
         
         gameSize = cp.getGameSize();
-        p = new Plateau(gameSize);
-        this.bateau = p.getBateau();
+        pg = new Plateau(gameSize);
+        this.bateau = pg.getBateau();
 
-        pJoueur = new Plateau(gameSize);
+        pd = new Plateau(gameSize);
         int placementOption = cp.getPlacementOption();
         if (placementOption == 0){
-            putBoatOnGame(p, difficulty, gameSize);
-            putBoatOnGame(pJoueur, difficulty, gameSize);
+            putBoatOnGame(pg, difficulty, gameSize);
+            putBoatOnGame(pd, difficulty, gameSize);
         }
         else {
             
-        }
-
-
-                    
-                
-            
-        //System.out.println("Hi " + name + ", you're playing in " + gamemode + " on a " + gameSize + "*" + gameSize + " plateau");
-        
-        ib = new InterfaceBatailleNavalle(gameSize, this, placementOption, p, joueur);
-        ib.revealBoat(pJoueur);
-        if (p.gagnant()) {
-        	System.out.println("GAGNANT AZEFAZEPZKNEFPOJAZNRG");
-        	ib.affichegagnant(name);
-        }
-        	
-
+        }                
+        ib = new InterfaceBatailleNavalle(gameSize, this, placementOption, pg,pd, joueur);
+        ib.revealBoat(pd);
     }
 
     public boolean checkIndexExistence(Bateau[][] bateau, int i, int j, int ii, int jj){
@@ -104,29 +92,48 @@ public class BatailleNavale implements ActionListener{
             }
         }
                 
-        } 
-
-    public void fillButtonOnSunk(int i, int j){
-        ib.fillOnSunk(i, j);
+    }     	
+    
+    public boolean rejouer(JLabel c) {
+        if (ib.getinfo(c)!="Manqué !") {
+        	return true;
+        }
+        return false;
+        
+        
     }
     
     public void actionPerformed(ActionEvent e) { 
         String[] coordinates = e.getActionCommand().split("-");
-            if (coordinates[0].equals("a")){
-                int i = Integer.parseInt(coordinates[1]);
-                int j = Integer.parseInt(coordinates[2]);
-                System.out.println(coordinates[0] +"" + i+" "+j);
-            }
+        if (coordinates[0].equals("a")){
+           int i = Integer.parseInt(coordinates[1]);
+           int j = Integer.parseInt(coordinates[2]);
+           System.out.println(coordinates[0] +"" + i+" "+j);
+        }
         else{
-            
-
             int i = Integer.parseInt(coordinates[0]);
             int j = Integer.parseInt(coordinates[1]);
-            ib.remplir(i, j);
-            if(p.gagnant()){
-            	ib.affichegagnant(name);
-            }
-        }
+            int ii=new Random().nextInt(gameSize-1);
+            int jj=new Random().nextInt(gameSize-1);
+            tour=0;
+        	ib.remplir(i, j,tour);
+        	if(!rejouer(ib.tourj))
+            	tour++;
+            	tour=tour%2;
+            	ib.remplir(ii,jj,1);
+
+        		
+
+    
+            
+            if(pg.gagnant())
+            	if (ib.affichegagnant(name)==1) 
+            		ib.endGame();
+            	else {
+            		ib.dispose();
+            		new BatailleNavale();
+            	}	
+    	}
     }
     
 
