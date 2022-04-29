@@ -7,32 +7,47 @@ import javax.swing.border.LineBorder;
 
 public class InterfaceBatailleNavalle {
 	Plateau plat;
+	Plateau bot;
 	Joueur joueur;
 	JButton [][] b1;
 	JButton [][] b2;
 	JPanel plateau; 
 	JPanel p1;
 	JFrame f = new JFrame("Bataille Navale !");
-	JLabel tour;
+	JLabel tourj;
+	JLabel tourB;
 	BatailleNavale bn;
+
 	JButton bat1, bat2, bat3, bat4;
 	int c1, c2, c3, c4;
 	JPanel z1, z2, z3, z4;
 	JLabel compteur1, compteur2, compteur3, compteur4;
 
+
 		
 		
-		public InterfaceBatailleNavalle(int size, ActionListener listener,int mode, Plateau plat, Joueur joueur) {			
+		public InterfaceBatailleNavalle(int size, ActionListener listener,int mode, Plateau plat,Plateau bot, Joueur joueur) {	
+			this.bot=bot;
 			this.plat = plat;
 			this.joueur = joueur;
 			f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			f.setLayout(new BorderLayout());
 			
-			tour=new JLabel();
-			tour.setText("INFO");
-			tour.setPreferredSize(new Dimension(100,100));
-			tour.setFont(new Font(Font.MONOSPACED,Font.BOLD,20));
-			tour.setBackground(Color.LIGHT_GRAY);
+			tourj=new JLabel();
+			tourj.setText("INFO joueur");
+			tourj.setPreferredSize(new Dimension(100,100));
+			tourj.setFont(new Font(Font.MONOSPACED,Font.BOLD,20));
+			tourj.setBackground(Color.LIGHT_GRAY);
+			
+			tourB=new JLabel();
+			tourB.setText("INFO adversaire");
+			tourB.setPreferredSize(new Dimension(100,100));
+			tourB.setFont(new Font(Font.MONOSPACED,Font.BOLD,20));
+			tourB.setBackground(Color.LIGHT_GRAY);
+			 JPanel tour =new JPanel(new GridLayout(1,2));
+			tour.add(tourj);
+			tour.add(tourB);
+			
 			
 			plateau =new JPanel(new GridLayout(1,2,50,50)); 
 			
@@ -223,46 +238,66 @@ public class InterfaceBatailleNavalle {
 	}
 	
 	
-	public void fillOnSunk(int i, int j){
-		/*Bateau[][] bateau = plat.getBateau();
-		Bateau boat = bateau[i][j];
-		String[] coordinate = boat.getBoatCoordinate().split(";");
-		for(int k=0;k<coordinate.length;k++){
-			int y = Integer.parseInt(coordinate[k].split("-")[0]);
-			int z = Integer.parseInt(coordinate[k].split("-")[1]);*/
+	public void fillOnSunk(JButton[][] plateau){
 		Case[][] grille=plat.getGrille();
         for(int y=0; y<grille.length; y++)
             for(int z=0; z<grille[y].length; z++)
 				if(grille[y][z]==Case.SUNK) {
-			b1[y][z].setBackground(new JButton().getBackground());
-			b1[y][z].setIcon(null);
-			b1[y][z].setIcon(new ImageIcon (new ImageIcon("wreck.jpg").getImage().getScaledInstance(300, 100, java.awt.Image.SCALE_SMOOTH)));}
+					plateau[y][z].setBackground(new JButton().getBackground());
+					plateau[y][z].setIcon(null);
+					plateau[y][z].setIcon(new ImageIcon (new ImageIcon("wreck.jpg").getImage().getScaledInstance(300, 100, java.awt.Image.SCALE_SMOOTH)));}
 	}
 
-	public void remplir(int i, int j){
-		String res = plat.jouer(i, j);
-		String result = res.split("_")[0];
-		String boat = res.split("_")[1];
-
-		if (result.equals("touché-coulé")){
-			b1[i][j].setEnabled(false);
-			fillOnSunk(i, j);
-			tour.setText("Touché-coulé" + boat + "!");
+	public void remplir(int i, int j,int t){
+			if (t==0) {
+				String res = plat.jouer(i, j);
+				String result = res.split("_")[0];
+				String boat = res.split("_")[1];
+				if (result.equals("touché-coulé")){
+					b1[i][j].setEnabled(false);
+					fillOnSunk(b1);
+					tourj.setText("Touché-coulé " + boat + "!");
+				}
+				else if (result.equals("touché")){
+					b1[i][j].setEnabled(false);
+					b1[i][j].setIcon(null);
+					b1[i][j].setBackground(Color.black);
+					tourj.setText("Touché !");
+				}
+				else{
+					tourj.setText("Manqué :(");
+					b1[i][j].setBackground(Color.LIGHT_GRAY);
+					b1[i][j].setEnabled(false);
+				}
+			}
+			
+		else {
+			String res = bot.jouer(i, j);
+			String result = res.split("_")[0];
+			String boat = res.split("_")[1];
+			if (result.equals("touché-coulé")){
+				fillOnSunk(b2);
+				tourB.setText("Touché-coulé " + boat + "!");
+			}
+			else if (result.equals("touché")){
+				b2[i][j].setBackground(Color.BLACK);
+				tourB.setText("Touché !");
+			}
+			else{
+				b2[i][j].setBackground(Color.RED);
+				tourB.setText("Manqué :(");
+			}
 		}
-		else if (result.equals("touché")){
-			b1[i][j].setEnabled(false);
-			b1[i][j].setIcon(null);
-			b1[i][j].setBackground(Color.black);
-			tour.setText("Touché !");
-		}
-		else{
-			tour.setText("Manqué :(");
-			b1[i][j].setEnabled(false);
-		}
+	}
 	
-}
+
+
+
 
 		
+	public String getinfo(JLabel c) {
+		return c.getText();
+	}
 
 	public void revealBoat(Plateau p) {
 	Case [][] grille=p.getGrille();
@@ -276,11 +311,13 @@ public class InterfaceBatailleNavalle {
 		return JOptionPane.showConfirmDialog(f,joueur+" a gagné !! Voulez-vous rejouer ??????","CRINGE ALERT",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
 	}
     
-	public static void main(String[] args) {
+	public void endGame() {
+		JOptionPane.showMessageDialog(f,"Au revoir");
+		dispose();
+		System.exit(0);
 	}
-
-	public void actionPerformed(ActionEvent e) {
-		
+	public void dispose() {
+		f.dispose();
 	}
     
 }

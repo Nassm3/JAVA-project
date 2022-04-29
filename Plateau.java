@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.util.Random;
 
 public class Plateau {
@@ -5,7 +6,7 @@ public class Plateau {
 	public Bateau[][] bateau;
 	Bateau bt;
 	int gameSize;
-    
+
     public Plateau(int i){
     	this.gameSize = i;
         grille = new Case [i][i];
@@ -31,7 +32,6 @@ public class Plateau {
 	public String jouer(int li, int col) {
 
 		if (grille[li][col] != Case.EMPTY){
-
 			if(grille[li][col].affiche().equals("bateau")){
 				Bateau boat = bateau[li][col];
 				String boatName = bateau[li][col].getName();
@@ -56,6 +56,7 @@ public class Plateau {
 			grille[li][col] = Case.MISSED;
 			return "manqué"+"_"+null;}
 	}
+	
 	
 
 	public Boolean manualPutBoat(int i,int j,int a, int b ,int taille, BatailleNavale bn){
@@ -97,9 +98,6 @@ public class Plateau {
 
 
 	public Bateau[][] putBoat(int i,int j,int a, int b ,int taille, BatailleNavale bn){ 
-		
-		
-
 
 		if (Math.abs(a-i)+1 != taille && Math.abs(b-j)+1 != taille) {//|| Math.abs(j-b)+1!=taille)
 
@@ -138,10 +136,6 @@ public class Plateau {
 		}
 		return bateau;
 	}
-
-	
-	
-	
 	public void afficher() {
 		String marge=" ";
     	afficherligne(marge.length());
@@ -166,9 +160,6 @@ public class Plateau {
 	public Bateau[][] getBateau(){
 		return bateau;
 	}
-	
-
-		
 	public static void main(String[] args) {
 		/*Plateau p=new Plateau(8);
 		p.putBoat(2, 3, 4, 3, 3);

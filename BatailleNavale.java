@@ -1,11 +1,13 @@
 import java.awt.event.*;
 import java.util.Random;
 
+import javax.swing.JLabel;
+
 
 
 public class BatailleNavale implements ActionListener{
-    Plateau p;
-    Plateau pJoueur;
+    Plateau pg;
+    Plateau pd;
     int gameSize;
     Joueur joueur;
     int tour;
@@ -16,7 +18,6 @@ public class BatailleNavale implements ActionListener{
     int cpt;
     int placeLigneStart, placeLigneEnd, placeColStart, placeColEnd, placeSize;
     public BatailleNavale(){
-        
         ChoosePanel cp = new ChoosePanel();
         cp.choosePanel();
         
@@ -36,32 +37,33 @@ public class BatailleNavale implements ActionListener{
         }
         
         gameSize = cp.getGameSize();
-        p = new Plateau(gameSize);
-        this.bateau = p.getBateau();
+        pg = new Plateau(gameSize);
+        this.bateau = pg.getBateau();
 
-        pJoueur = new Plateau(gameSize);
+        pd = new Plateau(gameSize);
         int placementOption = cp.getPlacementOption();
         if (placementOption == 0){
-            putBoatOnGame(pJoueur, 0, gameSize);
+            putBoatOnGame(pd, 0, gameSize);
 
         }
         else {
 
         }
-        putBoatOnGame(p, difficulty, gameSize);
+        putBoatOnGame(pg, difficulty, gameSize);
 
                     
                 
             
         //System.out.println("Hi " + name + ", you're playing in " + gamemode + " on a " + gameSize + "*" + gameSize + " plateau");
         
-        ib = new InterfaceBatailleNavalle(gameSize, this, placementOption, p, joueur);
-        ib.revealBoat(pJoueur);
-        if (p.gagnant()) {
+        ib = new InterfaceBatailleNavalle(gameSize, this, placementOption, pg, pd, joueur);
+        ib.revealBoat(pd);
+        if (pd.gagnant() || pg.gagnant()) {
         	System.out.println("GAGNANT AZEFAZEPZKNEFPOJAZNRG");
         	ib.affichegagnant(name);
         }
         	
+
 
     }
 
@@ -108,17 +110,23 @@ public class BatailleNavale implements ActionListener{
             }
         }
                 
-        } 
-
-    public void fillButtonOnSunk(int i, int j){
-        ib.fillOnSunk(i, j);
+    }     	
+    
+    public boolean rejouer(JLabel c) {
+        if (ib.getinfo(c)!="Manqué !") {
+        	return true;
+        }
+        return false;
+        
+        
     }
     
     public void actionPerformed(ActionEvent e) { 
         String[] coordinates = e.getActionCommand().split("-");
+
             if (coordinates[1].equals("b")){
                 cpt = 0;
-                ib.activateButton(pJoueur.getGrille());
+                ib.activateButton(pd.getGrille());
                 placeSize = Integer.parseInt(coordinates[2]);
             }
             else if (coordinates[0].equals("a")){
@@ -133,15 +141,15 @@ public class BatailleNavale implements ActionListener{
                     if ((placeColStart<16 || placeLigneEnd<16 || placeColEnd<16 || placeSize<16) 
                     && (Math.abs((placeLigneStart-placeLigneEnd)+(placeColStart-placeColEnd))+1 == placeSize) 
                     && (placeLigneStart == placeLigneEnd || placeColStart==placeColEnd)){
-                        pJoueur.manualPutBoat(placeLigneStart, placeColStart, placeLigneEnd, placeColEnd, placeSize, this);
-                        ib.deactivateButton(pJoueur.getGrille());
-                        ib.revealBoat(pJoueur);
+                        pd.manualPutBoat(placeLigneStart, placeColStart, placeLigneEnd, placeColEnd, placeSize, this);
+                        ib.deactivateButton(pd.getGrille());
+                        ib.revealBoat(pd);
                         cpt++;
                         ib.decreaseButton(placeSize);
                     }
                     else{
-                        ib.tour.setText("Taille pas bonne kek, cringe même, c'est Squid Game nul a chier si je puis me permettre");
-                        ib.deactivateButton(pJoueur.getGrille());
+                        ib.tourj.setText("Taille pas bonne kek, cringe même, c'est Squid Game nul a chier si je puis me permettre");
+                        ib.deactivateButton(pd.getGrille());
 
                         cpt = 0;
 
@@ -157,14 +165,26 @@ public class BatailleNavale implements ActionListener{
         else{
             int i = Integer.parseInt(coordinates[0]);
             int j = Integer.parseInt(coordinates[1]);
-            ib.remplir(i, j);
-            if(p.gagnant()){
-                ib.affichegagnant(name);
+            int ii=new Random().nextInt(gameSize-1);
+            int jj=new Random().nextInt(gameSize-1);
+            tour=0;
+        	ib.remplir(i, j,tour);
+        	ib.remplir(ii, jj,1);
 
-            }
+
+        	
+            if(pg.gagnant())
+            	if (ib.affichegagnant(name)==1) 
+            		ib.endGame();
+            	else {
+            		ib.dispose();
+            		new BatailleNavale();
+            	}	
+
 
 
         }
+
     }
     
 
