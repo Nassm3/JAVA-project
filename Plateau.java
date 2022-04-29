@@ -68,8 +68,11 @@ public class Plateau {
 			
 		}
 		else if(!bn.checkIndexExistence(bateau, i, j, a, b)){
-			System.err.println("non" +bn.checkIndexExistence(bateau, i, j, a, b));
-			throw new java.lang.Error("Improperplacement " + i +", "+j+", "+a+", "+b);
+			/*System.err.println("non" +bn.checkIndexExistence(bateau, i, j, a, b));
+			throw new java.lang.Error("Improperplacement " + i +", "+j+", "+a+", "+b);*/
+			int ii = new Random().nextInt(gameSize-taille+1);
+			int jj = new Random().nextInt(gameSize-taille+1);
+			putBoat(ii, jj, ii+taille-1, jj, taille, bn);	
 		}
 
 		else {
@@ -78,10 +81,8 @@ public class Plateau {
 				
 				String coordinate = bt.getBoatCoordinate();
 				String[] position = coordinate.split(";");
-				//System.out.println(coordinate);
 				int c=0;
 				while(c<position.length){
-					//System.out.println(position[c].split("-")[1]);
 					int indiceL = Integer.parseInt(position[c].split("-")[0]);
 					int indiceCol = Integer.parseInt(position[c].split("-")[1]);
 					grille[indiceL][indiceCol] = Case.BOAT;

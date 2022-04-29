@@ -53,6 +53,8 @@ public class InterfaceBatailleNavalle {
 			for (int i=0;i<b2.length;i++)
 				for (int j=0;j<b2[i].length;j++) {
 					b2[i][j]=new JButton();
+					b1[i][j].addActionListener(listener);
+					b1[i][j].setActionCommand("a-"+i+"-"+j);
 					b2[i][j].setPreferredSize(new Dimension(80,80));
 					b2[i][j].setBackground(Color.BLUE);
 					b2[i][j].setEnabled(false);
@@ -68,6 +70,8 @@ public class InterfaceBatailleNavalle {
 				
 				JPanel ra = new JPanel(new FlowLayout(FlowLayout.LEFT));
 				JButton bat1 = new JButton();
+				bat1.addActionListener(listener);
+				bat1.setActionCommand("2");
 				bat1.setIcon(new ImageIcon (new ImageIcon("bat4.jpg").getImage().getScaledInstance(100, 50, java.awt.Image.SCALE_SMOOTH)));
 
 				JPanel z1= new JPanel(new GridLayout(2,1));

@@ -53,7 +53,7 @@ public class BatailleNavale implements ActionListener{
             
         //System.out.println("Hi " + name + ", you're playing in " + gamemode + " on a " + gameSize + "*" + gameSize + " plateau");
         
-        ib = new InterfaceBatailleNavalle(gameSize, this, 1, p, joueur);
+        ib = new InterfaceBatailleNavalle(gameSize, this, placementOption, p, joueur);
         ib.revealBoat(pJoueur);
 
     }
@@ -68,13 +68,11 @@ public class BatailleNavale implements ActionListener{
                 return true;
         	}
         	else {
-                System.out.println(bateau[i][j] + " " + bateau[ii][jj] + "");
         		return false;
         	}
             
         } 
         catch (Exception e) {
-            System.err.println(e + ",  " + i+ ",  " + j+ ",  " + ii+ ",  " + jj);
             return false;
         }
         }
@@ -84,36 +82,18 @@ public class BatailleNavale implements ActionListener{
             int size = 2;
             while (size<6) {
                 if ((new Random().nextInt(2)) == 0){
-
-                    
-
-                    //System.out.println("oui" + checkIndexExistence(bateau, ii, jj, ii+size-1, jj));
-                    if (new Random().nextInt(2) == 0){
-                        int ii = new Random().nextInt(gameSize-size+1);
-                        int jj = new Random().nextInt(gameSize-size+1);
-                        p.putBoat(ii, jj, ii+size-1, jj, size, this);
-                    }
-                    
-                    else{
-                        int ii = new Random().nextInt(gameSize - size) + size-1;	
-                        int jj = new Random().nextInt(gameSize - size) + size-1;
-                        p.putBoat(ii, jj, ii-size+1, jj, size, this);
-                    }
-                    
+                    int ii;
+                    int jj;
+                    ii = new Random().nextInt(gameSize-size+1);
+                    jj = new Random().nextInt(gameSize-size+1);
+                    p.putBoat(ii, jj, ii+size-1, jj, size, this);
                 }
                 else{
-                    
-                    if (new Random().nextInt(2) == 0){     
-                        int ii = new Random().nextInt(gameSize-size+1);
-                        int jj = new Random().nextInt(gameSize-size+1);               
-                        p.putBoat(ii, jj, ii, jj+size-1, size, this);
-                    }
-                    else{
-                        int ii = new Random().nextInt(gameSize - size) + size-1;
-                        int jj = new Random().nextInt(gameSize - size) + size-1;
-                        p.putBoat(ii, jj, ii, jj-size+1, size, this);
-                    }
-
+                    int ii;
+                    int jj;
+                    ii = new Random().nextInt(gameSize-size+1);
+                    jj = new Random().nextInt(gameSize-size+1);               
+                    p.putBoat(ii, jj, ii, jj+size-1, size, this);
                 }
                 size++;
             }
@@ -127,9 +107,20 @@ public class BatailleNavale implements ActionListener{
     
     public void actionPerformed(ActionEvent e) { 
         String[] coordinates = e.getActionCommand().split("-");
-		int i = Integer.parseInt(coordinates[0]);
-		int j = Integer.parseInt(coordinates[1]);
-        ib.remplir(i, j);
+            if (coordinates[0].equals("a")){
+                int i = Integer.parseInt(coordinates[1]);
+                int j = Integer.parseInt(coordinates[2]);
+                System.out.println(coordinates[0] +"" + i+" "+j);
+            }
+        else{
+            
+
+            int i = Integer.parseInt(coordinates[0]);
+                int j = Integer.parseInt(coordinates[1]);
+                System.out.println(i+" "+j);
+                ib.remplir(i, j);
+
+        }
     }
     
 public void m(int l, int c){
