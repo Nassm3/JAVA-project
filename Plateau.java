@@ -20,13 +20,13 @@ public class Plateau {
                 grille[indiceLigne][indiceCol] = Case.EMPTY;
     }
     
-	public boolean gagnant(int i,int j) {
+	public boolean gagnant() {
 		
         for(int indiceLigne=0; indiceLigne<grille.length; indiceLigne++)
             for(int indiceCol=0; indiceCol<grille[indiceLigne].length; indiceCol++)
-            	if (grille[indiceLigne][indiceCol]==Case.SUNK || grille[indiceLigne][indiceCol]==Case.EMPTY)
-            		return true;
-		return false;
+            	if (grille[indiceLigne][indiceCol]!=Case.SUNK || grille[indiceLigne][indiceCol]!=Case.EMPTY)
+            		return false;
+		return true;
 	}
 	
 	public String jouer(int li, int col) {
