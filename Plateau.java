@@ -23,7 +23,7 @@ public class Plateau {
 		
         for(int indiceLigne=0; indiceLigne<grille.length; indiceLigne++)
             for(int indiceCol=0; indiceCol<grille[indiceLigne].length; indiceCol++)
-            	if (grille[indiceLigne][indiceCol]==Case.HIT || grille[indiceLigne][indiceCol]!=Case.BOAT)
+            	if (grille[indiceLigne][indiceCol]==Case.BOAT)
             		return false;
 		return true;
 	}

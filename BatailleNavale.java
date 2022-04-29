@@ -120,9 +120,12 @@ public class BatailleNavale implements ActionListener{
             
 
             int i = Integer.parseInt(coordinates[0]);
-                int j = Integer.parseInt(coordinates[1]);
-                System.out.println(i+" "+j);
-                ib.remplir(i, j);
+            int j = Integer.parseInt(coordinates[1]);
+            ib.remplir(i, j);
+            if(p.gagnant()){
+                System.out.println("no cap");
+            }
+
 
         }
     }
