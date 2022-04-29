@@ -153,12 +153,16 @@ public class InterfaceBatailleNavalle {
 	
 	
 	public void fillOnSunk(int i, int j){
-		Bateau[][] bateau = plat.getBateau();
+		/*Bateau[][] bateau = plat.getBateau();
 		Bateau boat = bateau[i][j];
 		String[] coordinate = boat.getBoatCoordinate().split(";");
 		for(int k=0;k<coordinate.length;k++){
 			int y = Integer.parseInt(coordinate[k].split("-")[0]);
-			int z = Integer.parseInt(coordinate[k].split("-")[1]);
+			int z = Integer.parseInt(coordinate[k].split("-")[1]);*/
+		Case[][] grille=plat.getGrille();
+        for(int y=0; y<grille.length; y++)
+            for(int z=0; z<grille[y].length; z++)
+				if(grille[y][z]==Case.SUNK) {
 			b1[y][z].setBackground(new JButton().getBackground());
 			b1[y][z].setIcon(null);
 			b1[y][z].setIcon(new ImageIcon (new ImageIcon("wreck.jpg").getImage().getScaledInstance(300, 100, java.awt.Image.SCALE_SMOOTH)));}

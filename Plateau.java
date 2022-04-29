@@ -23,7 +23,7 @@ public class Plateau {
 		
         for(int indiceLigne=0; indiceLigne<grille.length; indiceLigne++)
             for(int indiceCol=0; indiceCol<grille[indiceLigne].length; indiceCol++)
-            	if (grille[indiceLigne][indiceCol]!=Case.SUNK || grille[indiceLigne][indiceCol]!=Case.EMPTY)
+            	if (grille[indiceLigne][indiceCol]==Case.HIT || grille[indiceLigne][indiceCol]!=Case.BOAT)
             		return false;
 		return true;
 	}
@@ -35,11 +35,15 @@ public class Plateau {
 
 			if(grille[li][col].affiche().equals("bateau")){	
 				Bateau boat = bateau[li][col];
-
 				String boatName = bateau[li][col].getName();
 				System.out.println(boat.getBoatCoordinate());
 				grille[li][col] = Case.HIT;
 				if(boat.isSunk(grille)){
+					String[] coordinate = boat.getBoatCoordinate().split(";");
+					for(int k=0;k<coordinate.length;k++){
+						int y = Integer.parseInt(coordinate[k].split("-")[0]);
+						int z = Integer.parseInt(coordinate[k].split("-")[1]);
+						grille[y][z] = Case.SUNK;}
 					return "touché-coulé" + "_" + boatName;
 					
 				}
@@ -131,18 +135,19 @@ public class Plateau {
 	public static void main(String[] args) {
 		/*Plateau p=new Plateau(8);
 		p.putBoat(2, 3, 4, 3, 3);
-		Bateau bo=new Bateau(2,3,4,3,3,5);
+		Bateau bo=new Bateau(2,3,4,3,3,3);
 		p.jouer(0,0);
-		//p.jouer(1,3);
+		p.jouer(1,3);
 		p.jouer(2,3);
-		//p.jouer(4,3);
+		p.jouer(4,3);
+		p.jouer(3,3);
+		System.out.println(gagnant());
 
 
 
-		System.out.println(bo.isSunk(p.grille));
-		p.afficher();*/
+		p.afficher();
 
-
+	*/
 	}
 }
 
