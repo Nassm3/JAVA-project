@@ -53,8 +53,8 @@ public class InterfaceBatailleNavalle {
 			for (int i=0;i<b2.length;i++)
 				for (int j=0;j<b2[i].length;j++) {
 					b2[i][j]=new JButton();
-					b1[i][j].addActionListener(listener);
-					b1[i][j].setActionCommand("a-"+i+"-"+j);
+					b2[i][j].addActionListener(listener);
+					b2[i][j].setActionCommand("a-"+i+"-"+j);
 					b2[i][j].setPreferredSize(new Dimension(80,80));
 					b2[i][j].setBackground(Color.BLUE);
 					b2[i][j].setEnabled(false);
