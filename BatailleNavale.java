@@ -39,11 +39,13 @@ public class BatailleNavale implements ActionListener{
         pJoueur = new Plateau(gameSize);
         int placementOption = cp.getPlacementOption();
         if (placementOption == 0){
+            putBoatOnGame(p, difficulty, gameSize);
             putBoatOnGame(pJoueur, difficulty, gameSize);
         }
-        else{
-
+        else {
+            
         }
+
         putBoatOnGame(p, difficulty, gameSize);
 
                     
@@ -52,7 +54,7 @@ public class BatailleNavale implements ActionListener{
         //System.out.println("Hi " + name + ", you're playing in " + gamemode + " on a " + gameSize + "*" + gameSize + " plateau");
         
         ib = new InterfaceBatailleNavalle(gameSize, this, 1, p, joueur);
-        
+        ib.revealBoat(pJoueur);
 
     }
 
