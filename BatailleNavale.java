@@ -58,10 +58,10 @@ public class BatailleNavale implements ActionListener{
         
         ib = new InterfaceBatailleNavalle(gameSize, this, placementOption, pg, pd, joueur);
         ib.revealBoat(pd);
-        if (pd.gagnant() || pg.gagnant()) {
+        /*if (pd.gagnant() || pg.gagnant()) {
         	System.out.println("GAGNANT AZEFAZEPZKNEFPOJAZNRG");
         	ib.affichegagnant(name);
-        }
+        }*/
         	
 
 
@@ -174,6 +174,7 @@ public class BatailleNavale implements ActionListener{
 
         	
             if(pg.gagnant())
+                System.out.println("cringe un peu non");
             	if (ib.affichegagnant(name)==1) 
             		ib.endGame();
             	else {
