@@ -220,21 +220,42 @@ public class InterfaceBatailleNavalle {
 	 }
 	
 
-	public void activateButton( Case [][] grille ){
-		for (int i=0;i<b2.length;i++)
-				for (int j=0;j<b2[i].length;j++) {
-					if (grille[i][j] == Case.EMPTY){
-						b2[i][j].setEnabled(true);
-					} 
+	public void activateButton( Case [][] grille, int choice ){
+		if(choice == 2){for (int i=0;i<b2.length;i++)
+			for (int j=0;j<b2[i].length;j++) {
+				if (grille[i][j] == Case.EMPTY){
+					b2[i][j].setEnabled(true);
+				} 
+				
+			}
+		}
+		else{
+			for (int i=0;i<b1.length;i++){
+				for (int j=0;j<b1[i].length;j++) {
+					b1[i][j].setEnabled(true);
+					}
 					
 				}
-	}
+			}
+		}
 
-	public void deactivateButton(Case [][] grille){
-		for (int i=0;i<b2.length;i++)
-				for (int j=0;j<b2[i].length;j++) {
+	public void deactivateButton(Case [][] grille, int choice ){
+		if(choice == 2){for (int i=0;i<b2.length;i++)
+			for (int j=0;j<b2[i].length;j++) {
+				if (grille[i][j] == Case.EMPTY){
 					b2[i][j].setEnabled(false);
+				} 
+				
+			}
+		}
+		else{
+			for (int i=0;i<b1.length;i++){
+				for (int j=0;j<b1[i].length;j++) {
+					b1[i][j].setEnabled(false);
+					}
+					
 				}
+			}
 	}
 	
 	
