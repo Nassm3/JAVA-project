@@ -18,8 +18,10 @@ public class BatailleNavale implements ActionListener{
     Bateau[][] bateau;
     String name;
     int cpt;
-    int placeLigneStart, placeLigneEnd, placeColStart, placeColEnd, placeSize;
+    int placeLigneStart, placeLigneEnd, placeColStart, placeColEnd, placeSize,ii,jj;
     public BatailleNavale(){
+        ii=0;
+        jj=0;
         ChoosePanel cp = new ChoosePanel();
         cp.choosePanel();
         
@@ -85,7 +87,7 @@ public class BatailleNavale implements ActionListener{
         catch (Exception e) {
             return false;
         }
-        }
+     }
 
 
 
@@ -111,16 +113,29 @@ public class BatailleNavale implements ActionListener{
             }
         }
                 
-    }     	
+    }     
     
-    public boolean rejouer(JLabel c) {
-        if (ib.getinfo(c)!="Manqué !") {
-        	return true;
-        }
-        return false;
-        
-        
+    public void  rejouerbot() {
+    	ib.remplir(ii, jj, 1);
+    	if (pd.rejouer) {
+    		System.out.println("bot rejouer");
+    		rejouerbot();
+    	}
     }
+    
+    public void rejouer(int a,int b) {
+
+        ib.remplir(a, b,0);
+        if (pg.rejouer) {
+        	rejouer(a,b);
+    	}
+        else {
+        	ib.remplir(ii, jj, 1);
+
+        	
+        }
+    }
+    
     
     public void actionPerformed(ActionEvent e) { 
         String[] coordinates = e.getActionCommand().split("-");
@@ -161,13 +176,20 @@ public class BatailleNavale implements ActionListener{
         else{
             int i = Integer.parseInt(coordinates[0]);
             int j = Integer.parseInt(coordinates[1]);
-            int ii=new Random().nextInt(gameSize-1);
-            int jj=new Random().nextInt(gameSize-1);
-            tour=0;
-        	ib.remplir(i, j,tour);
-        	ib.remplir(ii, jj,1);
+            ii=new Random().nextInt(gameSize-1);
+            jj=new Random().nextInt(gameSize-1);
+        	
+            ib.remplir(i, j,0);
+            if (pg.rejouer) {
+            	ib.remplir(i, j,0);
+            }
+            else {
+                ib.remplir(ii, jj,1);
+                if (pd.rejouer) {
+                	ib.remplir(new Random().nextInt(gameSize-1), new Random().nextInt(gameSize-1),1);
+                }
 
-
+            }
         	
             if(pg.gagnant()){
                 System.out.println("cringe un peu non");
