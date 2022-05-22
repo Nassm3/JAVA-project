@@ -6,12 +6,14 @@ public class Plateau {
 	public Bateau[][] bateau;
 	Bateau bt;
 	int gameSize;
+	boolean rejouer;
 
     public Plateau(int i){
     	this.gameSize = i;
         grille = new Case [i][i];
 		bateau = new Bateau[i][i];
         init();
+        rejouer=false;
     } 
 
     public void init(){
@@ -36,6 +38,7 @@ public class Plateau {
 				Bateau boat = bateau[li][col];
 				String boatName = bateau[li][col].getName();
 				grille[li][col] = Case.HIT;
+				rejouer=true;
 				if(boat.isSunk(grille)){
 					String[] coordinate = boat.getBoatCoordinate().split(";");
 					for(int k=0;k<coordinate.length;k++){
@@ -52,6 +55,7 @@ public class Plateau {
 			return "manqué"+"_"+null;
 		}
 		else{
+			rejouer=false;
 			grille[li][col] = Case.MISSED;
 			return "manqué"+"_"+null;}
 	}
@@ -158,21 +162,25 @@ public class Plateau {
 		return bateau;
 	}
 	public static void main(String[] args) {
-		/*Plateau p=new Plateau(8);
-		p.putBoat(2, 3, 4, 3, 3);
-		Bateau bo=new Bateau(2,3,4,3,3,3);
+		/*BatailleNavale b=new BatailleNavale();
+		Plateau p=new Plateau(8);
+		p.putBoat(2, 3, 4, 3, 3, b);
+
 		p.jouer(0,0);
+		System.out.println(rejouer);
 		p.jouer(1,3);
 		p.jouer(2,3);
 		p.jouer(4,3);
 		p.jouer(3,3);
-		System.out.println(gagnant());
+		System.out.println(rejouer);
+		p.jouer(5, 7);
+		System.out.println(rejouer);
 
 
 
-		p.afficher();
+		p.afficher();*/
 
-	*/
+	
 	}
 }
 
