@@ -304,7 +304,7 @@ public class InterfaceBatailleNavalle {
 				b2[i][j].setBackground(Color.BLACK);
 				tourB.setText("Touché !");
 			}
-			else{
+			else{=n,j  
 				b2[i][j].setBackground(Color.RED);
 				tourB.setText("Manqué :(");
 			}

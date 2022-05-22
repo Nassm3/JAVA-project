@@ -35,7 +35,6 @@ public class Plateau {
 			if(grille[li][col].affiche().equals("bateau")){
 				Bateau boat = bateau[li][col];
 				String boatName = bateau[li][col].getName();
-				System.out.println(boat.getBoatCoordinate());
 				grille[li][col] = Case.HIT;
 				if(boat.isSunk(grille)){
 					String[] coordinate = boat.getBoatCoordinate().split(";");
@@ -80,7 +79,6 @@ public class Plateau {
 
 						int indiceL = Integer.parseInt(position[c].split("-")[0]);
 						int indiceCol = Integer.parseInt(position[c].split("-")[1]);
-						System.out.println(c + " " + indiceL + " " + indiceCol);
 						grille[indiceL][indiceCol] = Case.BOAT;
 						bateau[indiceL][indiceCol] = bt;
 						c--;}
@@ -140,7 +138,6 @@ public class Plateau {
 		String marge=" ";
     	afficherligne(marge.length());
 	    for (int i = 0; i < grille.length; i++) {
-	    	System.out.print(marge+String.valueOf(i+1)+marge);
 	    	for (int j=0;j<grille[i].length;j++){
 	    		System.out.print("|"+marge+grille[i][j].affiche()+marge);
 	    	}

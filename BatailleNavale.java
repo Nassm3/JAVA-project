@@ -57,10 +57,7 @@ public class BatailleNavale implements ActionListener{
 
         }
         putBoatOnGame(pg, difficulty, gameSize);
-            
-        //System.out.println("Hi " + name + ", you're playing in " + gamemode + " on a " + gameSize + "*" + gameSize + " plateau");
-        
-        
+                  
         ib.revealBoat(pd);
 
         	
@@ -112,6 +109,19 @@ public class BatailleNavale implements ActionListener{
         }
                 
     }     	
+    public int[] botJouer(int gameSize, int difficulty){
+        int[] ij = new int[2];
+        if (difficulty == 0){
+            ij[1]=new Random().nextInt(gameSize-1);
+            ij[2]=new Random().nextInt(gameSize-1);
+        }
+        else {
+
+        }
+        
+        
+        return ij;
+    }
     
     public boolean rejouer(JLabel c) {
         if (ib.getinfo(c)!="Manqué !") {
@@ -157,33 +167,29 @@ public class BatailleNavale implements ActionListener{
                     }
                 }
             }
-        
-        else{
-            int i = Integer.parseInt(coordinates[0]);
-            int j = Integer.parseInt(coordinates[1]);
-            int ii=new Random().nextInt(gameSize-1);
-            int jj=new Random().nextInt(gameSize-1);
-            tour=0;
-        	ib.remplir(i, j,tour);
-        	ib.remplir(ii, jj,1);
+            else{
+                System.out.println("bot joue");
+                int i = Integer.parseInt(coordinates[0]);
+                int j = Integer.parseInt(coordinates[1]);
+               
+                tour=0;
+                ib.remplir(i, j, tour);
 
 
-        	
-            if(pg.gagnant()){
-                System.out.println("cringe un peu non");
-            	if (ib.affichegagnant(name)==1) 
-            		ib.endGame();
-            	else {
-                    System.out.println("cringe un peu non2");
+                
+                if(pg.gagnant()){
+                    if (ib.affichegagnant(name)==1) 
+                        ib.endGame();
+                    else {
 
-            		ib.dispose();
-            		new BatailleNavale();
-            	}	
+                        ib.dispose();
+                        new BatailleNavale();
+                    }	
+                }
+
+
+
             }
-
-
-
-        }
 
     
     
@@ -193,6 +199,3 @@ public class BatailleNavale implements ActionListener{
         bn = new BatailleNavale();
     }
 }
-
-
-
