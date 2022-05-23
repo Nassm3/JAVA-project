@@ -294,11 +294,11 @@ public class BatailleNavale implements ActionListener{
             }
         	
             if(pg.gagnant()){
-                System.out.println("cringe un peu non");
             	if (ib.affichegagnant(name)==1) 
             		ib.endGame();
+
             	else {
-                    System.out.println("cringe un peu non2");
+                    System.out.println("crnge un peu non2");
                 }
             }
         }
