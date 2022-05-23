@@ -1,24 +1,19 @@
 import java.awt.event.*;
 import java.util.Random;
 
-import javax.swing.JLabel;
 
 
 
 public class BatailleNavale implements ActionListener{
-    Plateau pg;
-    Plateau pd;
-    Case[][] grillepg;
-    Case[][] grillepd;
-    int gameSize;
-    Joueur joueur;
-    int tour;
-    String gamemode;
+
+    int placeLigneStart, placeLigneEnd, placeColStart, placeColEnd, placeSize, ii, jj, gameSize, tour, cpt, difficulty, botWay;
+    Case[][] grillepg, grillepd;
     InterfaceBatailleNavalle ib;
-    Bateau[][] bateau;
-    String name;
-    int cpt;
-    int placeLigneStart, placeLigneEnd, placeColStart, placeColEnd, placeSize,ii,jj;
+    String gamemode, name;
+    Bateau[][] bateau; 
+    Plateau pg, pd;
+    Joueur joueur;
+
     public BatailleNavale(){
         ii=0;
         jj=0;
@@ -26,15 +21,18 @@ public class BatailleNavale implements ActionListener{
         cp.choosePanel();
         
         name = cp.getName();
-        int difficulty = cp.getDifficulty();
+        difficulty = cp.getDifficulty();
 
         if (difficulty == 0){
             gamemode = new String("Easy");
-            joueur = new Joueur(name);}
+            joueur = new Joueur(name);
+        }
+
         else if (difficulty == 1){
             gamemode = new String("Normal");
             joueur = new Joueur(name);
         }
+
         else{
             gamemode = new String("JcJ");
             joueur = new Joueur(name);
@@ -110,40 +108,136 @@ public class BatailleNavale implements ActionListener{
             }
         }
                 
-    }     	
-    public int[] botJouer(int gameSize, int difficulty){
+    }     
+    public boolean checkIfBotPlayable(int i, int j){
+        if (grillepd[i][j].affiche().equals("vide") | grillepd[i][j].affiche().equals("bateau")){
+            return true;
+        }
+        return false;
+    }	
+    public void botJouer(int gameSize, int difficulty){
         int[] ij = new int[2];
         if (difficulty == 0){
-            ij[1]=new Random().nextInt(gameSize-1);
-            ij[2]=new Random().nextInt(gameSize-1);
+
+            ij[0]=new Random().nextInt(gameSize);
+            ij[1]=new Random().nextInt(gameSize);
+
+            if (grillepd[ij[0]][ij[1]].affiche().equals("vide") | grillepd[ij[0]][ij[1]].affiche().equals("bateau")){
+                ib.remplir(ij[0], ij[1], 1);
+            }
+            else{
+                botJouer(gameSize, difficulty);
+            }
         }
         else {
+            if (ib.botMemory > 0){
+                if(ib.botHitCpt<2){
+
+                    if (new Random().nextInt(2)==0){
+                        
+
+                        if (new Random().nextInt(2) == 0 & ib.lastBotHit[0] != gameSize){
+                            ib.remplir(ib.lastBotHit[0] + 1, ib.lastBotHit[1], 1);
+                        }
+                        else if (ib.lastBotHit[1] != gameSize) {
+                        ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] + 1, 1);
+                        }
+                        else{
+                            ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] - 1, 1);
+                        }
+                    }
+                    else{
+                        if (new Random().nextInt(1)==0 & ib.lastBotHit[0] != 0){
+                            ib.remplir(ib.lastBotHit[0] - 1, ib.lastBotHit[1], 1);
+                        }
+                        else if (ib.lastBotHit[1] != 0) {
+                        ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] - 1, 1);
+                        }
+                        else{
+                            ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] + 1, 1);
+                        }
+                    }
+                }
+                else if(ib.botHitCpt == 2){   
+                    System.out.println("== 2");
+                    System.out.println("on essaye"+ ib.lastBotHit[0] + " " + ib.lastBotHit[1] + " " + ib.botHit[0] + " " + ib.botHit[1]);
+
+                        if (ib.botHit[0] - ib.lastBotHit[0] != 0){
+                            if (ib.botHit[0] - ib.lastBotHit[0] < 0 ){
+                                botWay = 1;
+                                if(checkIfBotPlayable(ib.lastBotHit[0] + botWay, ib.lastBotHit[1])){
+                                    ib.remplir(ib.lastBotHit[0] + botWay, ib.lastBotHit[1], 1);
+                                }
+                                else{
+                                    System.out.println(1 + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                                }
+                            }
+                            else{
+                                botWay = -1;
+                                if(checkIfBotPlayable(ib.lastBotHit[0] + botWay, ib.lastBotHit[1])){
+                                    ib.remplir(ib.lastBotHit[0] + botWay, ib.lastBotHit[1], 1);
+                                }
+                                else{
+                                    System.out.println(2+ "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+
+                                }
+                            }
+                        }   
+                        else{
+                            if (ib.botHit[1] - ib.lastBotHit[1] < 0 ){
+                                botWay = 1;
+                                if(checkIfBotPlayable(ib.lastBotHit[0], ib.lastBotHit[1] + botWay)){
+                                    ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] + botWay, 1);
+                                }
+                                else{
+                                    System.out.println(3 +"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                                }
+                            }
+                            else{
+                                botWay = -1;
+                                if(checkIfBotPlayable(ib.lastBotHit[0], ib.lastBotHit[1] + botWay)){
+                                    ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] + botWay, 1);
+                                    System.out.println(ib.lastBotHit[0] + " " + ib.lastBotHit[1] + botWay);
+
+                                }
+                                else{
+                                    System.out.println(4 + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+
+                                }
+                            }
+                        }
+  
+                    } 
+                else{
+                    if (ib.botHit[0] - ib.lastBotHit[0] != 0){
+                        if(ib.lastBotHit[0] != gameSize - 1 & checkIfBotPlayable(ib.lastBotHit[0] + botWay, ib.lastBotHit[1])){
+                            ib.remplir(ib.lastBotHit[0] + botWay, ib.lastBotHit[1], 1);
+                        }
+                        else{
+                            botJouer(gameSize, 0);
+                            System.out.println("cringe moment");
+                        }
+                    }
+                    else{
+                        if(ib.lastBotHit[0] != gameSize - 1 & checkIfBotPlayable(ib.lastBotHit[0] + botWay, ib.lastBotHit[1])){
+                            ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] + botWay, 1);
+                        }
+                        else{
+                            botJouer(gameSize, 0);
+                            System.out.println("cringe moment");
+
+                        }
+                    }
+            }
+        }
+            else{
+                botJouer(gameSize, 0);
+            }
 
         }
-        
-        
-        return ij;
-    }
-
-    
-    public void  rejouerbot() {
-    	ib.remplir(ii, jj, 1);
-    	if (pd.rejouer) {
-    		System.out.println("bot rejouer");
-    		rejouerbot();
-    	}
-    }
-    
-    public void rejouer(int a,int b) {
-
-        ib.remplir(a, b,0);
-        if (pg.rejouer) {
-        	rejouer(a,b);
-    	}
-        else {
-        	ib.remplir(ii, jj, 1);
-
-        	
+        if (pd.rejouer){
+            System.out.println("cringe moment de fin");
+            botJouer(gameSize, difficulty);
         }
     }
     
@@ -165,9 +259,11 @@ public class BatailleNavale implements ActionListener{
                 else if (cpt == 1){
                     placeLigneEnd = Integer.parseInt(coordinates[1]);
                     placeColEnd = Integer.parseInt(coordinates[2]);
+
                     if ((placeColStart<16 || placeLigneEnd<16 || placeColEnd<16 || placeSize<16) 
                     && (Math.abs((placeLigneStart-placeLigneEnd)+(placeColStart-placeColEnd))+1 == placeSize) 
-                    && (placeLigneStart == placeLigneEnd || placeColStart==placeColEnd)){
+                    && (placeLigneStart == placeLigneEnd || placeColStart==placeColEnd)) {
+
                         pd.manualPutBoat(placeLigneStart, placeColStart, placeLigneEnd, placeColEnd, placeSize, this);
                         ib.deactivateButton(pd.getGrille(), 2);
                         ib.revealBoat(pd);
@@ -188,19 +284,13 @@ public class BatailleNavale implements ActionListener{
         else{
             int i = Integer.parseInt(coordinates[0]);
             int j = Integer.parseInt(coordinates[1]);
-            ii=new Random().nextInt(gameSize-1);
-            jj=new Random().nextInt(gameSize-1);
         	
             ib.remplir(i, j,0);
-            if (pg.rejouer) {
-            	ib.remplir(i, j,0);
-            }
-            else {
-                ib.remplir(ii, jj,1);
+            if (!pg.rejouer) {
+                botJouer(gameSize, difficulty);
                 if (pd.rejouer) {
-                	ib.remplir(new Random().nextInt(gameSize-1), new Random().nextInt(gameSize-1),1);
+                	botJouer(gameSize, difficulty);
                 }
-
             }
         	
             if(pg.gagnant()){
@@ -209,14 +299,13 @@ public class BatailleNavale implements ActionListener{
             		ib.endGame();
             	else {
                     System.out.println("cringe un peu non2");
-
+                }
             }
-
+        }
     
     
     }
     public static void main(String[] args) {
-        BatailleNavale bn;
-        bn = new BatailleNavale();
+        new BatailleNavale();
     }
 }

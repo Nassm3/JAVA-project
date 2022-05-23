@@ -115,7 +115,7 @@ public class Bateau{
    		return liste;
    	}
 	   public Bateau getBateau(int i, int j) {
-		String [] coordinate = getBoatCoordinate().split(";");
+		//String [] coordinate = getBoatCoordinate().split(";");
 
 		return this;
 	   }

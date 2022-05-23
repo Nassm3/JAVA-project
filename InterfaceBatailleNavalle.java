@@ -1,31 +1,26 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 
 
 
 public class InterfaceBatailleNavalle {
-	Plateau plat;
-	Plateau bot;
+	Plateau plat, bot;
 	Joueur joueur;
-	JButton [][] b1;
-	JButton [][] b2;
-	JPanel plateau; 
-	JPanel p1;
+	JButton [][] b1, b2;
+	JPanel plateau, p1, z1, z2, z3, z4;
 	JFrame f = new JFrame("Bataille Navale !");
-	JLabel tourj;
-	JLabel tourB;
+	JLabel tourj, tourB, compteur1, compteur2, compteur3, compteur4;
 	BatailleNavale bn;
-
 	JButton bat1, bat2, bat3, bat4;
-	int c1, c2, c3, c4;
-	JPanel z1, z2, z3, z4;
-	JLabel compteur1, compteur2, compteur3, compteur4;
+	int c1, c2, c3, c4, botWay, botMemory, botHitCpt;
+	int[] botHit = new int[2];
+	int[] lastBotHit = new int[2];
+	ArrayList<int[]> allBotHits = new ArrayList<int[]>();
 
-
-		
-		
 		public InterfaceBatailleNavalle(int size, ActionListener listener,int mode, Plateau plat,Plateau bot, Joueur joueur) {	
 			this.bot=bot;
 			this.plat = plat;
@@ -296,17 +291,32 @@ public class InterfaceBatailleNavalle {
 			String res = bot.jouer(i, j);
 			String result = res.split("_")[0];
 			String boat = res.split("_")[1];
+
 			if (result.equals("touché-coulé")){
 				fillOnSunk(b2);
 				tourB.setText("Touché-coulé " + boat + "!");
+				botMemory = 0;
+				botHitCpt = 0;
 			}
 			else if (result.equals("touché")){
 				b2[i][j].setBackground(Color.BLACK);
 				tourB.setText("Touché !");
+				botMemory = 1;
+				botHitCpt++;
+				lastBotHit[0] = i;
+				lastBotHit[1] = j; 
+				allBotHits.add(new int[] {lastBotHit[0], lastBotHit[1]});
+				for(int k=0; k<allBotHits.size();k++){
+					System.out.println("boucle for "+k+ " " +Arrays.toString(allBotHits.get(k)));
+				}
+				 
 			}
-			else{=n,j  
+			else{
 				b2[i][j].setBackground(Color.RED);
 				tourB.setText("Manqué :(");
+				if(botHitCpt > 1){
+					botMemory = 2;
+				}
 			}
 		}
 	}
