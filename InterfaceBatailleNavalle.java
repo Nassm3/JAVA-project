@@ -299,8 +299,9 @@ public class InterfaceBatailleNavalle {
 				botHitCpt = 0;
 			}
 			else if (result.equals("touché")){
-				b2[i][j].setBackground(Color.BLACK);
 				tourB.setText("Touché !");
+
+				b2[i][j].setBackground(Color.BLACK);
 				botMemory = 1;
 				botHitCpt++;
 				lastBotHit[0] = i;

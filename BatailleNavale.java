@@ -130,7 +130,63 @@ public class BatailleNavale implements ActionListener{
             }
         }
         else {
-            if (ib.botMemory > 0){
+           int firsti=new Random().nextInt(gameSize);
+           int firstj=new Random().nextInt(gameSize);
+            if (grillepd[firsti][firstj].affiche().equals("vide") | grillepd[firsti][firstj].affiche().equals("bateau")){
+                ib.remplir(firsti, firstj, 1);
+                if (ib.botMemory == 1){
+                    //complications
+                    System.out.println("finito");
+                    if (ib.lastBotHit[0] != gameSize){
+                        ib.remplir(ib.lastBotHit[0] + 1, ib.lastBotHit[1], 1);
+                    }
+                    else if (ib.lastBotHit[0]==gameSize){
+                        ib.remplir(ib.lastBotHit[0] - 1, ib.lastBotHit[1], 1);
+                    }
+                    else if (ib.lastBotHit[1] != gameSize){
+                        ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] + 1, 1);
+                    }
+                    else {
+                        ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] - 1, 1);
+                    }
+                }
+            }
+        }
+        
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            /*{
                 if(ib.botHitCpt<2){
 
                     if (new Random().nextInt(2)==0){
@@ -238,7 +294,7 @@ public class BatailleNavale implements ActionListener{
         if (pd.rejouer){
             System.out.println("cringe moment de fin");
             botJouer(gameSize, difficulty);
-        }
+        */
     }
     
     
@@ -288,17 +344,18 @@ public class BatailleNavale implements ActionListener{
             ib.remplir(i, j,0);
             if (!pg.rejouer) {
                 botJouer(gameSize, difficulty);
-                if (pd.rejouer) {
+                if(pd.rejouer) {
                 	botJouer(gameSize, difficulty);
                 }
             }
         	
-            if(pg.gagnant()){
+            if(pg.gagnant() || pd.gagnant()){
             	if (ib.affichegagnant(name)==1) 
             		ib.endGame();
 
             	else {
-                    System.out.println("crnge un peu non2");
+                    ib.dispose();
+                    new BatailleNavale();
                 }
             }
         }
