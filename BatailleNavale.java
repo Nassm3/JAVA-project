@@ -114,7 +114,8 @@ public class BatailleNavale implements ActionListener{
             return true;
         }
         return false;
-    }	
+    }	    
+    
     public void botJouer(int gameSize, int difficulty){
         int[] ij = new int[2];
         if (difficulty == 0){
@@ -130,29 +131,45 @@ public class BatailleNavale implements ActionListener{
             }
         }
         else {
-           int firsti=new Random().nextInt(gameSize);
-           int firstj=new Random().nextInt(gameSize);
-            if (grillepd[firsti][firstj].affiche().equals("vide") | grillepd[firsti][firstj].affiche().equals("bateau")){
-                ib.remplir(firsti, firstj, 1);
-                if (ib.botMemory == 1){
-                    //complications
-                    System.out.println("finito");
-                    if (ib.lastBotHit[0] != gameSize){
-                        ib.remplir(ib.lastBotHit[0] + 1, ib.lastBotHit[1], 1);
-                    }
-                    else if (ib.lastBotHit[0]==gameSize){
-                        ib.remplir(ib.lastBotHit[0] - 1, ib.lastBotHit[1], 1);
-                    }
-                    else if (ib.lastBotHit[1] != gameSize){
-                        ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] + 1, 1);
-                    }
-                    else {
-                        ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] - 1, 1);
-                    }
+        	//complications 
+
+                if (ib.lastBotHit[0] != gameSize){
+                	do {
+                    	ib.remplir(ib.lastBotHit[0] + 1, ib.lastBotHit[1], 1);
+                	}
+                	while(pd.rejouer);
+
                 }
-            }
-        }
-        
+                else if (ib.lastBotHit[0]==gameSize){
+                	do {
+                       	ib.remplir(ib.lastBotHit[0] - 1, ib.lastBotHit[1], 1);
+                	}
+                	while(pd.rejouer);
+                }
+                    else if (ib.lastBotHit[1] != gameSize){
+                    	do {
+                    		
+                        	ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] + 1, 1);
+                	}
+                	while(pd.rejouer);
+                }
+                    else {
+                    	do {
+                    		
+                        ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] - 1, 1);
+                	}
+                	while(pd.rejouer);
+                }
+        	
+        	if (ib.botMemory==1) {
+        		botJouer(gameSize, difficulty);
+        	}
+        	else {
+        		botJouer(gameSize, 0);
+        	}
+        }    
+    }
+            
             
             
             
@@ -294,8 +311,8 @@ public class BatailleNavale implements ActionListener{
         if (pd.rejouer){
             System.out.println("cringe moment de fin");
             botJouer(gameSize, difficulty);
-        */
-    }
+        
+    }*/
     
     
     public void actionPerformed(ActionEvent e) { 
