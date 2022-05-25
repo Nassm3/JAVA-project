@@ -31,7 +31,7 @@ public class ChoosePanel implements ActionListener{
 		
 		
 		f=new JDialog((Frame)null,"Séléction des paramètres",true);    
-        String L[]={"Facile","Moyen","JoueurVSJoueur"};        
+        String L[]={"Facile","Moyen"};        
         combobox=new JComboBox<String>(L);
         
         String P[]={"Aléatoire","Joueur"};        
