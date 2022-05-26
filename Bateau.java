@@ -31,7 +31,8 @@ public class Bateau{
         this.iLE = indiceLigneEnd;
         this.iCE = indiceColEnd;
     }
-    public String getName() {return this.name;}
+	
+    public String getName() {return name;}
     
     public boolean isSunk(Case [][] grille){   	
    	

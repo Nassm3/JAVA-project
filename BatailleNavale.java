@@ -170,6 +170,7 @@ public class BatailleNavale implements ActionListener{
             if (ib.botMemory == 1){
                 if(ib.botHitCpt == 1){
 
+
                     if (new Random().nextInt(2)==0){
                         
 
@@ -279,8 +280,8 @@ public class BatailleNavale implements ActionListener{
 
         }
         if (pd.rejouer){
-            botJouer(gameSize, difficulty);
-        }
+            botJouer(gameSize, difficulty);}
+        
     }
     public boolean checkIfBoatCanBePlaced(int i, int j, int ii, int jj, Plateau p, int taille){
         Case[][] grille = p.getGrille();
@@ -367,21 +368,27 @@ public class BatailleNavale implements ActionListener{
             ib.remplir(i, j,0);
             if (!pg.rejouer) {
                 botJouer(gameSize, difficulty);
-                if (pd.rejouer) {
+                if(pd.rejouer) {
                 	botJouer(gameSize, difficulty);
                 }
             }
-        	
+
             if(pg.gagnant()){
+
             	if (ib.affichegagnant(name)==1) 
             		ib.endGame();
+
             	else {
+                    ib.dispose();
+                    new BatailleNavale();
                 }
             }
             else if(pd.gagnant()){
             	if (ib.affichegagnant("Le bot ") == 1) 
             		ib.endGame();
             	else {
+                    ib.dispose();
+                    new BatailleNavale();
                 }
             }
         }
