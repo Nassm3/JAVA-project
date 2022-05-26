@@ -11,7 +11,7 @@ public class BatailleNavale implements ActionListener{
     Case[][] grillepg, grillepd;
     InterfaceBatailleNavalle ib;
     String gamemode, name;
-    Bateau[][] bateau; 
+    Bateau[][] bateau;
     Plateau pg, pd;
     Joueur joueur;
 
@@ -201,47 +201,34 @@ public class BatailleNavale implements ActionListener{
                         if (!checkOrientation(ib.allBotHits)){
                             if (ib.allBotHits.get(ib.allBotHits.size()-2)[0] - ib.lastBotHit[0] < 0 ){
                                 botWay = 1;
-                                if(checkIfBotPlayable(ib.lastBotHit[0] + botWay, ib.lastBotHit[1])){
-                                    ib.remplir(ib.lastBotHit[0] + botWay, ib.lastBotHit[1], 1);
-                                }
-                                else{
-                                    jouerInverser();
-                                    //ib.botMemory = 2;
-                                }
                             }
                             else{
-                                botWay = -1;
-                                if(checkIfBotPlayable(ib.lastBotHit[0] + botWay, ib.lastBotHit[1])){
-                                    ib.remplir(ib.lastBotHit[0] + botWay, ib.lastBotHit[1], 1);
-                                }
-                                else{
-                                    jouerInverser();
-                                    //ib.botMemory = 2;
+                                botWay = -1; 
+                            }
+                            if(checkIfBotPlayable(ib.lastBotHit[0] + botWay, ib.lastBotHit[1])){
+                                ib.remplir(ib.lastBotHit[0] + botWay, ib.lastBotHit[1], 1);
+                            }
+                            else{
+                                jouerInverser();
+                                //ib.botMemory = 2;
 
 
-                                }
                             }
                         }   
                         else{
                             if (ib.allBotHits.get(ib.allBotHits.size()-2)[1] - ib.lastBotHit[1] < 0 ){
                                 botWay = 1;
-                                if(checkIfBotPlayable(ib.lastBotHit[0], ib.lastBotHit[1] + botWay)){
-                                    ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] + botWay, 1);
-                                }
-                                else{
-                                    jouerInverser();
-                                    //ib.botMemory = 2;
-                                }
                             }
                             else{
                                 botWay = -1;
-                                if(checkIfBotPlayable(ib.lastBotHit[0], ib.lastBotHit[1] + botWay)){
-                                    ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] + botWay, 1);
-                                }
-                                else{
-                                    jouerInverser();
-                                    //ib.botMemory = 2;
-                                }
+                                
+                            }
+                            if(checkIfBotPlayable(ib.lastBotHit[0], ib.lastBotHit[1] + botWay)){
+                                ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] + botWay, 1);
+                            }
+                            else{
+                                jouerInverser();
+                                //ib.botMemory = 2;
                             }
                         }
   
@@ -259,7 +246,7 @@ public class BatailleNavale implements ActionListener{
                         }
                     }
                     else{
-                        if(checkIfBotPlayable(ib.lastBotHit[0] + botWay, ib.lastBotHit[1])){
+                        if(checkIfBotPlayable(ib.lastBotHit[0] , ib.lastBotHit[1]+ botWay)){
                             ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] + botWay, 1);
                         }
                         else{
@@ -301,7 +288,7 @@ public class BatailleNavale implements ActionListener{
                     return false;
                 }
             }
-            if((indiceL+1)< 16){
+            if((indiceL+1)< gameSize){
                 if(grille[indiceL+1][indiceCol] == Case.BOAT){
                     return false;
                 }
@@ -311,7 +298,7 @@ public class BatailleNavale implements ActionListener{
                     return false;
                 }
             }
-            if((indiceCol + 1)< 16){
+            if((indiceCol + 1)< gameSize){
                 if(grille[indiceL][indiceCol + 1] == Case.BOAT){
                     return false;
                 }
@@ -340,7 +327,7 @@ public class BatailleNavale implements ActionListener{
                     placeLigneEnd = Integer.parseInt(coordinates[1]);
                     placeColEnd = Integer.parseInt(coordinates[2]);
 
-                    if ((placeColStart<16 || placeLigneEnd<16 || placeColEnd<16 || placeSize<16) 
+                    if ((placeColStart<gameSize || placeLigneEnd<gameSize || placeColEnd<gameSize || placeSize<gameSize) 
                     && (Math.abs((placeLigneStart-placeLigneEnd)+(placeColStart-placeColEnd))+1 == placeSize) 
                     && (placeLigneStart == placeLigneEnd || placeColStart==placeColEnd) && checkIfBoatCanBePlaced(placeLigneStart, placeColStart, placeLigneEnd, placeColEnd, pd, placeSize)){
 

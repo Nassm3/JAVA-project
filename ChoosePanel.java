@@ -37,7 +37,7 @@ public class ChoosePanel implements ActionListener{
         String P[]={"Aléatoire","Joueur"};        
         par =new JComboBox<String>(P);
         
-        String C[]={"16","32","64"};        
+        String C[]={"13","16","64"};        
         ratio = new JComboBox<String>(C);
         
         
