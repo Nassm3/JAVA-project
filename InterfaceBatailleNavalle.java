@@ -1,8 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import javax.swing.*;
 
 
@@ -201,7 +199,7 @@ public class InterfaceBatailleNavalle {
 				break;
 
 			default:
-				System.out.println("wtf, how did we get here");
+				System.out.println("how did we get here");
 				break;
 		}
 		if (c1 ==0 && c2 ==0 && c3 ==0 && c4 ==0)	{
@@ -254,11 +252,11 @@ public class InterfaceBatailleNavalle {
 	}
 	
 	
-	public void fillOnSunk(JButton[][] plateau){
-		Case[][] grille=plat.getGrille();
+	public void fillOnSunk(JButton[][] plateau, Plateau joueurOuBot){
+		Case[][] grille = joueurOuBot.getGrille();
         for(int y=0; y<grille.length; y++)
             for(int z=0; z<grille[y].length; z++)
-				if(grille[y][z]==Case.SUNK) {
+				if(grille[y][z] == Case.SUNK){
 					plateau[y][z].setBackground(new JButton().getBackground());
 					plateau[y][z].setIcon(null);
 					plateau[y][z].setIcon(new ImageIcon (new ImageIcon("wreck.jpg").getImage().getScaledInstance(300, 100, java.awt.Image.SCALE_SMOOTH)));}
@@ -271,7 +269,7 @@ public class InterfaceBatailleNavalle {
 				String boat = res.split("_")[1];
 				if (result.equals("touché-coulé")){
 					b1[i][j].setEnabled(false);
-					fillOnSunk(b1);
+					fillOnSunk(b1, plat);
 					tourj.setText("Touché-coulé " + boat + "!");
 				}
 				else if (result.equals("touché")){
@@ -293,10 +291,11 @@ public class InterfaceBatailleNavalle {
 			String boat = res.split("_")[1];
 
 			if (result.equals("touché-coulé")){
-				fillOnSunk(b2);
+				fillOnSunk(b2, bot);
 				tourB.setText("Touché-coulé " + boat + "!");
 				botMemory = 0;
 				botHitCpt = 0;
+				allBotHits.clear();
 			}
 			else if (result.equals("touché")){
 				b2[i][j].setBackground(Color.BLACK);
@@ -306,10 +305,7 @@ public class InterfaceBatailleNavalle {
 				lastBotHit[0] = i;
 				lastBotHit[1] = j; 
 				allBotHits.add(new int[] {lastBotHit[0], lastBotHit[1]});
-				for(int k=0; k<allBotHits.size();k++){
-					System.out.println("boucle for "+k+ " " +Arrays.toString(allBotHits.get(k)));
-				}
-				 
+		
 			}
 			else{
 				b2[i][j].setBackground(Color.RED);

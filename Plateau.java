@@ -162,7 +162,7 @@ public class Plateau {
 		return bateau;
 	}
 	public static void main(String[] args) {
-		//ArrayList<int[]> allBotHits = new ArrayList<int[]>();
+		
 
 	
 	}

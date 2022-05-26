@@ -1,4 +1,5 @@
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -50,13 +51,13 @@ public class BatailleNavale implements ActionListener{
         int placementOption = cp.getPlacementOption();
         ib = new InterfaceBatailleNavalle(gameSize, this, placementOption, pg, pd, joueur);
         if (placementOption == 0){
-            putBoatOnGame(pd, 0, gameSize);
+            putBoatOnGame(pd, 0, gameSize, 2);
             ib.activateButton(grillepg, 1);
         }
         else {
 
         }
-        putBoatOnGame(pg, difficulty, gameSize);
+        putBoatOnGame(pg, difficulty, gameSize, 2);
                   
         ib.revealBoat(pd);
 
@@ -86,32 +87,68 @@ public class BatailleNavale implements ActionListener{
 
 
 
-    public void putBoatOnGame(Plateau p, int difficulty, int gameSize){
+    public void putBoatOnGame(Plateau p, int difficulty, int gameSize, int size){
         if (difficulty != 2){
-            int size = 2;
             while (size<6) {
                 if ((new Random().nextInt(2)) == 0){
-                    int ii;
-                    int jj;
-                    ii = new Random().nextInt(gameSize-size+1);
-                    jj = new Random().nextInt(gameSize-size+1);
-                    p.putBoat(ii, jj, ii+size-1, jj, size, this);
+                    int ii = new Random().nextInt(gameSize-size+1);
+                    int jj = new Random().nextInt(gameSize-size+1);
+                    if(checkIfBoatCanBePlaced(ii, jj, ii+size-1, jj, p, size)){
+                        p.putBoat(ii, jj, ii+size-1, jj, size, this);
+                    }
+                    else{
+                        putBoatOnGame(p, difficulty, gameSize, size);
+                    }
+                    
                 }
                 else{
-                    int ii;
-                    int jj;
-                    ii = new Random().nextInt(gameSize-size+1);
-                    jj = new Random().nextInt(gameSize-size+1);               
-                    p.putBoat(ii, jj, ii, jj+size-1, size, this);
+                    int ii = new Random().nextInt(gameSize-size+1);
+                    int jj = new Random().nextInt(gameSize-size+1);  
+                    if(checkIfBoatCanBePlaced(ii, jj, ii, jj+size-1, p, size)){
+                        p.putBoat(ii, jj, ii, jj+size-1, size, this);
+                    }
+                    else{
+                        putBoatOnGame(p, difficulty, gameSize, size);
+                    }             
+                    
                 }
                 size++;
             }
         }
                 
     }     
-    public boolean checkIfBotPlayable(int i, int j){
-        if (grillepd[i][j].affiche().equals("vide") | grillepd[i][j].affiche().equals("bateau")){
+    public boolean checkOrientation(ArrayList<int[]> allBotHits){
+        if(allBotHits.get(allBotHits.size()-2)[0] - allBotHits.get(allBotHits.size()-1)[0] == 0){
             return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public void jouerInverser(){
+        //botWay = botWay * -1;
+        if (!checkOrientation(ib.allBotHits)){
+            if(checkIfBotPlayable(ib.allBotHits.get(0)[0] + botWay * -1, ib.allBotHits.get(0)[1])){
+                ib.remplir(ib.allBotHits.get(0)[0] + botWay * -1, ib.allBotHits.get(0)[1], 1);
+            }
+
+        }
+        else{
+            if(checkIfBotPlayable(ib.allBotHits.get(0)[0] , ib.allBotHits.get(0)[1] + (botWay * -1))){
+                ib.remplir(ib.allBotHits.get(0)[0] , ib.allBotHits.get(0)[1]+ botWay * -1, 1);
+            }
+
+        }
+    }
+    
+
+
+    public boolean checkIfBotPlayable(int i, int j){
+        if(i < gameSize & i >= 0 & j < gameSize & j >= 0){
+            if (grillepd[i][j].affiche().equals("vide") | grillepd[i][j].affiche().equals("bateau")){
+                return true;
+            }
         }
         return false;
     }	
@@ -130,46 +167,45 @@ public class BatailleNavale implements ActionListener{
             }
         }
         else {
-            if (ib.botMemory > 0){
-                if(ib.botHitCpt<2){
+            if (ib.botMemory == 1){
+                if(ib.botHitCpt == 1){
 
                     if (new Random().nextInt(2)==0){
                         
 
-                        if (new Random().nextInt(2) == 0 & ib.lastBotHit[0] != gameSize){
+                        if (new Random().nextInt(2) == 0 & checkIfBotPlayable(ib.lastBotHit[0] + 1, ib.lastBotHit[1])){
                             ib.remplir(ib.lastBotHit[0] + 1, ib.lastBotHit[1], 1);
                         }
-                        else if (ib.lastBotHit[1] != gameSize) {
+                        else if (checkIfBotPlayable(ib.lastBotHit[0], ib.lastBotHit[1] + 1)) {
                         ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] + 1, 1);
                         }
                         else{
-                            ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] - 1, 1);
+                            botJouer(gameSize, difficulty);
                         }
                     }
                     else{
-                        if (new Random().nextInt(1)==0 & ib.lastBotHit[0] != 0){
+                        if (new Random().nextInt(1)==0 & checkIfBotPlayable(ib.lastBotHit[0] - 1, ib.lastBotHit[1])){
                             ib.remplir(ib.lastBotHit[0] - 1, ib.lastBotHit[1], 1);
                         }
-                        else if (ib.lastBotHit[1] != 0) {
+                        else if (checkIfBotPlayable(ib.lastBotHit[0], ib.lastBotHit[1] - 1)) {
                         ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] - 1, 1);
                         }
                         else{
-                            ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] + 1, 1);
+                            botJouer(gameSize, difficulty);
                         }
                     }
                 }
                 else if(ib.botHitCpt == 2){   
-                    System.out.println("== 2");
-                    System.out.println("on essaye"+ ib.lastBotHit[0] + " " + ib.lastBotHit[1] + " " + ib.botHit[0] + " " + ib.botHit[1]);
 
-                        if (ib.botHit[0] - ib.lastBotHit[0] != 0){
-                            if (ib.botHit[0] - ib.lastBotHit[0] < 0 ){
+                        if (!checkOrientation(ib.allBotHits)){
+                            if (ib.allBotHits.get(ib.allBotHits.size()-2)[0] - ib.lastBotHit[0] < 0 ){
                                 botWay = 1;
                                 if(checkIfBotPlayable(ib.lastBotHit[0] + botWay, ib.lastBotHit[1])){
                                     ib.remplir(ib.lastBotHit[0] + botWay, ib.lastBotHit[1], 1);
                                 }
                                 else{
-                                    System.out.println(1 + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                                    jouerInverser();
+                                    //ib.botMemory = 2;
                                 }
                             }
                             else{
@@ -178,67 +214,110 @@ public class BatailleNavale implements ActionListener{
                                     ib.remplir(ib.lastBotHit[0] + botWay, ib.lastBotHit[1], 1);
                                 }
                                 else{
-                                    System.out.println(2+ "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                                    jouerInverser();
+                                    //ib.botMemory = 2;
+
 
                                 }
                             }
                         }   
                         else{
-                            if (ib.botHit[1] - ib.lastBotHit[1] < 0 ){
+                            if (ib.allBotHits.get(ib.allBotHits.size()-2)[1] - ib.lastBotHit[1] < 0 ){
                                 botWay = 1;
                                 if(checkIfBotPlayable(ib.lastBotHit[0], ib.lastBotHit[1] + botWay)){
                                     ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] + botWay, 1);
                                 }
                                 else{
-                                    System.out.println(3 +"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                                    jouerInverser();
+                                    //ib.botMemory = 2;
                                 }
                             }
                             else{
                                 botWay = -1;
                                 if(checkIfBotPlayable(ib.lastBotHit[0], ib.lastBotHit[1] + botWay)){
                                     ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] + botWay, 1);
-                                    System.out.println(ib.lastBotHit[0] + " " + ib.lastBotHit[1] + botWay);
-
                                 }
                                 else{
-                                    System.out.println(4 + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-
+                                    jouerInverser();
+                                    //ib.botMemory = 2;
                                 }
                             }
                         }
   
-                    } 
+                    }
+
                 else{
-                    if (ib.botHit[0] - ib.lastBotHit[0] != 0){
-                        if(ib.lastBotHit[0] != gameSize - 1 & checkIfBotPlayable(ib.lastBotHit[0] + botWay, ib.lastBotHit[1])){
+                    if (!checkOrientation(ib.allBotHits)){
+                        if(checkIfBotPlayable(ib.lastBotHit[0] + botWay, ib.lastBotHit[1])){
                             ib.remplir(ib.lastBotHit[0] + botWay, ib.lastBotHit[1], 1);
                         }
                         else{
-                            botJouer(gameSize, 0);
-                            System.out.println("cringe moment");
+                            jouerInverser();
+                            //botJouer(gameSize, 0);
+                            //ib.botMemory = 2;
                         }
                     }
                     else{
-                        if(ib.lastBotHit[0] != gameSize - 1 & checkIfBotPlayable(ib.lastBotHit[0] + botWay, ib.lastBotHit[1])){
+                        if(checkIfBotPlayable(ib.lastBotHit[0] + botWay, ib.lastBotHit[1])){
                             ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] + botWay, 1);
                         }
                         else{
-                            botJouer(gameSize, 0);
-                            System.out.println("cringe moment");
+                            jouerInverser();
+                            //botJouer(gameSize, 0);
 
+                            }
                         }
                     }
             }
-        }
+            else if(ib.botMemory == 2){
+                jouerInverser();
+                botWay = botWay * -1;
+            }
             else{
                 botJouer(gameSize, 0);
             }
 
         }
         if (pd.rejouer){
-            System.out.println("cringe moment de fin");
             botJouer(gameSize, difficulty);
         }
+    }
+    public boolean checkIfBoatCanBePlaced(int i, int j, int ii, int jj, Plateau p, int taille){
+        Case[][] grille = p.getGrille();
+        Bateau bt = new Bateau(i, j, ii, jj, taille, 1);
+        String coordinate = bt.getBoatCoordinate();
+		String[] position = coordinate.split(";");
+        int c = 0;
+
+        while(c<position.length){
+            int indiceL = Integer.parseInt(position[c].split("-")[0]);
+            int indiceCol = Integer.parseInt(position[c].split("-")[1]);
+            if(grille[indiceL][indiceCol] == Case.BOAT){
+                return false;
+            }
+            if((indiceL-1)>-1){
+                if(grille[indiceL-1][indiceCol] == Case.BOAT){
+                    return false;
+                }
+            }
+            if((indiceL+1)< 16){
+                if(grille[indiceL+1][indiceCol] == Case.BOAT){
+                    return false;
+                }
+            }
+            if((indiceCol-1)>-1){
+                if(grille[indiceL][indiceCol-1] == Case.BOAT){
+                    return false;
+                }
+            }
+            if((indiceCol + 1)< 16){
+                if(grille[indiceL][indiceCol + 1] == Case.BOAT){
+                    return false;
+                }
+            }
+            c++;
+        }
+		return true;
     }
     
     
@@ -262,7 +341,7 @@ public class BatailleNavale implements ActionListener{
 
                     if ((placeColStart<16 || placeLigneEnd<16 || placeColEnd<16 || placeSize<16) 
                     && (Math.abs((placeLigneStart-placeLigneEnd)+(placeColStart-placeColEnd))+1 == placeSize) 
-                    && (placeLigneStart == placeLigneEnd || placeColStart==placeColEnd)) {
+                    && (placeLigneStart == placeLigneEnd || placeColStart==placeColEnd) && checkIfBoatCanBePlaced(placeLigneStart, placeColStart, placeLigneEnd, placeColEnd, pd, placeSize)){
 
                         pd.manualPutBoat(placeLigneStart, placeColStart, placeLigneEnd, placeColEnd, placeSize, this);
                         ib.deactivateButton(pd.getGrille(), 2);
@@ -294,11 +373,15 @@ public class BatailleNavale implements ActionListener{
             }
         	
             if(pg.gagnant()){
-                System.out.println("cringe un peu non");
             	if (ib.affichegagnant(name)==1) 
             		ib.endGame();
             	else {
-                    System.out.println("cringe un peu non2");
+                }
+            }
+            else if(pd.gagnant()){
+            	if (ib.affichegagnant("Le bot ") == 1) 
+            		ib.endGame();
+            	else {
                 }
             }
         }
