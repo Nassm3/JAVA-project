@@ -14,6 +14,7 @@ public class BatailleNavale implements ActionListener{
     Bateau[][] bateau;
     Plateau pg, pd;
     Joueur joueur;
+    int debugCpt = 0;
 
     public BatailleNavale(){
         ii=0;
@@ -51,13 +52,13 @@ public class BatailleNavale implements ActionListener{
         int placementOption = cp.getPlacementOption();
         ib = new InterfaceBatailleNavalle(gameSize, this, placementOption, pg, pd, joueur);
         if (placementOption == 0){
-            putBoatOnGame(pd, 0, gameSize, 2);
+            putBoatOnGame(pd, 0, gameSize, 2, true);
             ib.activateButton(grillepg, 1);
         }
         else {
 
         }
-        putBoatOnGame(pg, difficulty, gameSize, 2);
+        putBoatOnGame(pg, difficulty, gameSize, 2, true);
                   
         ib.revealBoat(pd);
 
@@ -83,40 +84,63 @@ public class BatailleNavale implements ActionListener{
         catch (Exception e) {
             return false;
         }
-     }
+    }
 
 
 
-    public void putBoatOnGame(Plateau p, int difficulty, int gameSize, int size){
-        if (difficulty != 2){
+    public void putBoatOnGame(Plateau p, int difficulty, int gameSize, int size, boolean scan){
+        if (!scan){
+            int ii = new Random().nextInt(gameSize-size+1);
+            int jj = new Random().nextInt(gameSize-size+1);
+            if ((new Random().nextInt(2)) == 0){
+                
+                if(checkIfBoatCanBePlaced(ii, jj, ii+size-1, jj, p, size)){
+                    p.putBoat(ii, jj, ii+size-1, jj, size, this);
+                }
+                else{
+                    putBoatOnGame(p, difficulty, gameSize, size, false);
+                }
+            }
+            else{
+                if(checkIfBoatCanBePlaced(ii, jj, ii, jj+size-1, p, size)){
+                    p.putBoat(ii, jj, ii, jj+size-1, size, this);
+                }
+                else{
+                    putBoatOnGame(p, difficulty, gameSize, size, false);
+                }            
+            }
+
+        }
+        else{
             while (size<6) {
+                System.out.println("size : " + size);
+                int ii = new Random().nextInt(gameSize-size+1);
+                int jj = new Random().nextInt(gameSize-size+1);
                 if ((new Random().nextInt(2)) == 0){
-                    int ii = new Random().nextInt(gameSize-size+1);
-                    int jj = new Random().nextInt(gameSize-size+1);
+                    
                     if(checkIfBoatCanBePlaced(ii, jj, ii+size-1, jj, p, size)){
                         p.putBoat(ii, jj, ii+size-1, jj, size, this);
                     }
                     else{
-                        putBoatOnGame(p, difficulty, gameSize, size);
+                        putBoatOnGame(p, difficulty, gameSize, size, false);
                     }
-                    
                 }
                 else{
-                    int ii = new Random().nextInt(gameSize-size+1);
-                    int jj = new Random().nextInt(gameSize-size+1);  
                     if(checkIfBoatCanBePlaced(ii, jj, ii, jj+size-1, p, size)){
                         p.putBoat(ii, jj, ii, jj+size-1, size, this);
                     }
                     else{
-                        putBoatOnGame(p, difficulty, gameSize, size);
-                    }             
-                    
+                        putBoatOnGame(p, difficulty, gameSize, size, false);
+                    }            
                 }
-                size++;
-            }
+                    size++;
+
+            }    
         }
+    }
                 
-    }     
+         
+
     public boolean checkOrientation(ArrayList<int[]> allBotHits){
         if(allBotHits.get(allBotHits.size()-2)[0] - allBotHits.get(allBotHits.size()-1)[0] == 0){
             return true;
@@ -142,8 +166,6 @@ public class BatailleNavale implements ActionListener{
         }
     }
     
-
-
     public boolean checkIfBotPlayable(int i, int j){
         if(i < gameSize & i >= 0 & j < gameSize & j >= 0){
             if (grillepd[i][j].affiche().equals("vide") | grillepd[i][j].affiche().equals("bateau")){
@@ -152,6 +174,7 @@ public class BatailleNavale implements ActionListener{
         }
         return false;
     }	
+
     public void botJouer(int gameSize, int difficulty){
         int[] ij = new int[2];
         if (difficulty == 0){
@@ -169,6 +192,7 @@ public class BatailleNavale implements ActionListener{
         else {
             if (ib.botMemory == 1){
                 if(ib.botHitCpt == 1){
+                    System.out.println("botHitCpt " + 1);
 
 
                     if (new Random().nextInt(2)==0){
@@ -197,6 +221,7 @@ public class BatailleNavale implements ActionListener{
                     }
                 }
                 else if(ib.botHitCpt == 2){   
+                    System.out.println("botHitCpt " + 2);
 
                         if (!checkOrientation(ib.allBotHits)){
                             if (ib.allBotHits.get(ib.allBotHits.size()-2)[0] - ib.lastBotHit[0] < 0 ){
@@ -235,6 +260,8 @@ public class BatailleNavale implements ActionListener{
                     }
 
                 else{
+                    System.out.println("else, botway : " + botWay);
+
                     if (!checkOrientation(ib.allBotHits)){
                         if(checkIfBotPlayable(ib.lastBotHit[0] + botWay, ib.lastBotHit[1])){
                             ib.remplir(ib.lastBotHit[0] + botWay, ib.lastBotHit[1], 1);
@@ -266,10 +293,14 @@ public class BatailleNavale implements ActionListener{
             }
 
         }
-        if (pd.rejouer){
-            botJouer(gameSize, difficulty);}
+        if (pd.rejouer & debugCpt < 10){
+            debugCpt++;
+            System.out.println(debugCpt);
+            botJouer(gameSize, difficulty);
+        }
         
     }
+
     public boolean checkIfBoatCanBePlaced(int i, int j, int ii, int jj, Plateau p, int taille){
         Case[][] grille = p.getGrille();
         Bateau bt = new Bateau(i, j, ii, jj, taille, 1);
@@ -353,6 +384,7 @@ public class BatailleNavale implements ActionListener{
             int j = Integer.parseInt(coordinates[1]);
         	
             ib.remplir(i, j,0);
+            debugCpt = 0;
             if (!pg.rejouer) {
                 botJouer(gameSize, difficulty);
                 if(pd.rejouer) {
