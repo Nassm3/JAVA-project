@@ -35,10 +35,6 @@ public class BatailleNavale implements ActionListener{
             joueur = new Joueur(name);
         }
 
-        else{
-            gamemode = new String("JcJ");
-            joueur = new Joueur(name);
-        }
         
         gameSize = cp.getGameSize();
         pg = new Plateau(gameSize);
@@ -52,22 +48,19 @@ public class BatailleNavale implements ActionListener{
         int placementOption = cp.getPlacementOption();
         ib = new InterfaceBatailleNavalle(gameSize, this, placementOption, pg, pd, joueur);
         if (placementOption == 0){
+            //choix de placement automatique
             putBoatOnGame(pd, 0, gameSize, 2, true);
             ib.activateButton(grillepg, 1);
         }
-        else {
 
-        }
         putBoatOnGame(pg, difficulty, gameSize, 2, true);
                   
         ib.revealBoat(pd);
-
-        	
-
-
     }
 
     public boolean checkIndexExistence(Bateau[][] bateau, int i, int j, int ii, int jj){
+        /*teste l'existence de l'index pour le placement d'un bateau, prend les indices des extremitées du bateau
+        et le tableau de bateau*/
         try {
         	if (bateau[i][j] == null || bateau[ii][jj] == null) {
                 bateau[i][j] = new Bateau();      
@@ -89,6 +82,7 @@ public class BatailleNavale implements ActionListener{
 
 
     public void putBoatOnGame(Plateau p, int difficulty, int gameSize, int size, boolean scan){
+        /*ajoute les bateau sur le plateau a une position aléatoire de manière à ne pas être superposé ni adjacent*/
         if (!scan){
             int ii = new Random().nextInt(gameSize-size+1);
             int jj = new Random().nextInt(gameSize-size+1);
@@ -142,6 +136,7 @@ public class BatailleNavale implements ActionListener{
          
 
     public boolean checkOrientation(ArrayList<int[]> allBotHits){
+        /*retourne vrai si le bateau est horizontal*/
         if(allBotHits.get(allBotHits.size()-2)[0] - allBotHits.get(allBotHits.size()-1)[0] == 0){
             return true;
         }
@@ -151,7 +146,7 @@ public class BatailleNavale implements ActionListener{
     }
 
     public void jouerInverser(){
-        //botWay = botWay * -1;
+        /*prends le premier hit du bot et inverse le sens de frappe*/
         if (!checkOrientation(ib.allBotHits)){
             if(checkIfBotPlayable(ib.allBotHits.get(0)[0] + botWay * -1, ib.allBotHits.get(0)[1])){
                 ib.remplir(ib.allBotHits.get(0)[0] + botWay * -1, ib.allBotHits.get(0)[1], 1);
@@ -167,6 +162,7 @@ public class BatailleNavale implements ActionListener{
     }
     
     public boolean checkIfBotPlayable(int i, int j){
+        /*return true si la case peut être selectionnée*/
         if(i < gameSize & i >= 0 & j < gameSize & j >= 0){
             if (grillepd[i][j].affiche().equals("vide") | grillepd[i][j].affiche().equals("bateau")){
                 return true;
@@ -177,6 +173,8 @@ public class BatailleNavale implements ActionListener{
     }	
 
     public void botJouer(int gameSize, int difficulty){
+        /*action de jeu du bot, varie en fonction de la difficulté, le bot facile joue aléatoirement, le bot moyen
+        joue aléatoirement jusqu'à trouver un bateau, auquel cas il étend jusqu'à couler le bateau*/
         int[] ij = new int[2];
         if (difficulty == 0){
 
@@ -302,6 +300,8 @@ public class BatailleNavale implements ActionListener{
     }
 
     public boolean checkIfBoatCanBePlaced(int i, int j, int ii, int jj, Plateau p, int taille){
+        /*verifie si le bateau peut être placé au coordonnée fournies, 
+        en verifiant si il rentre au contact d'autres bateau*/
         Case[][] grille = p.getGrille();
         Bateau bt = new Bateau(i, j, ii, jj, taille, 1);
         String coordinate = bt.getBoatCoordinate();
