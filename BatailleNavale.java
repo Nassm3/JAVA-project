@@ -107,7 +107,6 @@ public class BatailleNavale implements ActionListener{
         }
         else{
             while (size<6) {
-                System.out.println("size : " + size);
                 int ii = new Random().nextInt(gameSize-size+1);
                 int jj = new Random().nextInt(gameSize-size+1);
                 if ((new Random().nextInt(2)) == 0){
@@ -192,7 +191,6 @@ public class BatailleNavale implements ActionListener{
 
             if (ib.botMemory == 1){
                 if(ib.botHitCpt == 1){
-                    System.out.println("botHitCpt " + 1);
                     if (new Random().nextInt(2)==0){
                         
 
@@ -219,7 +217,6 @@ public class BatailleNavale implements ActionListener{
                     }
                 }
                 else if(ib.botHitCpt == 2){   
-                    System.out.println("botHitCpt " + 2);
 
                         if (!checkOrientation(ib.allBotHits)){
                             if (ib.allBotHits.get(ib.allBotHits.size()-2)[0] - ib.lastBotHit[0] < 0 ){
@@ -258,7 +255,6 @@ public class BatailleNavale implements ActionListener{
                     }
 
                 else{
-                    System.out.println("else, botway : " + botWay);
 
                     if (!checkOrientation(ib.allBotHits)){
                         if(checkIfBotPlayable(ib.lastBotHit[0] + botWay, ib.lastBotHit[1])){
@@ -293,7 +289,6 @@ public class BatailleNavale implements ActionListener{
         }
         if (pd.rejouer & debugCpt < 10){
             debugCpt++;
-            System.out.println(debugCpt);
             botJouer(gameSize, difficulty);
         }
         

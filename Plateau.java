@@ -60,25 +60,9 @@ public class Plateau {
 			return "manqué" + "_" + null;}
 	}
 	
-	public String isBateau(int i,int j) {
-		if(grille[i][j].affiche().equals("bateau")){
-			if(grille[i+1][j].affiche().equals("bateau")) {
-				return String.valueOf(i+1)+"-"+String.valueOf(j);
-			}
-			else if(grille[i-1][j].affiche().equals("bateau")) {
-				return String.valueOf(i-1)+"-"+String.valueOf(j);
-			}
-			else if(grille[i][j+1].affiche().equals("bateau")) {
-				return String.valueOf(i)+"-"+String.valueOf(j+1);
-			}
-			else {
-				return String.valueOf(i)+"-"+String.valueOf(j-1);
-			}
-		}
-		return String.valueOf(i)+"-"+String.valueOf(j);
-	}
 
 	public Boolean manualPutBoat(int i,int j,int a, int b ,int taille, BatailleNavale bn){
+		/*ajoute le bateau au coordonnées fournies, retourne faux si elles sont invalides*/
 		bt = new Bateau(i, j, a, b, taille, 1);
 			if (grille[i][j]==Case.EMPTY && grille[a][b]==Case.EMPTY) {
 				String coordinate = bt.getBoatCoordinate();
@@ -114,6 +98,7 @@ public class Plateau {
 
 
 	public Bateau[][] putBoat(int i,int j,int a, int b ,int taille, BatailleNavale bn){ 
+		/*pose un bateau de coordonnées aléatoire sur le jeu*/
 
 		if (Math.abs(a-i)+1 != taille && Math.abs(b-j)+1 != taille) {//|| Math.abs(j-b)+1!=taille)
 
