@@ -343,46 +343,43 @@ public class BatailleNavale implements ActionListener{
     public void actionPerformed(ActionEvent e) { 
         String[] coordinates = e.getActionCommand().split("-");
 
-            if (coordinates[1].equals("b")){
-                cpt = 0;
-                ib.activateButton(pd.getGrille(), 2);
-                placeSize = Integer.parseInt(coordinates[2]);
+        if (coordinates[1].equals("b")){
+            cpt = 0;
+            ib.activateButton(pd.getGrille(), 2);
+            placeSize = Integer.parseInt(coordinates[2]);
+        }
+        else if (coordinates[0].equals("a")){
+            if (cpt == 0){
+                placeLigneStart = Integer.parseInt(coordinates[1]);
+                placeColStart = Integer.parseInt(coordinates[2]);
+                cpt++;
             }
-            else if (coordinates[0].equals("a")){
-                if (cpt == 0){
-                    placeLigneStart = Integer.parseInt(coordinates[1]);
-                    placeColStart = Integer.parseInt(coordinates[2]);
+            else if (cpt == 1){
+                placeLigneEnd = Integer.parseInt(coordinates[1]);
+                placeColEnd = Integer.parseInt(coordinates[2]);
+
+                if ((placeColStart<gameSize || placeLigneEnd<gameSize || placeColEnd<gameSize || placeSize<gameSize) 
+                && (Math.abs((placeLigneStart-placeLigneEnd)+(placeColStart-placeColEnd))+1 == placeSize) 
+                && (placeLigneStart == placeLigneEnd || placeColStart==placeColEnd) && checkIfBoatCanBePlaced(placeLigneStart, placeColStart, placeLigneEnd, placeColEnd, pd, placeSize)){
+
+                    pd.manualPutBoat(placeLigneStart, placeColStart, placeLigneEnd, placeColEnd, placeSize, this);
+                    ib.deactivateButton(pd.getGrille(), 2);
+                    ib.revealBoat(pd);
                     cpt++;
+                    ib.decreaseButton(placeSize);
                 }
-                else if (cpt == 1){
-                    placeLigneEnd = Integer.parseInt(coordinates[1]);
-                    placeColEnd = Integer.parseInt(coordinates[2]);
+                else{
+                    ib.tourj.setText("Mauvaise taille");
+                    ib.deactivateButton(pd.getGrille(), 2);
 
-                    if ((placeColStart<gameSize || placeLigneEnd<gameSize || placeColEnd<gameSize || placeSize<gameSize) 
-                    && (Math.abs((placeLigneStart-placeLigneEnd)+(placeColStart-placeColEnd))+1 == placeSize) 
-                    && (placeLigneStart == placeLigneEnd || placeColStart==placeColEnd) && checkIfBoatCanBePlaced(placeLigneStart, placeColStart, placeLigneEnd, placeColEnd, pd, placeSize)){
+                    cpt = 0;
 
-                        pd.manualPutBoat(placeLigneStart, placeColStart, placeLigneEnd, placeColEnd, placeSize, this);
-                        ib.deactivateButton(pd.getGrille(), 2);
-                        ib.revealBoat(pd);
-                        cpt++;
-                        ib.decreaseButton(placeSize);
-                    }
-                    else{
-                        ib.tourj.setText("Mauvaise taille");
-                        ib.deactivateButton(pd.getGrille(), 2);
-
-                        cpt = 0;
-
-                    }
                 }
             }
-
-        
+        }
         else{
             int i = Integer.parseInt(coordinates[0]);
             int j = Integer.parseInt(coordinates[1]);
-        	
             ib.remplir(i, j,0);
             debugCpt = 0;
             if (!pg.rejouer) {
@@ -411,10 +408,9 @@ public class BatailleNavale implements ActionListener{
                 }
             }
         }
-    
-    
     }
-    public static void main(String[] args) {
+
+    public static void main(String[] args){
         new BatailleNavale();
     }
 }
