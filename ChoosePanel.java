@@ -31,13 +31,13 @@ public class ChoosePanel implements ActionListener{
 		
 		
 		f=new JDialog((Frame)null,"Séléction des paramètres",true);    
-        String L[]={"Facile","Moyen","JoueurVSJoueur"};        
+        String L[]={"Facile","Moyen"};        
         combobox=new JComboBox<String>(L);
         
         String P[]={"Aléatoire","Joueur"};        
         par =new JComboBox<String>(P);
         
-        String C[]={"16","32","64"};        
+        String C[]={"13","16","64"};        
         ratio = new JComboBox<String>(C);
         
         
