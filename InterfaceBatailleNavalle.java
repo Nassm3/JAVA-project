@@ -331,8 +331,12 @@ public class InterfaceBatailleNavalle {
 	Case [][] grille=p.getGrille();
 	for (int i=0;i<grille.length;i++)
 		for (int j=0;j<grille[i].length;j++) 
-			if (grille[i][j]==Case.BOAT) 
+			if (grille[i][j]==Case.BOAT) {
 				b2[i][j].setBackground(Color.GREEN);
+				b2[i][j].setEnabled(false);
+			}
+		
+	
 	}
 	
 	public int affichegagnant(String joueur) {

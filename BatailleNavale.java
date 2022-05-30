@@ -173,6 +173,7 @@ public class BatailleNavale implements ActionListener{
             }
         }
         return false;
+
     }	
 
     public void botJouer(int gameSize, int difficulty){
@@ -190,11 +191,10 @@ public class BatailleNavale implements ActionListener{
             }
         }
         else {
+
             if (ib.botMemory == 1){
                 if(ib.botHitCpt == 1){
                     System.out.println("botHitCpt " + 1);
-
-
                     if (new Random().nextInt(2)==0){
                         
 

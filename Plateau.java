@@ -60,7 +60,23 @@ public class Plateau {
 			return "manqué" + "_" + null;}
 	}
 	
-	
+	public String isBateau(int i,int j) {
+		if(grille[i][j].affiche().equals("bateau")){
+			if(grille[i+1][j].affiche().equals("bateau")) {
+				return String.valueOf(i+1)+"-"+String.valueOf(j);
+			}
+			else if(grille[i-1][j].affiche().equals("bateau")) {
+				return String.valueOf(i-1)+"-"+String.valueOf(j);
+			}
+			else if(grille[i][j+1].affiche().equals("bateau")) {
+				return String.valueOf(i)+"-"+String.valueOf(j+1);
+			}
+			else {
+				return String.valueOf(i)+"-"+String.valueOf(j-1);
+			}
+		}
+		return String.valueOf(i)+"-"+String.valueOf(j);
+	}
 
 	public Boolean manualPutBoat(int i,int j,int a, int b ,int taille, BatailleNavale bn){
 		bt = new Bateau(i, j, a, b, taille, 1);
@@ -86,9 +102,7 @@ public class Plateau {
 						grille[indiceL][indiceCol] = Case.BOAT;
 						bateau[indiceL][indiceCol] = bt;
 						c--;}
-				}
-
-				
+				}	
 			}
 			else{
 				return false;
