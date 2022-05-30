@@ -173,13 +173,9 @@ public class BatailleNavale implements ActionListener{
             }
         }
         return false;
-<<<<<<< HEAD
-    }	    
-    
-=======
+
     }	
 
->>>>>>> bc1755e8e5f53dbd81adb3feac5e39cd32f2bf01
     public void botJouer(int gameSize, int difficulty){
         int[] ij = new int[2];
         if (difficulty == 0){
@@ -195,88 +191,10 @@ public class BatailleNavale implements ActionListener{
             }
         }
         else {
-<<<<<<< HEAD
-        	//complications 
 
-                if (ib.lastBotHit[0] != gameSize){
-                	do {
-                    	ib.remplir(ib.lastBotHit[0] + 1, ib.lastBotHit[1], 1);
-                	}
-                	while(pd.rejouer);
-
-                }
-                else if (ib.lastBotHit[0]==gameSize){
-                	do {
-                       	ib.remplir(ib.lastBotHit[0] - 1, ib.lastBotHit[1], 1);
-                	}
-                	while(pd.rejouer);
-                }
-                    else if (ib.lastBotHit[1] != gameSize){
-                    	do {
-                    		
-                        	ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] + 1, 1);
-                	}
-                	while(pd.rejouer);
-                }
-                    else {
-                    	do {
-                    		
-                        ib.remplir(ib.lastBotHit[0], ib.lastBotHit[1] - 1, 1);
-                	}
-                	while(pd.rejouer);
-                }
-        	
-        	if (ib.botMemory==1) {
-        		botJouer(gameSize, difficulty);
-        	}
-        	else {
-        		botJouer(gameSize, 0);
-        	}
-        }    
-    }
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            /*{
-                if(ib.botHitCpt<2){
-=======
             if (ib.botMemory == 1){
                 if(ib.botHitCpt == 1){
                     System.out.println("botHitCpt " + 1);
-
->>>>>>> bc1755e8e5f53dbd81adb3feac5e39cd32f2bf01
-
                     if (new Random().nextInt(2)==0){
                         
 
@@ -379,10 +297,6 @@ public class BatailleNavale implements ActionListener{
             debugCpt++;
             System.out.println(debugCpt);
             botJouer(gameSize, difficulty);
-<<<<<<< HEAD
-        
-    }*/
-=======
         }
         
     }
@@ -424,7 +338,6 @@ public class BatailleNavale implements ActionListener{
         }
 		return true;
     }
->>>>>>> bc1755e8e5f53dbd81adb3feac5e39cd32f2bf01
     
     
     public void actionPerformed(ActionEvent e) { 
