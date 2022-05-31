@@ -309,12 +309,15 @@ public class InterfaceBatailleNavalle {
 
 			if (result.equals("touché-coulé")){
 				fillOnSunk(b2, bot);
+				tourB.repaint();
 				tourB.setText("Touché-coulé " + boat + "!");
+				
 				botMemory = 0;
 				botHitCpt = 0;
 				allBotHits.clear();
 			}
 			else if (result.equals("touché")){
+				tourB.repaint();
 				tourB.setText("Touché !");
 
 				b2[i][j].setBackground(Color.BLACK);
@@ -327,6 +330,7 @@ public class InterfaceBatailleNavalle {
 			}
 			else{
 				b2[i][j].setBackground(Color.RED);
+				tourB.repaint();
 				tourB.setText("Manqué :(");
 				if(botHitCpt > 1){
 					botMemory = 2;
