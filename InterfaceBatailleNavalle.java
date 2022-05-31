@@ -1,8 +1,14 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import javax.swing.*;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.*;
+import java.io.*;
 
 
 public class InterfaceBatailleNavalle {
@@ -263,28 +269,41 @@ public class InterfaceBatailleNavalle {
 	}
 
 	public void remplir(int i, int j,int t){
-			if (t==0) {
-				String res = plat.jouer(i, j);
-				String result = res.split("_")[0];
-				String boat = res.split("_")[1];
-				if (result.equals("touché-coulé")){
-					b1[i][j].setEnabled(false);
-					fillOnSunk(b1, plat);
-					tourj.setText("Touché-coulé " + boat + "!");
-				}
-				else if (result.equals("touché")){
-					b1[i][j].setEnabled(false);
-					b1[i][j].setIcon(null);
-					b1[i][j].setBackground(Color.black);
-					tourj.setText("Touché !");
-				}
-				else{
-					tourj.setText("Manqué :(");
-					b1[i][j].setBackground(Color.LIGHT_GRAY);
-					b1[i][j].setEnabled(false);
-				}
+		if (t==0) {
+			String res = plat.jouer(i, j);
+			String result = res.split("_")[0];
+			String boat = res.split("_")[1];
+			if (result.equals("touché-coulé")){
+				b1[i][j].setEnabled(false);
+				fillOnSunk(b1, plat);
+				tourj.setText("Touché-coulé " + boat + "!");
 			}
-			
+			else if (result.equals("touché")){
+				b1[i][j].setEnabled(false);
+				b1[i][j].setIcon(null);
+				b1[i][j].setBackground(Color.black);
+				tourj.setText("Touché !");
+			}
+			else{
+				tourj.setText("Manqué :(");
+				b1[i][j].setBackground(Color.LIGHT_GRAY);
+				b1[i][j].setEnabled(false);
+				try {
+					
+					 AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("mmm-monke.wav").getAbsoluteFile());
+					Clip clip = AudioSystem.getClip();
+					clip.open(audioIn);
+					clip.start();
+				} catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+					e.printStackTrace();
+					
+				}  
+					
+
+
+				
+			}
+		}
 		else {
 			String res = bot.jouer(i, j);
 			String result = res.split("_")[0];

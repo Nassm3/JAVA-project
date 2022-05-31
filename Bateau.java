@@ -2,11 +2,7 @@
 
 public class Bateau{
     String name;
-    int l;
-    int iLS;
-    int iCS;
-    int iLE;
-    int iCE;
+    int iLS, iCS, iLE, iCE, l;
 	public Bateau(){
 		
 	}
