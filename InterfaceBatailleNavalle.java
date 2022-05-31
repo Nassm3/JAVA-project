@@ -1,14 +1,10 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
-import java.io.*;
+/*import javax.sound.sampled.*;
+import java.io.*;*/
+
 
 
 public class InterfaceBatailleNavalle {
@@ -288,7 +284,7 @@ public class InterfaceBatailleNavalle {
 					tourj.setText("Manqué :("); //si manqué, la case est grisé et impossible de cliquer dessus
 					b1[i][j].setBackground(Color.LIGHT_GRAY);
 					b1[i][j].setEnabled(false);
-					try {
+					/*try {
 					
 						AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("mmm-monke.wav").getAbsoluteFile());
 					   Clip clip = AudioSystem.getClip();
@@ -297,7 +293,7 @@ public class InterfaceBatailleNavalle {
 				   } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
 					   e.printStackTrace();
 					   
-				   }  
+				   }*/  
 				}
 			}
 			

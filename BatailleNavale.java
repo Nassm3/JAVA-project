@@ -17,8 +17,7 @@ public class BatailleNavale implements ActionListener{
     int debugCpt = 0;
 
     public BatailleNavale(){
-        ii=0;
-        jj=0;
+
         ChoosePanel cp = new ChoosePanel();
         cp.choosePanel();
         
