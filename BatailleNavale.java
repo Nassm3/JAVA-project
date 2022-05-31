@@ -1,8 +1,10 @@
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-
+import javax.sound.sampled.*;
 
 
 public class BatailleNavale implements ActionListener{
@@ -55,6 +57,18 @@ public class BatailleNavale implements ActionListener{
         putBoatOnGame(pg, difficulty, gameSize, 2, true);
                   
         ib.revealBoat(pd);
+
+        try {
+					
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("letsgo.wav").getAbsoluteFile());
+           Clip clip = AudioSystem.getClip();
+           clip.open(audioIn);
+           clip.start();
+       }
+        catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+           e.printStackTrace();
+           
+       }
     }
 
     public boolean checkIndexExistence(Bateau[][] bateau, int i, int j, int ii, int jj){
