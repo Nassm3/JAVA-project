@@ -35,10 +35,6 @@ public class BatailleNavale implements ActionListener{
             joueur = new Joueur(name);
         }
 
-        else{
-            gamemode = new String("JcJ");
-            joueur = new Joueur(name);
-        }
         
         gameSize = cp.getGameSize();
         pg = new Plateau(gameSize);
@@ -52,22 +48,19 @@ public class BatailleNavale implements ActionListener{
         int placementOption = cp.getPlacementOption();
         ib = new InterfaceBatailleNavalle(gameSize, this, placementOption, pg, pd, joueur);
         if (placementOption == 0){
+            //choix de placement automatique
             putBoatOnGame(pd, 0, gameSize, 2, true);
             ib.activateButton(grillepg, 1);
         }
-        else {
 
-        }
         putBoatOnGame(pg, difficulty, gameSize, 2, true);
                   
         ib.revealBoat(pd);
-
-        	
-
-
     }
 
     public boolean checkIndexExistence(Bateau[][] bateau, int i, int j, int ii, int jj){
+        /*teste l'existence de l'index pour le placement d'un bateau, prend les indices des extremitées du bateau
+        et le tableau de bateau*/
         try {
         	if (bateau[i][j] == null || bateau[ii][jj] == null) {
                 bateau[i][j] = new Bateau();      
@@ -89,6 +82,7 @@ public class BatailleNavale implements ActionListener{
 
 
     public void putBoatOnGame(Plateau p, int difficulty, int gameSize, int size, boolean scan){
+        /*ajoute les bateau sur le plateau a une position aléatoire de manière à ne pas être superposé ni adjacent*/
         if (!scan){
             int ii = new Random().nextInt(gameSize-size+1);
             int jj = new Random().nextInt(gameSize-size+1);
@@ -113,7 +107,6 @@ public class BatailleNavale implements ActionListener{
         }
         else{
             while (size<6) {
-                System.out.println("size : " + size);
                 int ii = new Random().nextInt(gameSize-size+1);
                 int jj = new Random().nextInt(gameSize-size+1);
                 if ((new Random().nextInt(2)) == 0){
@@ -142,6 +135,7 @@ public class BatailleNavale implements ActionListener{
          
 
     public boolean checkOrientation(ArrayList<int[]> allBotHits){
+        /*retourne vrai si le bateau est horizontal*/
         if(allBotHits.get(allBotHits.size()-2)[0] - allBotHits.get(allBotHits.size()-1)[0] == 0){
             return true;
         }
@@ -151,7 +145,7 @@ public class BatailleNavale implements ActionListener{
     }
 
     public void jouerInverser(){
-        //botWay = botWay * -1;
+        /*prends le premier hit du bot et inverse le sens de frappe*/
         if (!checkOrientation(ib.allBotHits)){
             if(checkIfBotPlayable(ib.allBotHits.get(0)[0] + botWay * -1, ib.allBotHits.get(0)[1])){
                 ib.remplir(ib.allBotHits.get(0)[0] + botWay * -1, ib.allBotHits.get(0)[1], 1);
@@ -167,6 +161,7 @@ public class BatailleNavale implements ActionListener{
     }
     
     public boolean checkIfBotPlayable(int i, int j){
+        /*return true si la case peut être selectionnée*/
         if(i < gameSize & i >= 0 & j < gameSize & j >= 0){
             if (grillepd[i][j].affiche().equals("vide") | grillepd[i][j].affiche().equals("bateau")){
                 return true;
@@ -177,6 +172,8 @@ public class BatailleNavale implements ActionListener{
     }	
 
     public void botJouer(int gameSize, int difficulty){
+        /*action de jeu du bot, varie en fonction de la difficulté, le bot facile joue aléatoirement, le bot moyen
+        joue aléatoirement jusqu'à trouver un bateau, auquel cas il étend jusqu'à couler le bateau*/
         int[] ij = new int[2];
         if (difficulty == 0){
 
@@ -194,7 +191,6 @@ public class BatailleNavale implements ActionListener{
 
             if (ib.botMemory == 1){
                 if(ib.botHitCpt == 1){
-                    System.out.println("botHitCpt " + 1);
                     if (new Random().nextInt(2)==0){
                         
 
@@ -221,7 +217,6 @@ public class BatailleNavale implements ActionListener{
                     }
                 }
                 else if(ib.botHitCpt == 2){   
-                    System.out.println("botHitCpt " + 2);
 
                         if (!checkOrientation(ib.allBotHits)){
                             if (ib.allBotHits.get(ib.allBotHits.size()-2)[0] - ib.lastBotHit[0] < 0 ){
@@ -260,7 +255,6 @@ public class BatailleNavale implements ActionListener{
                     }
 
                 else{
-                    System.out.println("else, botway : " + botWay);
 
                     if (!checkOrientation(ib.allBotHits)){
                         if(checkIfBotPlayable(ib.lastBotHit[0] + botWay, ib.lastBotHit[1])){
@@ -295,13 +289,14 @@ public class BatailleNavale implements ActionListener{
         }
         if (pd.rejouer & debugCpt < 10){
             debugCpt++;
-            System.out.println(debugCpt);
             botJouer(gameSize, difficulty);
         }
         
     }
 
     public boolean checkIfBoatCanBePlaced(int i, int j, int ii, int jj, Plateau p, int taille){
+        /*verifie si le bateau peut être placé au coordonnée fournies, 
+        en verifiant si il rentre au contact d'autres bateau*/
         Case[][] grille = p.getGrille();
         Bateau bt = new Bateau(i, j, ii, jj, taille, 1);
         String coordinate = bt.getBoatCoordinate();
@@ -343,46 +338,43 @@ public class BatailleNavale implements ActionListener{
     public void actionPerformed(ActionEvent e) { 
         String[] coordinates = e.getActionCommand().split("-");
 
-            if (coordinates[1].equals("b")){
-                cpt = 0;
-                ib.activateButton(pd.getGrille(), 2);
-                placeSize = Integer.parseInt(coordinates[2]);
+        if (coordinates[1].equals("b")){
+            cpt = 0;
+            ib.activateButton(pd.getGrille(), 2);
+            placeSize = Integer.parseInt(coordinates[2]);
+        }
+        else if (coordinates[0].equals("a")){
+            if (cpt == 0){
+                placeLigneStart = Integer.parseInt(coordinates[1]);
+                placeColStart = Integer.parseInt(coordinates[2]);
+                cpt++;
             }
-            else if (coordinates[0].equals("a")){
-                if (cpt == 0){
-                    placeLigneStart = Integer.parseInt(coordinates[1]);
-                    placeColStart = Integer.parseInt(coordinates[2]);
+            else if (cpt == 1){
+                placeLigneEnd = Integer.parseInt(coordinates[1]);
+                placeColEnd = Integer.parseInt(coordinates[2]);
+
+                if ((placeColStart<gameSize || placeLigneEnd<gameSize || placeColEnd<gameSize || placeSize<gameSize) 
+                && (Math.abs((placeLigneStart-placeLigneEnd)+(placeColStart-placeColEnd))+1 == placeSize) 
+                && (placeLigneStart == placeLigneEnd || placeColStart==placeColEnd) && checkIfBoatCanBePlaced(placeLigneStart, placeColStart, placeLigneEnd, placeColEnd, pd, placeSize)){
+
+                    pd.manualPutBoat(placeLigneStart, placeColStart, placeLigneEnd, placeColEnd, placeSize, this);
+                    ib.deactivateButton(pd.getGrille(), 2);
+                    ib.revealBoat(pd);
                     cpt++;
+                    ib.decreaseButton(placeSize);
                 }
-                else if (cpt == 1){
-                    placeLigneEnd = Integer.parseInt(coordinates[1]);
-                    placeColEnd = Integer.parseInt(coordinates[2]);
+                else{
+                    ib.tourj.setText("Mauvaise taille");
+                    ib.deactivateButton(pd.getGrille(), 2);
 
-                    if ((placeColStart<gameSize || placeLigneEnd<gameSize || placeColEnd<gameSize || placeSize<gameSize) 
-                    && (Math.abs((placeLigneStart-placeLigneEnd)+(placeColStart-placeColEnd))+1 == placeSize) 
-                    && (placeLigneStart == placeLigneEnd || placeColStart==placeColEnd) && checkIfBoatCanBePlaced(placeLigneStart, placeColStart, placeLigneEnd, placeColEnd, pd, placeSize)){
+                    cpt = 0;
 
-                        pd.manualPutBoat(placeLigneStart, placeColStart, placeLigneEnd, placeColEnd, placeSize, this);
-                        ib.deactivateButton(pd.getGrille(), 2);
-                        ib.revealBoat(pd);
-                        cpt++;
-                        ib.decreaseButton(placeSize);
-                    }
-                    else{
-                        ib.tourj.setText("Mauvaise taille");
-                        ib.deactivateButton(pd.getGrille(), 2);
-
-                        cpt = 0;
-
-                    }
                 }
             }
-
-        
+        }
         else{
             int i = Integer.parseInt(coordinates[0]);
             int j = Integer.parseInt(coordinates[1]);
-        	
             ib.remplir(i, j,0);
             debugCpt = 0;
             if (!pg.rejouer) {
@@ -411,10 +403,9 @@ public class BatailleNavale implements ActionListener{
                 }
             }
         }
-    
-    
     }
-    public static void main(String[] args) {
+
+    public static void main(String[] args){
         new BatailleNavale();
     }
 }
