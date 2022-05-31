@@ -25,7 +25,7 @@ public class InterfaceBatailleNavalle {
 	int[] lastBotHit = new int[2];
 	ArrayList<int[]> allBotHits = new ArrayList<int[]>();
 
-		public InterfaceBatailleNavalle(int size, ActionListener listener,int mode, Plateau plat,Plateau bot, Joueur joueur) {	
+		public InterfaceBatailleNavalle(int size, ActionListener listener,int mode, Plateau plat,Plateau bot, Joueur joueur) {	//mode correspond au mode de placement
 			this.bot=bot;
 			this.plat = plat;
 			this.joueur = joueur;
@@ -83,7 +83,7 @@ public class InterfaceBatailleNavalle {
 			plateau.add(p2);
 			
 			JPanel bateaux;
-			if (mode==1) {
+			if (mode==1) { //si placement par joueur
 				
 				bateaux = new JPanel(new GridLayout(1,4));
 				
@@ -159,7 +159,7 @@ public class InterfaceBatailleNavalle {
 				bateaux.setPreferredSize(new Dimension(100,150));
 			}
 
-			else {
+			else { //placement aléatoire
 			bateaux = new JPanel();
 			bateaux.add(new Label("choisir une position"));
 			bateaux.setPreferredSize(new Dimension(25,25));
@@ -168,16 +168,16 @@ public class InterfaceBatailleNavalle {
 		
 		
 		f.setLayout(new BorderLayout());
-		f.add(tour, BorderLayout.PAGE_START);
-		f.add(plateau,BorderLayout.CENTER);
-		f.add(bateaux,BorderLayout.PAGE_END);
+		f.add(tour, BorderLayout.PAGE_START); //tour contient info sur le coup joué (manqué touché ou touché coulé
+		f.add(plateau,BorderLayout.CENTER); 
+		f.add(bateaux,BorderLayout.PAGE_END); //bateaux cvontient les boutons de bateaux et le compeutr descendant
 		f.pack();
 		f.setLocationRelativeTo(null);
 		f.setVisible(true);
 
 	}
 
-	public void decreaseButton(int b){
+	public void decreaseButton(int b){ //en fonction de b (taille bateau), le bouton peut diminuer a chaque fois que la fonction est appelé jusqu'a 0 ou le bouton devient enabled(false)
 		switch(b){
    
 			case 2: 
@@ -211,7 +211,7 @@ public class InterfaceBatailleNavalle {
 		if (c1 ==0 && c2 ==0 && c3 ==0 && c4 ==0)	{
 			for (int i=0;i<b1.length;i++){
 				for (int j=0;j<b1[i].length;j++) {
-					b1[i][j].setEnabled(true);
+					b1[i][j].setEnabled(true); 
 
 				}
 			}
@@ -258,53 +258,51 @@ public class InterfaceBatailleNavalle {
 	}
 	
 	
-	public void fillOnSunk(JButton[][] plateau, Plateau joueurOuBot){
+	public void fillOnSunk(JButton[][] plateau, Plateau joueurOuBot){ //affichage d'un bateau coulé
 		Case[][] grille = joueurOuBot.getGrille();
         for(int y=0; y<grille.length; y++)
             for(int z=0; z<grille[y].length; z++)
-				if(grille[y][z] == Case.SUNK){
-					plateau[y][z].setBackground(new JButton().getBackground());
-					plateau[y][z].setIcon(null);
+				if(grille[y][z] == Case.SUNK){ //affiche un image sur toutes les cases du bateau
+					//plateau[y][z].setBackground(new JButton().getBackground()); 
+					plateau[y][z].setIcon(null); 
 					plateau[y][z].setIcon(new ImageIcon (new ImageIcon("wreck.jpg").getImage().getScaledInstance(300, 100, java.awt.Image.SCALE_SMOOTH)));}
 	}
 
-	public void remplir(int i, int j,int t){
-		if (t==0) {
-			String res = plat.jouer(i, j);
-			String result = res.split("_")[0];
-			String boat = res.split("_")[1];
-			if (result.equals("touché-coulé")){
-				b1[i][j].setEnabled(false);
-				fillOnSunk(b1, plat);
-				tourj.setText("Touché-coulé " + boat + "!");
-			}
-			else if (result.equals("touché")){
-				b1[i][j].setEnabled(false);
-				b1[i][j].setIcon(null);
-				b1[i][j].setBackground(Color.black);
-				tourj.setText("Touché !");
-			}
-			else{
-				tourj.setText("Manqué :(");
-				b1[i][j].setBackground(Color.LIGHT_GRAY);
-				b1[i][j].setEnabled(false);
-				try {
+	public void remplir(int i, int j,int t){ 
+			if (t==0) { //sur le plateau de joueur
+				String res = plat.jouer(i, j); //sur la case ij, recupere le resultat --> touche, coulé ou manqué + nom bateau
+				String result = res.split("_")[0]; //résultat
+				String boat = res.split("_")[1]; //boatname
+				if (result.equals("touché-coulé")){ //si bateau coulé, on ne peut plus cliquer sur le bouton, image du bateau est changée
+					b1[i][j].setEnabled(false);
+					fillOnSunk(b1, plat);
+					tourj.setText("Touché-coulé " + boat + "!"); //+ print du nom du bateau coulé dans label
+				}
+				else if (result.equals("touché")){ //si bateau touché, mise a jour du label, changement d'icon, onn ne peut plus cliquer dessus
+					b1[i][j].setEnabled(false);
+					b1[i][j].setIcon(null);
+					b1[i][j].setBackground(Color.black);
+					tourj.setText("Touché !");
+				}
+				else{
+					tourj.setText("Manqué :("); //si manqué, la case est grisé et impossible de cliquer dessus
+					b1[i][j].setBackground(Color.LIGHT_GRAY);
+					b1[i][j].setEnabled(false);
+					try {
 					
-					 AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("mmm-monke.wav").getAbsoluteFile());
-					Clip clip = AudioSystem.getClip();
-					clip.open(audioIn);
-					clip.start();
-				} catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
-					e.printStackTrace();
-					
-				}  
-					
-
-
-				
+						AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("mmm-monke.wav").getAbsoluteFile());
+					   Clip clip = AudioSystem.getClip();
+					   clip.open(audioIn);
+					   clip.start();
+				   } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+					   e.printStackTrace();
+					   
+				   }  
+				}
 			}
-		}
-		else {
+			
+		else { //quand c'est le bot qui joue quasi même chose a par que les bouton appartiennent a un autre panel et initialisation des variables botmemory : 1 si un bateau est touché,
+			   //reset à 0 des qu'un bateau est coulé, 2 si un bateau a été touché 2 fois et que le bot a manqué
 			String res = bot.jouer(i, j);
 			String result = res.split("_")[0];
 			String boat = res.split("_")[1];
@@ -321,8 +319,8 @@ public class InterfaceBatailleNavalle {
 
 				b2[i][j].setBackground(Color.BLACK);
 				botMemory = 1;
-				botHitCpt++;
-				lastBotHit[0] = i;
+				botHitCpt++; //stocke le nb de case d'un bateau touché
+				lastBotHit[0] = i; //stocke les dernieres coodronnées du bateau touché
 				lastBotHit[1] = j; 
 				allBotHits.add(new int[] {lastBotHit[0], lastBotHit[1]});
 		
@@ -336,17 +334,8 @@ public class InterfaceBatailleNavalle {
 			}
 		}
 	}
-	
 
-
-
-
-		
-	public String getinfo(JLabel c) {
-		return c.getText();
-	}
-
-	public void revealBoat(Plateau p) {
+	public void revealBoat(Plateau p) { 
 	Case [][] grille=p.getGrille();
 	for (int i=0;i<grille.length;i++)
 		for (int j=0;j<grille[i].length;j++) 
