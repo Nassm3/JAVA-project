@@ -172,6 +172,7 @@ public class BatailleNavale implements ActionListener{
     }	
 
     public void botJouer(int gameSize, int difficulty){
+
         /*action de jeu du bot, varie en fonction de la difficulté, le bot facile joue aléatoirement, le bot moyen
         joue aléatoirement jusqu'à trouver un bateau, auquel cas il étend jusqu'à couler le bateau*/
         int[] ij = new int[2];
@@ -288,6 +289,11 @@ public class BatailleNavale implements ActionListener{
 
         }
         if (pd.rejouer & debugCpt < 10){
+            try {
+                Thread.sleep(250);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             debugCpt++;
             botJouer(gameSize, difficulty);
         }

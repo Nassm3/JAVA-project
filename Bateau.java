@@ -11,16 +11,16 @@ public class Bateau{
         l = length;
 		
         if (length == 5){
-            name = "Porte avion " + String.valueOf(nb);
+            name = "Porte avion ";
 		}
         else if (length == 4){ 
-            name = "Croiseur " + String.valueOf(nb);
+            name = "Croiseur ";
         }
         else if (length == 3){ 
-            name = "Contre-torpilleur " + String.valueOf(nb);
+            name = "Contre-torpilleur ";
         }
         else{ 
-            name = "Torpilleur" + String.valueOf(nb);
+            name = "Torpilleur";
         }
         this.iLS = indiceLigneStart;
         this.iCS = indiceColStart;
